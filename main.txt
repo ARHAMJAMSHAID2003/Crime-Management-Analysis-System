@@ -1,1 +1,4 @@
 This is the main text file for the Crime Management Analysis System.
+
+Purpose: Base file demonstrating the repository branch structure.
+Three branches (branch1, branch2, branch3) extend from this base.
