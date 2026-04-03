@@ -1,323 +1,1037 @@
-# CPAS Backend - Crime Pattern Analysis System
+# CMAS Backend - Crime Management Analysis System
 
-Complete Node.js/Express backend for Crime Pattern Analysis System with Oracle Database integration.
+Node.js + Express backend for CMAS (MehfoozPakistan) with Oracle Database integration.
 
-##  Features
+## Project Overview
+CMAS is a role-based crime management platform supporting:
+- Victim crime reporting and officer review
+- Investigation and evidence management
+- Crime analytics and prediction
 
-### Authentication System
-- **Officer Login**: Officers authenticate using email and password from `Officer` table
-- **Victim Login**: Victims authenticate using email and password from `Victim` table
-- **Witness Login**: Witnesses authenticate using email and password from `Witness` table
-- JWT-based authentication with role-based access control
-- No separate Users table - authentication directly against entity tables
+## Milestone 3 Coverage (Web-Based Application Development)
+This backend keeps all existing CMAS functionality and additionally maps three non-auth workflows for milestone grading.
+These workflows are implemented on top of the full system (not as replacements).
 
-### CRUD Operations
-Full CRUD operations for all entities:
-- **Crimes**: Create, read, update, delete crimes with full details
-- **Crime Reports**: Victims can file reports, Officers can manage them
-- **Suspects**: Manage suspect records with criminal history
-- **Evidence**: Track evidence with chain of custody
-- **Locations**: Manage crime locations
-- **Crime Types**: Manage crime categories
-- **Investigations**: Full investigation management
-- **Officers**: Officer management
-- **Victims**: Victim profile management
-- **Witnesses**: Witness profile management
+### Workflow 1: Victim Crime Reporting and Officer Review
+Primary Entity: `Crime_Report` (full CRUD)
+- List: `GET /api/crime-reports`
+- Read: `GET /api/crime-reports/:id`
+- Create: `POST /api/crime-reports`
+- Update: `PUT /api/crime-reports/:id`
+- Delete: `DELETE /api/crime-reports/:id`
+- Related workflow operations:
+  - Link report to crime: `POST /api/crime-reports/:id/link`
+  - Create and manage accepted crimes: `/api/crimes/*`
+
+### Workflow 2: Investigation Management with Suspect and Evidence Tracking
+Primary Entity: `Investigation` (full CRUD)
+- List: `GET /api/investigations`
+- Read: `GET /api/investigations/:id`
+- Create: `POST /api/investigations`
+- Update: `PUT /api/investigations/:id`
+- Delete: `DELETE /api/investigations/:id`
+- Related workflow operations:
+  - Suspect CRUD: `/api/suspects/*`
+  - Evidence CRUD + chain updates: `/api/evidence/*`, `POST /api/evidence/:id/chain`
+  - Link crimes to investigations: `POST /api/investigations/:id/crimes`
+
+### Workflow 3: Crime Analysis and Prediction
+Primary Entity Support: `Crime` (full CRUD) + analytics/prediction services
+- Crime CRUD foundation:
+  - List: `GET /api/crimes`
+  - Read: `GET /api/crimes/:id`
+  - Create: `POST /api/crimes`
+  - Update: `PUT /api/crimes/:id`
+  - Delete: `DELETE /api/crimes/:id`
+- Analysis and prediction endpoints:
+  - `/api/analytics/crime-trends`
+  - `/api/analytics/hotspots`
+  - `/api/analytics/patterns`
+  - `/api/analytics/category-distribution`
+  - `/api/analytics/officer-performance`
+  - `/api/analytics/time-series`
+  - `/api/predictions/risk-assessment`
+  - `/api/predictions/pattern-matching`
+  - `/api/predictions/forecast`
+
+Note: Login and registration flows exist but are not counted as milestone workflows.
+
+## Tech Stack
+- Backend: Node.js, Express.js
+- Database: Oracle Database
+- Auth: JWT + role-based middleware
+- Password hashing: bcryptjs
+
+## Backend Architecture
+- Routes layer: API URL definitions and HTTP method mapping
+- Controller layer: request validation and response handling
+- Service/data layer (`models/`): SQL queries, DB operations, stored procedure calls
+
+## Features
+
+### Authentication
+- Officer login/signup
+- Victim login/signup
+- Witness login/signup
+- JWT-based authentication
+- Role-based access control: OFFICER, VICTIM, WITNESS
+
+### Core CRUD Modules
+- Crimes
+- Crime Reports
+- Suspects
+- Evidence
+- Locations
+- Crime Types
+- Investigations
+- Officers
+- Victim Profile
+- Witness Profile
 
 ### Advanced Database Features
+- Window functions (`ROW_NUMBER`, `RANK`, `DENSE_RANK`, `LAG`, cumulative windows)
+- Complex joins for multi-entity retrieval
+- Stored procedures:
+  - `sp_create_crime_report`
+  - `sp_assign_investigation`
+  - `sp_calculate_crime_statistics`
+  - `sp_predict_crime_risk`
+  - `sp_update_evidence_chain`
+- Triggers for validation and automation
+- Sequences for PK generation
+- Indexes for query performance
 
-#### Window Functions
-- Crime trend analysis with `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`
-- Cumulative statistics with `SUM() OVER()`
-- Moving averages with window frames
-- Month-over-month comparisons with `LAG()`
+### Analytics and Predictions
+- Crime trends
+- Hotspots
+- Patterns by day/time
+- Category distribution
+- Officer performance
+- Time series aggregation
+- Risk assessment
+- Pattern matching
+- Trend forecasting
 
-#### Complex Joins
-- Multi-table joins for crime details (Crime, Crime_Type, Location, Officer)
-- Self-joins for related crimes
-- Outer joins for comprehensive data retrieval
-- Bridge table joins for many-to-many relationships
+## Project Structure
 
-#### Stored Procedures
-- `sp_create_crime_report`: Auto-create crime from report
-- `sp_assign_investigation`: Assign officer to investigation
-- `sp_calculate_crime_statistics`: Calculate comprehensive statistics
-- `sp_predict_crime_risk`: Predict crime risk for locations
-- `sp_update_evidence_chain`: Maintain evidence chain of custody
-
-#### Triggers
-- `trg_audit_crime_reports`: Audit trail for crime reports
-- `trg_update_crime_statistics`: Auto-update statistics
-- `trg_notify_high_priority_crime`: Notify on high-priority crimes
-- `trg_validate_suspect_data`: Data validation
-- `trg_maintain_evidence_integrity`: Prevent deletion of linked evidence
-- `trg_auto_update_investigation_status`: Auto-update investigation status
-- `trg_validate_crime_dates`: Date validation
-
-### Analytics & Predictions
-- **Crime Trends**: Time-series analysis with window functions
-- **Crime Hotspots**: Location-based crime ranking
-- **Crime Patterns**: Day-of-week and time-of-day patterns
-- **Category Distribution**: Crime category statistics
-- **Officer Performance**: Performance metrics with rankings
-- **Time Series Data**: Chart-ready time series data
-- **Risk Assessment**: Predict crime risk for locations
-- **Pattern Matching**: Find similar crime patterns
-- **Forecast**: Forecast future crime trends
-
-## 📁 Project Structure
-
-```
+```text
 backend/
-├── app.js                      # Main application entry point
-├── config/
-│   └── db.js                  # Database connection configuration
-├── controllers/               # Business logic controllers
-│   ├── authController.js
-│   ├── crimeController.js
-│   ├── crimeReportController.js
-│   ├── suspectController.js
-│   ├── evidenceController.js
-│   ├── locationController.js
-│   ├── crimeTypeController.js
-│   ├── investigationController.js
-│   ├── analyticsController.js
-│   ├── predictionController.js
-│   ├── officerController.js
-│   ├── victimController.js
-│   └── witnessController.js
-├── models/                    # Database interaction models
-│   ├── OfficerModel.js
-│   ├── VictimModel.js
-│   ├── WitnessModel.js
-│   ├── CrimeModel.js
-│   ├── CrimeReportModel.js
-│   ├── SuspectModel.js
-│   ├── EvidenceModel.js
-│   ├── LocationModel.js
-│   ├── CrimeTypeModel.js
-│   ├── InvestigationModel.js
-│   ├── AnalyticsModel.js
-│   └── PredictionModel.js
-├── routes/                    # API route definitions
-│   ├── authRoutes.js
-│   ├── crimeRoutes.js
-│   ├── crimeReportRoutes.js
-│   ├── suspectRoutes.js
-│   ├── evidenceRoutes.js
-│   ├── locationRoutes.js
-│   ├── crimeTypeRoutes.js
-│   ├── investigationRoutes.js
-│   ├── analyticsRoutes.js
-│   ├── predictionRoutes.js
-│   ├── officerRoutes.js
-│   ├── victimRoutes.js
-│   └── witnessRoutes.js
-├── middlewares/              # Express middlewares
-│   ├── authMiddleware.js     # JWT authentication
-│   └── roleMiddleware.js     # Role-based access control
-├── db-schema-updates.sql     # Schema updates for authentication
-├── db-procedures.sql         # Stored procedures
-└── db-triggers.sql           # Database triggers
+|- .env.example
+|- .gitignore
+|- app.js
+|- check-witness-table.sql
+|- cpas_data_generator.py
+|- package-lock.json
+|- package.json
+|- README.md
+|- test-constraint.js
+|- test-login.js
+|- test-next-investigation.js
+|- test-witness-link.js
+|- config/
+|  |- db.js
+|- controllers/
+|  |- analyticsController.js
+|  |- authController.js
+|  |- crimeController.js
+|  |- crimeReportController.js
+|  |- crimeTypeController.js
+|  |- evidenceController.js
+|  |- investigationController.js
+|  |- locationController.js
+|  |- officerController.js
+|  |- predictionController.js
+|  |- suspectController.js
+|  |- victimController.js
+|  |- witnessController.js
+|- middlewares/
+|  |- authMiddleware.js
+|  |- roleMiddleware.js
+|- models/
+|  |- AnalyticsModel.js
+|  |- CrimeModel.js
+|  |- CrimeReportModel.js
+|  |- CrimeTypeModel.js
+|  |- EvidenceModel.js
+|  |- InvestigationModel.js
+|  |- LocationModel.js
+|  |- OfficerModel.js
+|  |- PredictionModel.js
+|  |- SuspectModel.js
+|  |- VictimModel.js
+|  |- WitnessModel.js
+|- routes/
+|  |- analyticsRoutes.js
+|  |- authRoutes.js
+|  |- crimeRoutes.js
+|  |- crimeReportRoutes.js
+|  |- crimeTypeRoutes.js
+|  |- evidenceRoutes.js
+|  |- investigationRoutes.js
+|  |- locationRoutes.js
+|  |- officerRoutes.js
+|  |- predictionRoutes.js
+|  |- suspectRoutes.js
+|  |- victimRoutes.js
+|  |- witnessRoutes.js
+|- scripts/
+|  |- check-db-connection.js
+|  |- check_service_tables.py
+|  |- fix-existing-passwords.js
+|  |- populate-passwords-sql.sql
+|  |- populate-passwords.js
+|  |- populate-sample-data.sql
+|  |- README.md
+|  |- setup-victim-witness-credentials.js
+|  |- set-victim-witness-passwords.py
+|- postman/
+|  |- APIs.postman_collection.json
+|  |- CPAS.postman_collection.json
+|  |- CPAS_Complete_Test_Collection.json
+|  |- FIXES_APPLIED.md
+|  |- MANUAL_TESTING_GUIDE.md
+|  |- QUICK_FIX.md
+|  |- README_POSTMAN_TESTS.md
+|  |- TROUBLESHOOTING.md
 ```
 
-## 🔧 Setup
+## Setup
 
-### 1. Install Dependencies
-
+### 1. Install dependencies
 ```bash
 npm install
 ```
 
-### 2. Database Setup
-
-Run the following SQL files in order:
-
-1. **Schema Updates** (add password fields):
-   ```sql
-   -- Run: db-schema-updates.sql
-   ```
-
-2. **Stored Procedures**:
-   ```sql
-   -- Run: db-procedures.sql
-   ```
-
-3. **Triggers**:
-   ```sql
-   -- Run: db-triggers.sql
-   ```
-
-### 3. Environment Variables
-
-Create a `.env` file in the `backend/` directory:
-
+### 2. Configure environment
+Create `.env` in `backend/` (copy from `.env.example`):
 ```env
 DB_USER=your_oracle_username
 DB_PASSWORD=your_oracle_password
-DB_CONNECTION_STRING=localhost:1521/orcl
-JWT_SECRET=your_jwt_secret_key
+DB_CONNECTION_STRING=localhost:1521/xe
+JWT_SECRET=replace_with_a_secure_random_string
 PORT=5000
+NODE_ENV=development
+DB_POOL_MIN=1
+DB_POOL_MAX=10
+DB_POOL_INCREMENT=1
 ```
 
-### 4. Run the Server
+If your Oracle service is different, update `DB_CONNECTION_STRING` accordingly.
 
+### 3. Verify DB connectivity
+```bash
+npm run db:check
+```
+
+### 4. Database setup
+Run schema, procedures, and triggers in Oracle SQL Developer/SQL*Plus.
+
+Recommended order:
+1. Main schema SQL (tables, constraints, sequences, views)
+2. Auth/schema update SQL (email/password fields if not in main schema)
+3. Stored procedures SQL
+4. Triggers SQL
+
+### 5. Run backend
+```bash
+npm run dev
+```
+Or:
 ```bash
 npm start
 ```
 
-Or for development with auto-reload:
-
+### 6. Populate sample data
 ```bash
-npm run dev
+C:\Python314\python.exe cpas_data_generator.py
 ```
 
-## 📡 API Endpoints
+## API Base URL
+`http://localhost:5000/api`
+
+## Endpoint Summary
 
 ### Authentication
-
-#### Officer
-- `POST /api/auth/officer/signup` - Register new officer
-- `POST /api/auth/officer/login` - Officer login
-
-#### Victim
-- `POST /api/auth/victim/signup` - Register new victim
-- `POST /api/auth/victim/login` - Victim login
-
-#### Witness
-- `POST /api/auth/witness/signup` - Register new witness
-- `POST /api/auth/witness/login` - Witness login
+- `POST /auth/officer/signup`
+- `POST /auth/officer/login`
+- `POST /auth/victim/signup`
+- `POST /auth/victim/login`
+- `POST /auth/witness/signup`
+- `POST /auth/witness/login`
 
 ### Crimes
-- `GET /api/crimes` - Get all crimes (with filters)
-- `GET /api/crimes/:id` - Get crime by ID with full details
-- `POST /api/crimes` - Create crime (Officer only)
-- `PUT /api/crimes/:id` - Update crime (Officer only)
-- `DELETE /api/crimes/:id` - Delete crime (Officer only)
-- `POST /api/crimes/:id/suspects` - Link suspect to crime (Officer only)
-- `POST /api/crimes/:id/victims` - Link victim to crime (Officer only)
+- `GET /crimes`
+- `GET /crimes/:id`
+- `POST /crimes`
+- `PUT /crimes/:id`
+- `DELETE /crimes/:id`
+- `POST /crimes/:id/suspects`
+- `POST /crimes/:id/victims`
+- `POST /crimes/:id/witnesses`
 
 ### Crime Reports
-- `GET /api/crime-reports` - Get all reports (filtered by role)
-- `GET /api/crime-reports/:id` - Get report by ID
-- `POST /api/crime-reports` - Create report (Victim only)
-- `PUT /api/crime-reports/:id` - Update report status (Officer only)
-- `POST /api/crime-reports/:id/link` - Link report to crime (Officer only)
-- `DELETE /api/crime-reports/:id` - Delete report (Officer only)
+- `GET /crime-reports`
+- `GET /crime-reports/:id`
+- `POST /crime-reports`
+- `PUT /crime-reports/:id`
+- `POST /crime-reports/:id/link`
+- `DELETE /crime-reports/:id`
 
 ### Suspects
-- `GET /api/suspects` - Get all suspects (Officer only)
-- `GET /api/suspects/:id` - Get suspect with crime history (Officer only)
-- `POST /api/suspects` - Create suspect (Officer only)
-- `PUT /api/suspects/:id` - Update suspect (Officer only)
-- `DELETE /api/suspects/:id` - Delete suspect (Officer only)
+- `GET /suspects`
+- `GET /suspects/:id`
+- `POST /suspects`
+- `PUT /suspects/:id`
+- `DELETE /suspects/:id`
 
 ### Evidence
-- `GET /api/evidence` - Get all evidence (Officer only)
-- `GET /api/evidence/:id` - Get evidence by ID (Officer only)
-- `POST /api/evidence` - Create evidence (Officer only)
-- `PUT /api/evidence/:id` - Update evidence (Officer only)
-- `DELETE /api/evidence/:id` - Delete evidence (Officer only)
-
-### Locations
-- `GET /api/locations` - Get all locations
-- `GET /api/locations/:id` - Get location by ID
-- `POST /api/locations` - Create location (Officer only)
-- `PUT /api/locations/:id` - Update location (Officer only)
-- `DELETE /api/locations/:id` - Delete location (Officer only)
-
-### Crime Types
-- `GET /api/crime-types` - Get all crime types
-- `GET /api/crime-types/:id` - Get crime type by ID
-- `POST /api/crime-types` - Create crime type (Officer only)
-- `PUT /api/crime-types/:id` - Update crime type (Officer only)
-- `DELETE /api/crime-types/:id` - Delete crime type (Officer only)
+- `GET /evidence`
+- `GET /evidence/:id`
+- `POST /evidence`
+- `PUT /evidence/:id`
+- `POST /evidence/:id/chain`
+- `DELETE /evidence/:id`
 
 ### Investigations
-- `GET /api/investigations` - Get all investigations (Officer only)
-- `GET /api/investigations/:id` - Get investigation with linked crimes (Officer only)
-- `POST /api/investigations` - Create investigation (Officer only)
-- `PUT /api/investigations/:id` - Update investigation (Officer only)
-- `POST /api/investigations/:id/crimes` - Link crime to investigation (Officer only)
-- `DELETE /api/investigations/:id` - Delete investigation (Officer only)
+- `GET /investigations`
+- `GET /investigations/:id`
+- `POST /investigations`
+- `PUT /investigations/:id`
+- `POST /investigations/:id/assign`
+- `POST /investigations/:id/crimes`
+- `DELETE /investigations/:id`
 
-### Analytics (Officer only)
-- `GET /api/analytics/crime-trends` - Get crime trends with window functions
-- `GET /api/analytics/hotspots` - Get crime hotspots
-- `GET /api/analytics/patterns` - Get crime patterns by day/time
-- `GET /api/analytics/category-distribution` - Get category distribution
-- `GET /api/analytics/officer-performance` - Get officer performance stats
-- `GET /api/analytics/time-series` - Get time series data for charts
+### Analytics
+- `GET /analytics/crime-trends`
+- `GET /analytics/hotspots`
+- `GET /analytics/patterns`
+- `GET /analytics/category-distribution`
+- `GET /analytics/officer-performance`
+- `GET /analytics/time-series`
+- `GET /analytics/statistics`
 
-### Predictions (Officer only)
-- `POST /api/predictions/risk-assessment` - Predict crime risk for location
-- `POST /api/predictions/pattern-matching` - Find similar crime patterns
-- `GET /api/predictions/forecast` - Forecast future crime trends
+### Predictions
+- `POST /predictions/risk-assessment`
+- `POST /predictions/pattern-matching`
+- `GET /predictions/forecast`
 
-### Officers
-- `GET /api/officers` - Get all officers (Officer only)
-- `GET /api/officers/:id` - Get officer by ID (Officer only)
-- `POST /api/officers` - Create officer (Officer only)
+## Detailed API Documentation (Request Formats and Examples)
 
-### Victim Profile
-- `GET /api/victim/profile` - Get victim profile (Victim only)
-- `PUT /api/victim/profile` - Update victim profile (Victim only)
+All examples below use base URL:
+`http://localhost:5000/api`
 
-### Witness Profile
-- `GET /api/witness/profile` - Get witness profile (Witness only)
-- `PUT /api/witness/profile` - Update witness profile (Witness only)
+### Common Headers
 
-## 🔐 Authentication
+For authenticated endpoints:
 
-All endpoints (except auth endpoints) require JWT authentication. Include the token in the Authorization header:
-
-```
-Authorization: Bearer <your_jwt_token>
+```http
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
 ```
 
-## 🎯 Role-Based Access
+### 1. Authentication
 
-- **OFFICER**: Full access to all features
-- **VICTIM**: Can file crime reports, view own reports, update profile
-- **WITNESS**: Can view profile, update profile (limited access)
+#### Officer Login
+- Method: `POST`
+- Route: `/auth/officer/login`
+- Request body example:
 
-## 📊 Database Optimization
+```json
+{
+  "email": "ahmed.khan@police.gov.pk",
+  "password": "your_password"
+}
+```
 
-- Indexes on frequently queried columns
-- Window functions for efficient analytics
-- Stored procedures for complex operations
-- Triggers for data integrity and automation
-- Connection pooling for performance
+- Success response example:
 
-## 🧪 Testing
+```json
+{
+  "token": "<jwt_token>",
+  "user": {
+    "id": 1,
+    "name": "Inspector Ahmed Khan",
+    "email": "ahmed.khan@police.gov.pk",
+    "role": "OFFICER"
+  }
+}
+```
 
-Use Postman or similar tool to test endpoints. A Postman collection can be created based on the routes above.
+### 2. Workflow 1: Crime Report Management (Full CRUD)
 
-## 📝 Notes
+#### List Crime Reports
+- Method: `GET`
+- Route: `/crime-reports`
+- Optional query params:
+  - `status`
+  - `victimId` (officer view)
+  - `dateFrom`
+  - `dateTo`
+- Success response example:
 
-- All dates should be in ISO format (YYYY-MM-DD)
-- All IDs are numbers
-- Error responses follow standard format: `{ message: "...", error: "..." }`
-- Success responses include data: `{ data: [...] }`
+```json
+{
+  "data": [
+    {
+      "REPORT_ID": 101,
+      "VICTIM_ID": 5,
+      "REPORTED_BY": "Ayesha Malik",
+      "STATUS": "Pending Review"
+    }
+  ]
+}
+```
 
-## 🚨 Important
+#### Create Crime Report
+- Method: `POST`
+- Route: `/crime-reports`
+- Request body example:
 
-1. Run `db-schema-updates.sql` first to add password fields to tables
-2. Set strong `JWT_SECRET` in `.env` file
-3. Ensure Oracle database is running and accessible
-4. All passwords are hashed using bcrypt
+```json
+{
+  "reportDetails": "Mobile snatching near market around 8 PM.",
+  "reportedByName": "Ayesha Malik",
+  "reportStatus": "Pending Review"
+}
+```
 
-## 📚 Database Features Used
+- Success response example:
 
-- ✅ Window Functions (ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD, SUM OVER)
-- ✅ Complex Joins (INNER, LEFT, RIGHT, SELF)
-- ✅ Stored Procedures
-- ✅ Triggers
-- ✅ Sequences (for auto-increment)
-- ✅ Views (for analytics)
-- ✅ Indexes (for performance)
-- ✅ Constraints (for data integrity)
+```json
+{
+  "message": "Crime report created successfully",
+  "reportId": 201
+}
+```
+
+#### Update Crime Report
+- Method: `PUT`
+- Route: `/crime-reports/:id`
+- Request body example:
+
+```json
+{
+  "reportStatus": "Under Investigation",
+  "reportDetails": "Reviewed by officer and moved to investigation stage."
+}
+```
+
+- Success response example:
+
+```json
+{
+  "message": "Crime report updated successfully"
+}
+```
+
+#### Delete Crime Report
+- Method: `DELETE`
+- Route: `/crime-reports/:id`
+- Success response example:
+
+```json
+{
+  "message": "Crime report deleted successfully"
+}
+```
+
+### 3. Workflow 2: Investigation Management (Full CRUD + Links)
+
+#### List Investigations
+- Method: `GET`
+- Route: `/investigations`
+- Optional query params:
+  - `status`
+  - `outcome`
+  - `leadOfficerId`
+- Success response example:
+
+```json
+{
+  "data": [
+    {
+      "INVESTIGATION_ID": 12,
+      "CASE_NUMBER": "INV-2026-000012",
+      "STATUS": "Active",
+      "OUTCOME": "Pending"
+    }
+  ]
+}
+```
+
+#### Create Investigation
+- Method: `POST`
+- Route: `/investigations`
+- Request body example:
+
+```json
+{
+  "status": "Active",
+  "outcome": "Pending",
+  "notes": "Initial investigation opened"
+}
+```
+
+- Success response example:
+
+```json
+{
+  "message": "Investigation created successfully",
+  "investigationId": 52,
+  "caseNumber": "INV-2026-000052"
+}
+```
+
+#### Update Investigation
+- Method: `PUT`
+- Route: `/investigations/:id`
+- Request body example:
+
+```json
+{
+  "status": "Closed",
+  "outcome": "Solved",
+  "notes": "Case resolved and closed"
+}
+```
+
+- Success response example:
+
+```json
+{
+  "message": "Investigation updated successfully"
+}
+```
+
+#### Delete Investigation
+- Method: `DELETE`
+- Route: `/investigations/:id`
+- Success response example:
+
+```json
+{
+  "message": "Investigation deleted successfully"
+}
+```
+
+#### Link Crime to Investigation
+- Method: `POST`
+- Route: `/investigations/:id/crimes`
+- Request body example:
+
+```json
+{
+  "crimeId": 145
+}
+```
+
+### 4. Workflow 3: Crime CRUD + Analysis and Prediction
+
+#### Create Crime
+- Method: `POST`
+- Route: `/crimes`
+- Request body example:
+
+```json
+{
+  "crimeTypeId": 2,
+  "dateOccurred": "2026-04-02",
+  "timeOccurred": "20:15",
+  "description": "Armed robbery reported at main market.",
+  "severityLevel": "Major",
+  "locationId": 10,
+  "status": "Open"
+}
+```
+
+- Success response example:
+
+```json
+{
+  "message": "Crime created successfully",
+  "crimeId": 302
+}
+```
+
+#### List Crimes
+- Method: `GET`
+- Route: `/crimes`
+- Optional query params:
+  - `status`
+  - `crimeTypeId`
+  - `locationId`
+  - `dateFrom`
+  - `dateTo`
+
+#### Update Crime
+- Method: `PUT`
+- Route: `/crimes/:id`
+- Request body example:
+
+```json
+{
+  "status": "Under Investigation",
+  "severityLevel": "Critical"
+}
+```
+
+#### Delete Crime
+- Method: `DELETE`
+- Route: `/crimes/:id`
+
+#### Analytics Example: Hotspots
+- Method: `GET`
+- Route: `/analytics/hotspots?limit=10`
+- Success response example:
+
+```json
+{
+  "data": [
+    {
+      "CITY": "Karachi",
+      "AREA": "Lyari",
+      "TOTAL_CRIMES": 48,
+      "SOLVE_RATE": 37.5
+    }
+  ]
+}
+```
+
+#### Prediction Example: Risk Assessment
+- Method: `POST`
+- Route: `/predictions/risk-assessment`
+- Request body example:
+
+```json
+{
+  "city": "Karachi",
+  "area": "Lyari"
+}
+```
+
+- Success response example:
+
+```json
+{
+  "data": {
+    "location": {
+      "city": "Karachi",
+      "area": "Lyari"
+    },
+    "risk_assessment": {
+      "risk_score": 8,
+      "risk_level": "HIGH"
+    }
+  }
+}
+```
+
+### 5. Evidence CRUD (Related to Workflow 2)
+
+#### Create Evidence
+- Method: `POST`
+- Route: `/evidence`
+- Request body example:
+
+```json
+{
+  "crimeId": 302,
+  "type": "CCTV Footage",
+  "description": "Video clip from shop camera",
+  "dateCollected": "2026-04-03"
+}
+```
+
+#### Update Chain of Custody
+- Method: `POST`
+- Route: `/evidence/:id/chain`
+- Request body example:
+
+```json
+{
+  "action": "ANALYZED",
+  "notes": "Forensics lab completed initial analysis"
+}
+```
+
+## Workflow Execution Order (Aligned with Project Narratives)
+
+This section documents each workflow in execution order with concrete API calls, request payloads, and response examples.
+
+Note on scope alignment:
+- Frontend handles notification display and milestone messaging in Milestone 3.
+- Backend email dispatch and file attachment upload pipeline are planned for a future phase.
+
+### Workflow 1: Victim Crime Reporting, Officer Review, and Investigation Initiation
+
+#### Step 1: Victim registers (if new)
+- Method: `POST`
+- Endpoint: `/api/auth/victim/signup`
+- Request:
+
+```json
+{
+  "name": "Ayesha Malik",
+  "age": 27,
+  "gender": "Female",
+  "contactInfo": "0300-1234567",
+  "address": "Block 7, Gulshan, Karachi",
+  "email": "ayesha.malik@example.com",
+  "password": "StrongPass123"
+}
+```
+
+- Response:
+
+```json
+{
+  "message": "Victim account created successfully"
+}
+```
+
+#### Step 2: Victim logs in
+- Method: `POST`
+- Endpoint: `/api/auth/victim/login`
+- Request:
+
+```json
+{
+  "email": "ayesha.malik@example.com",
+  "password": "StrongPass123"
+}
+```
+
+- Response:
+
+```json
+{
+  "token": "<victim_jwt>",
+  "user": {
+    "id": 15,
+    "name": "Ayesha Malik",
+    "email": "ayesha.malik@example.com",
+    "role": "VICTIM"
+  }
+}
+```
+
+#### Step 3: Victim submits crime report
+- Method: `POST`
+- Endpoint: `/api/crime-reports`
+- Headers: `Authorization: Bearer <victim_jwt>`
+- Request:
+
+```json
+{
+  "reportDetails": "Mobile snatching near Tariq Road at around 8:15 PM.",
+  "reportedByName": "Ayesha Malik",
+  "reportStatus": "Pending Review"
+}
+```
+
+- Response:
+
+```json
+{
+  "message": "Crime report created successfully",
+  "reportId": 310
+}
+```
+
+#### Step 4: Officer logs in and lists pending reports
+- Method: `POST`
+- Endpoint: `/api/auth/officer/login`
+- Method: `GET`
+- Endpoint: `/api/crime-reports?status=Pending%20Review`
+- Headers: `Authorization: Bearer <officer_jwt>`
+
+#### Step 5: Officer reads one report for review
+- Method: `GET`
+- Endpoint: `/api/crime-reports/:id`
+- Headers: `Authorization: Bearer <officer_jwt>`
+
+#### Step 6A: Officer rejects report
+- Method: `PUT`
+- Endpoint: `/api/crime-reports/:id`
+- Request:
+
+```json
+{
+  "reportStatus": "Rejected",
+  "reportDetails": "Insufficient detail for verification."
+}
+```
+
+- Response:
+
+```json
+{
+  "message": "Crime report updated successfully"
+}
+```
+
+#### Step 6B: Officer accepts and initiates investigation (current backend sequence)
+
+Current backend performs this as multi-call orchestration:
+
+1. Create crime
+- Method: `POST`
+- Endpoint: `/api/crimes`
+- Request:
+
+```json
+{
+  "crimeTypeId": 2,
+  "dateOccurred": "2026-04-03",
+  "timeOccurred": "20:15",
+  "description": "Accepted from report #310",
+  "status": "Open",
+  "severityLevel": "Major",
+  "locationId": 10
+}
+```
+
+2. Link report to crime
+- Method: `POST`
+- Endpoint: `/api/crime-reports/:id/link`
+- Request:
+
+```json
+{
+  "crimeId": 420,
+  "notes": "Linked during officer acceptance"
+}
+```
+
+3. Create investigation
+- Method: `POST`
+- Endpoint: `/api/investigations`
+- Request:
+
+```json
+{
+  "status": "Active",
+  "outcome": "Pending",
+  "notes": "Investigation created from accepted report"
+}
+```
+
+4. Link crime to investigation
+- Method: `POST`
+- Endpoint: `/api/investigations/:id/crimes`
+- Request:
+
+```json
+{
+  "crimeId": 420
+}
+```
+
+5. Update report status
+- Method: `PUT`
+- Endpoint: `/api/crime-reports/:id`
+- Request:
+
+```json
+{
+  "reportStatus": "Under Investigation"
+}
+```
+
+#### Workflow 1 scope notes
+- Attachment upload (photos/videos/documents) is frontend-planned and not implemented as backend file API in this milestone.
+- Notification and email dispatch are frontend/UI milestone scope; backend email dispatch is planned future work.
+
+### Workflow 2: Investigation Management, Suspect Tracking, and Evidence Chain of Custody
+
+#### Step 1: Officer lists active investigations
+- Method: `GET`
+- Endpoint: `/api/investigations?status=Active`
+- Headers: `Authorization: Bearer <officer_jwt>`
+
+#### Step 2: Officer opens investigation case details
+- Method: `GET`
+- Endpoint: `/api/investigations/:id`
+
+#### Step 3: Officer searches/creates suspect
+- Search suspects:
+  - Method: `GET`
+  - Endpoint: `/api/suspects?searchName=Ali&status=At%20Large`
+- Create suspect:
+  - Method: `POST`
+  - Endpoint: `/api/suspects`
+  - Request:
+
+```json
+{
+  "name": "Ali Raza",
+  "gender": "Male",
+  "age": 31,
+  "address": "Korangi, Karachi",
+  "criminalRecord": true,
+  "status": "At Large"
+}
+```
+
+#### Step 4: Link suspect to crime
+- Method: `POST`
+- Endpoint: `/api/crimes/:id/suspects`
+- Request:
+
+```json
+{
+  "suspectId": 88,
+  "role": "Primary Suspect",
+  "arrestStatus": "Pending"
+}
+```
+
+#### Step 5: Add evidence
+- Method: `POST`
+- Endpoint: `/api/evidence`
+- Request:
+
+```json
+{
+  "crimeId": 420,
+  "type": "CCTV Footage",
+  "description": "Camera clip from nearby shop",
+  "dateCollected": "2026-04-04"
+}
+```
+
+#### Step 6: Update evidence chain of custody
+- Method: `POST`
+- Endpoint: `/api/evidence/:id/chain`
+- Request:
+
+```json
+{
+  "action": "TRANSFERRED",
+  "notes": "Transferred to forensic lab"
+}
+```
+
+#### Step 7: Add/link witness statement
+- Link witness to crime:
+  - Method: `POST`
+  - Endpoint: `/api/crimes/:id/witnesses`
+  - Request:
+
+```json
+{
+  "witnessId": 40,
+  "statementDate": "2026-04-04",
+  "statementText": "Saw suspect escaping on motorcycle",
+  "isKeyWitness": 1
+}
+```
+
+#### Step 8: Update investigation progress/outcome
+- Method: `PUT`
+- Endpoint: `/api/investigations/:id`
+- Request:
+
+```json
+{
+  "status": "Closed",
+  "outcome": "Solved",
+  "closeDate": "2026-04-15",
+  "notes": "Suspect arrested and case closed"
+}
+```
+
+### Workflow 3: Crime Analysis and Predictive Policing
+
+#### Step 1: Officer opens hotspot analysis
+- Method: `GET`
+- Endpoint: `/api/analytics/hotspots?limit=10`
+- Response (example):
+
+```json
+{
+  "data": [
+    {
+      "CITY": "Karachi",
+      "AREA": "Lyari",
+      "TOTAL_CRIMES": 48,
+      "SOLVE_RATE": 37.5
+    }
+  ]
+}
+```
+
+#### Step 2: Officer checks trends by year/month/type
+- Method: `GET`
+- Endpoint: `/api/analytics/crime-trends?year=2026&month=4&crimeTypeId=2`
+
+#### Step 3: Officer checks day/time patterns
+- Method: `GET`
+- Endpoint: `/api/analytics/patterns`
+
+#### Step 4: Officer checks category distribution
+- Method: `GET`
+- Endpoint: `/api/analytics/category-distribution`
+
+#### Step 5: Officer checks officer performance
+- Method: `GET`
+- Endpoint: `/api/analytics/officer-performance`
+
+#### Step 6: Officer gets risk assessment for area
+- Method: `POST`
+- Endpoint: `/api/predictions/risk-assessment`
+- Request:
+
+```json
+{
+  "city": "Karachi",
+  "area": "Lyari"
+}
+```
+
+#### Step 7: Officer finds similar patterns
+- Method: `POST`
+- Endpoint: `/api/predictions/pattern-matching`
+- Request:
+
+```json
+{
+  "crimeType": "Armed Robbery",
+  "city": "Karachi",
+  "area": "Lyari",
+  "dayOfWeek": "Friday"
+}
+```
+
+#### Step 8: Officer forecasts upcoming crime trends
+- Method: `GET`
+- Endpoint: `/api/predictions/forecast?months=6&city=Karachi&area=Lyari`
+
+#### Step 9: Officer gets chart-ready time series
+- Method: `GET`
+- Endpoint: `/api/analytics/time-series?groupBy=MONTH&startDate=2025-01-01&endDate=2026-12-31`
+
+## Auth and Response Format
+- Protected routes require JWT in header:
+  - `Authorization: Bearer <token>`
+- Standard success format:
+  - `{ "data": ... }` or `{ "message": "..." }`
+- Standard error format:
+  - `{ "message": "...", "error": "..." }`
+
+
+## Version Control Guidance (Recommended)
+Suggested commit sequence:
+1. `docs(readme): align with CMAS and milestone-3 workflow coverage`
+2. `chore(db): harden Oracle pool initialization and env validation`
+3. `feat(tools): add db connection check script and npm db:check command`
+4. `fix(data-gen): align generator with schema constraints and service`
+
+## Important Notes
+- CMAS name should be used consistently in submission text.
+- Use your actual Oracle service name in `.env` (`xe` in your current setup).
+- Keep `.env` private and never commit secrets.
+- Scope clarification (Milestone 3): Notification display and milestone update messaging are handled in the frontend layer. Backend email/notification dispatch service is planned for a future phase and is outside the current milestone scope.
 
 ---
-
-**Built with ❤️ for Crime Pattern Analysis System**
+Built for CMAS (Crime Management Analysis System)
