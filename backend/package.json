@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "db:check": "node scripts/check-db-connection.js",
     "populate-passwords": "node scripts/populate-passwords.js",
     "setup-credentials": "node scripts/setup-victim-witness-credentials.js"
   },

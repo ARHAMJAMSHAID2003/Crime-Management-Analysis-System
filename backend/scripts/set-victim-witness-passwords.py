@@ -1,12 +1,35 @@
 import oracledb
 import bcrypt
+import os
+from pathlib import Path
+
+
+def load_dotenv(dotenv_path):
+    if not dotenv_path.exists():
+        return
+
+    for line in dotenv_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 # ============================================
 # ORACLE CONNECTION
 # ============================================
-username = "c##irfan"
-password = "123"
-dsn = "localhost:1521/orcl"
+username = os.getenv("DB_USER")
+password = os.getenv("DB_PASSWORD")
+dsn = os.getenv("DB_CONNECTION_STRING")
+
+if not username or not password or not dsn:
+    raise ValueError("Missing DB_USER, DB_PASSWORD, or DB_CONNECTION_STRING environment variables")
 
 # ============================================
 # PASSWORD HASHING
