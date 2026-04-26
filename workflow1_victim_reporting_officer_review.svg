@@ -1,0 +1,909 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7800 6600" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="100%" style="stop-color:#00f2fe"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b"/>
+      <stop offset="100%" style="stop-color:#38f9d7"/>
+    </linearGradient>
+    <linearGradient id="authBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <filter id="cardShadow" x="-3%" y="-3%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+    <filter id="heavyShadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="8" stdDeviation="15" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="7800" height="6600" fill="#f0f2f5"/>
+
+  <!-- Title Banner -->
+  <rect x="0" y="0" width="7800" height="80" fill="url(#primaryGrad)"/>
+  <text x="3900" y="50" text-anchor="middle" fill="white" font-size="30" font-weight="700">WORKFLOW 1: Victim Crime Reporting → Officer Review → Investigation Initiation</text>
+
+  <!-- ======================== ROW 1 ======================== -->
+  <!-- S1: Victim Login — Default (Empty) -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S1 — Victim / Witness Login (Default State)</text>
+
+    <rect x="0" y="50" width="2450" height="1300" rx="14" fill="url(#authBg)"/>
+    <rect x="625" y="120" width="1200" height="1100" rx="14" fill="white" filter="url(#heavyShadow)"/>
+
+    <circle cx="1225" cy="190" r="34" fill="#f0f0f0"/>
+    <text x="1225" y="200" text-anchor="middle" font-size="28">👤</text>
+    <text x="1225" y="260" text-anchor="middle" fill="#333" font-size="26" font-weight="700">Victim / Witness Login</text>
+    <text x="1225" y="290" text-anchor="middle" fill="#666" font-size="14">Report a crime or provide information</text>
+
+    <!-- Empty form fields -->
+    <text x="680" y="340" fill="#333" font-size="14" font-weight="600">I am a:</text>
+    <rect x="680" y="350" width="1080" height="44" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="700" y="378" fill="#aaa" font-size="14">Select role...</text>
+    <polygon points="1730,370 1740,380 1720,380" fill="#999"/>
+
+    <text x="680" y="425" fill="#333" font-size="14" font-weight="600">Email</text>
+    <rect x="680" y="435" width="1080" height="44" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="700" y="463" fill="#aaa" font-size="14">your.email@example.com</text>
+
+    <text x="680" y="510" fill="#333" font-size="14" font-weight="600">Password</text>
+    <rect x="680" y="520" width="1080" height="44" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="700" y="548" fill="#aaa" font-size="14">Enter your password</text>
+
+    <rect x="680" y="600" width="1080" height="46" rx="8" fill="url(#primaryGrad)"/>
+    <text x="1225" y="629" text-anchor="middle" fill="white" font-size="15" font-weight="600">Login</text>
+
+    <text x="1225" y="690" text-anchor="middle" fill="#666" font-size="13">Don't have an account? <tspan fill="#667eea" font-weight="600">Sign up here</tspan></text>
+    <text x="1225" y="718" text-anchor="middle" fill="#666" font-size="13">Are you an officer? <tspan fill="#667eea" font-weight="600">Login as Officer</tspan></text>
+
+    <line x1="730" y1="745" x2="1720" y2="745" stroke="#e0e0e0" stroke-width="1"/>
+    <rect x="680" y="770" width="1080" height="240" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="1225" y="800" text-anchor="middle" fill="#333" font-size="15" font-weight="600">📝 New Registration Fields</text>
+    <text x="700" y="828" fill="#555" font-size="12">When signing up, victims provide:</text>
+    <text x="720" y="852" fill="#495057" font-size="12">• Full Name *</text>
+    <text x="720" y="872" fill="#495057" font-size="12">• Age</text>
+    <text x="720" y="892" fill="#495057" font-size="12">• Gender (Male / Female / Other)</text>
+    <text x="720" y="912" fill="#495057" font-size="12">• Contact Details (phone)</text>
+    <text x="720" y="932" fill="#495057" font-size="12">• Address</text>
+    <text x="720" y="952" fill="#495057" font-size="12">• Email * &amp; Password * (hashed with bcrypt)</text>
+    <rect x="700" y="968" width="1040" height="18" rx="5" fill="#e8f5e9"/>
+    <text x="720" y="982" fill="#2e7d32" font-size="11">✓ Password securely hashed before storage</text>
+  </g>
+
+  <!-- Arrow S1 → S2 -->
+  <g transform="translate(2530, 790)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="75,-7 90,0 75,7" fill="#667eea"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Fill &amp; Login</text>
+  </g>
+
+  <!-- S2: Victim Login — Filled + Success -->
+  <g transform="translate(2650, 120)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#28a745" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S2 — Victim Login (Filled + Success State)</text>
+
+    <rect x="0" y="50" width="2450" height="1300" rx="14" fill="url(#authBg)"/>
+    <rect x="625" y="120" width="1200" height="950" rx="14" fill="white" filter="url(#heavyShadow)"/>
+
+    <circle cx="1225" cy="190" r="34" fill="#f0f0f0"/>
+    <text x="1225" y="200" text-anchor="middle" font-size="28">👤</text>
+    <text x="1225" y="260" text-anchor="middle" fill="#333" font-size="26" font-weight="700">Victim / Witness Login</text>
+    <text x="1225" y="290" text-anchor="middle" fill="#666" font-size="14">Report a crime or provide information</text>
+
+    <!-- Success alert -->
+    <rect x="680" y="310" width="1080" height="38" rx="8" fill="#d4edda" stroke="#c3e6cb" stroke-width="1"/>
+    <text x="700" y="335" fill="#155724" font-size="13">✅ Login successful! Redirecting to your dashboard...</text>
+
+    <!-- Filled form fields -->
+    <text x="680" y="380" fill="#333" font-size="14" font-weight="600">I am a:</text>
+    <rect x="680" y="390" width="1080" height="44" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="700" y="418" fill="#333" font-size="14" font-weight="600">Victim</text>
+
+    <text x="680" y="465" fill="#333" font-size="14" font-weight="600">Email</text>
+    <rect x="680" y="475" width="1080" height="44" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="700" y="503" fill="#333" font-size="14">sarah.khan@email.com</text>
+
+    <text x="680" y="550" fill="#333" font-size="14" font-weight="600">Password</text>
+    <rect x="680" y="560" width="1080" height="44" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="700" y="588" fill="#333" font-size="14">••••••••••••</text>
+
+    <rect x="680" y="640" width="1080" height="46" rx="8" fill="#28a745"/>
+    <text x="1225" y="669" text-anchor="middle" fill="white" font-size="15" font-weight="600">✓ Logged In</text>
+
+    <!-- JWT token info -->
+    <rect x="680" y="720" width="1080" height="100" rx="10" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+    <text x="1225" y="748" text-anchor="middle" fill="#1565C0" font-size="14" font-weight="600">🔐 Authentication Completed</text>
+    <text x="700" y="775" fill="#495057" font-size="12">• JWT Token issued — stored in localStorage</text>
+    <text x="700" y="795" fill="#495057" font-size="12">• Role: VICTIM | User: Sarah Khan | Redirecting to My Reports...</text>
+
+    <!-- Loading indicator -->
+    <rect x="680" y="850" width="1080" height="55" rx="10" fill="#f8f9fa"/>
+    <text x="1225" y="885" text-anchor="middle" fill="#667eea" font-size="14" font-weight="600">⏳ Loading dashboard...</text>
+  </g>
+
+  <!-- Arrow S2 → S3 -->
+  <g transform="translate(5130, 790)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="75,-7 90,0 75,7" fill="#667eea"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Redirect</text>
+  </g>
+
+  <!-- S3: Victim Dashboard — My Reports (Default State) -->
+  <g transform="translate(5250, 120)">
+    <rect x="0" y="0" width="2500" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1250" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S3 — My Crime Reports (Default State)</text>
+
+    <rect x="0" y="50" width="2500" height="1300" rx="14" fill="#f5f7fa"/>
+
+    <!-- Header bar -->
+    <rect x="0" y="50" width="2500" height="55" rx="0" fill="url(#primaryGrad)"/>
+    <text x="20" y="83" fill="white" font-size="18" font-weight="700">🚔 CMAS</text>
+    <text x="130" y="83" fill="white" font-size="11" opacity="0.9">Crime Management Analysis System</text>
+    <rect x="1200" y="65" width="100" height="26" rx="6" fill="rgba(255,255,255,0.3)"/>
+    <text x="1250" y="82" text-anchor="middle" fill="white" font-size="11" font-weight="600">My Reports</text>
+    <rect x="1310" y="65" width="90" height="26" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="1355" y="82" text-anchor="middle" fill="white" font-size="11">My Profile</text>
+    <text x="2150" y="82" fill="white" font-size="12">Sarah Khan</text>
+    <rect x="2330" y="65" width="65" height="26" rx="6" fill="rgba(255,255,255,0.2)"/>
+    <text x="2362" y="82" text-anchor="middle" fill="white" font-size="11">Logout</text>
+
+    <!-- Page title -->
+    <text x="25" y="140" fill="#333" font-size="22" font-weight="700">📋 My Crime Reports</text>
+    <text x="25" y="162" fill="#888" font-size="12">View and manage your submitted crime reports</text>
+    <rect x="2150" y="125" width="240" height="38" rx="8" fill="url(#primaryGrad)" filter="url(#cardShadow)"/>
+    <text x="2270" y="149" text-anchor="middle" fill="white" font-size="13" font-weight="600">+ Report a Crime</text>
+
+    <!-- Stats cards -->
+    <g transform="translate(25, 180)">
+      <rect x="0" y="0" width="590" height="80" rx="10" fill="url(#primaryGrad)" filter="url(#cardShadow)"/>
+      <text x="20" y="28" fill="white" font-size="12" opacity="0.9">Total Reports</text>
+      <text x="20" y="60" fill="white" font-size="28" font-weight="700">12</text>
+      <rect x="610" y="0" width="590" height="80" rx="10" fill="url(#pinkGrad)" filter="url(#cardShadow)"/>
+      <text x="630" y="28" fill="white" font-size="12" opacity="0.9">Pending Review</text>
+      <text x="630" y="60" fill="white" font-size="28" font-weight="700">3</text>
+      <rect x="1220" y="0" width="590" height="80" rx="10" fill="url(#blueGrad)" filter="url(#cardShadow)"/>
+      <text x="1240" y="28" fill="white" font-size="12" opacity="0.9">Under Investigation</text>
+      <text x="1240" y="60" fill="white" font-size="28" font-weight="700">5</text>
+      <rect x="1830" y="0" width="590" height="80" rx="10" fill="url(#greenGrad)" filter="url(#cardShadow)"/>
+      <text x="1850" y="28" fill="white" font-size="12" opacity="0.9">Resolved</text>
+      <text x="1850" y="60" fill="white" font-size="28" font-weight="700">4</text>
+    </g>
+
+    <!-- Reports table -->
+    <rect x="25" y="280" width="2450" height="500" rx="10" fill="white" filter="url(#cardShadow)"/>
+    <rect x="25" y="280" width="2450" height="35" fill="#f8f9fa"/>
+    <text x="50" y="303" fill="#495057" font-size="11" font-weight="600">REPORT ID</text>
+    <text x="220" y="303" fill="#495057" font-size="11" font-weight="600">DATE</text>
+    <text x="500" y="303" fill="#495057" font-size="11" font-weight="600">TYPE</text>
+    <text x="700" y="303" fill="#495057" font-size="11" font-weight="600">STATUS</text>
+    <text x="1000" y="303" fill="#495057" font-size="11" font-weight="600">ACTIONS</text>
+
+    <!-- Row 1 -->
+    <text x="50" y="340" fill="#333" font-size="13" font-weight="700">#46</text>
+    <text x="220" y="340" fill="#333" font-size="12">Feb 10, 2026</text>
+    <rect x="500" y="326" width="80" height="20" rx="10" fill="#e3f2fd"/>
+    <text x="540" y="341" text-anchor="middle" fill="#1976d2" font-size="10" font-weight="600">Registered</text>
+    <rect x="700" y="326" width="120" height="20" rx="10" fill="#cfe2ff"/>
+    <text x="760" y="341" text-anchor="middle" fill="#084298" font-size="10" font-weight="600">Under Investigation</text>
+    <rect x="1000" y="324" width="55" height="24" rx="5" fill="#17a2b8"/>
+    <text x="1027" y="341" text-anchor="middle" fill="white" font-size="10" font-weight="600">View</text>
+
+    <line x1="45" y1="355" x2="2450" y2="355" stroke="#e9ecef" stroke-width="1"/>
+    <!-- Row 2 -->
+    <text x="50" y="378" fill="#333" font-size="13" font-weight="700">#38</text>
+    <text x="220" y="378" fill="#333" font-size="12">Jan 22, 2026</text>
+    <rect x="500" y="364" width="80" height="20" rx="10" fill="#e3f2fd"/>
+    <text x="540" y="379" text-anchor="middle" fill="#1976d2" font-size="10" font-weight="600">Registered</text>
+    <rect x="700" y="364" width="80" height="20" rx="10" fill="#d4edda"/>
+    <text x="740" y="379" text-anchor="middle" fill="#155724" font-size="10" font-weight="600">Resolved</text>
+    <rect x="1000" y="362" width="55" height="24" rx="5" fill="#17a2b8"/>
+    <text x="1027" y="379" text-anchor="middle" fill="white" font-size="10" font-weight="600">View</text>
+
+    <line x1="45" y1="393" x2="2450" y2="393" stroke="#e9ecef" stroke-width="1"/>
+    <!-- Row 3 -->
+    <text x="50" y="416" fill="#333" font-size="13" font-weight="700">#29</text>
+    <text x="220" y="416" fill="#333" font-size="12">Dec 18, 2025</text>
+    <rect x="500" y="402" width="80" height="20" rx="10" fill="#fff3e0"/>
+    <text x="540" y="417" text-anchor="middle" fill="#f57c00" font-size="10" font-weight="600">Anonymous</text>
+    <rect x="700" y="402" width="100" height="20" rx="10" fill="#fff3cd"/>
+    <text x="750" y="417" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">Pending Review</text>
+    <rect x="1000" y="400" width="55" height="24" rx="5" fill="#17a2b8"/>
+    <text x="1027" y="417" text-anchor="middle" fill="white" font-size="10" font-weight="600">View</text>
+
+    <!-- No modal — hint box -->
+    <rect x="25" y="800" width="2450" height="50" rx="8" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+    <text x="1250" y="830" text-anchor="middle" fill="#1565C0" font-size="13" font-weight="600">👆 Click "+ Report a Crime" to open the report submission form (shown in next screen)</text>
+  </g>
+
+  <!-- ======================== ROW 2 ======================== -->
+  <!-- S4: My Reports — Modal Open (Empty Form) -->
+  <g transform="translate(50, 1520)">
+    <rect x="0" y="0" width="2500" height="40" rx="20" fill="#f5576c" opacity="0.9"/>
+    <text x="1250" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S4 — Report Crime Modal (Opened — Empty Form)</text>
+
+    <rect x="0" y="50" width="2500" height="1350" rx="14" fill="#f5f7fa"/>
+    <!-- Header -->
+    <rect x="0" y="50" width="2500" height="55" rx="0" fill="url(#primaryGrad)"/>
+    <text x="20" y="83" fill="white" font-size="18" font-weight="700">🚔 CMAS</text>
+    <text x="130" y="83" fill="white" font-size="11" opacity="0.9">Crime Management Analysis System</text>
+    <text x="2150" y="82" fill="white" font-size="12">Sarah Khan</text>
+
+    <!-- Page title behind modal -->
+    <text x="25" y="140" fill="#aaa" font-size="22" font-weight="700">📋 My Crime Reports</text>
+
+    <!-- Dimmed overlay -->
+    <rect x="0" y="150" width="2500" height="1250" fill="rgba(0,0,0,0.45)"/>
+
+    <!-- Modal -->
+    <rect x="350" y="180" width="1800" height="1160" rx="12" fill="white" filter="url(#heavyShadow)"/>
+    <text x="400" y="220" fill="#333" font-size="20" font-weight="700">Submit Crime Report</text>
+    <circle cx="2100" cy="210" r="15" fill="#f0f0f0"/>
+    <text x="2100" y="216" text-anchor="middle" fill="#999" font-size="16">✕</text>
+
+    <!-- Info banner -->
+    <rect x="400" y="240" width="1700" height="45" rx="8" fill="#e3f2fd"/>
+    <rect x="400" y="240" width="5" height="45" rx="2" fill="#2196F3"/>
+    <text x="420" y="260" fill="#1565C0" font-size="12" font-weight="600">ℹ Important Information</text>
+    <text x="420" y="276" fill="#1976D2" font-size="11">Your report will be reviewed by officers. Include as much detail as possible.</text>
+
+    <!-- EMPTY form fields -->
+    <text x="400" y="315" fill="#333" font-size="13" font-weight="600">Crime Type *</text>
+    <rect x="400" y="325" width="780" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="420" y="350" fill="#aaa" font-size="13">Select crime type...</text>
+    <text x="1200" y="315" fill="#888" font-size="10" font-style="italic">Violent, Property, Cyber, White_Collar, Drug_Related, Other</text>
+
+    <text x="400" y="395" fill="#333" font-size="13" font-weight="600">Date of Incident *</text>
+    <rect x="400" y="405" width="780" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="420" y="430" fill="#aaa" font-size="13">Select date...</text>
+    <text x="1150" y="430" fill="#999" font-size="14">📅</text>
+
+    <text x="1210" y="395" fill="#333" font-size="13" font-weight="600">Time of Incident</text>
+    <rect x="1210" y="405" width="740" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="1230" y="430" fill="#aaa" font-size="13">HH:MM</text>
+
+    <text x="400" y="475" fill="#333" font-size="13" font-weight="600">City *</text>
+    <rect x="400" y="485" width="500" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="420" y="510" fill="#aaa" font-size="13">Enter city...</text>
+
+    <text x="920" y="475" fill="#333" font-size="13" font-weight="600">Area</text>
+    <rect x="920" y="485" width="500" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="940" y="510" fill="#aaa" font-size="13">Enter area...</text>
+
+    <text x="1440" y="475" fill="#333" font-size="13" font-weight="600">Street Address</text>
+    <rect x="1440" y="485" width="510" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="1460" y="510" fill="#aaa" font-size="13">Enter street...</text>
+
+    <text x="400" y="555" fill="#333" font-size="13" font-weight="600">Report Details *</text>
+    <rect x="400" y="565" width="1550" height="120" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="420" y="590" fill="#aaa" font-size="13">Describe the incident in detail...</text>
+
+    <text x="400" y="715" fill="#333" font-size="13" font-weight="600">📎 Upload Evidence (Optional)</text>
+    <rect x="400" y="725" width="1550" height="55" rx="8" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="2" stroke-dasharray="6,3"/>
+    <text x="1175" y="755" text-anchor="middle" fill="#888" font-size="13">Drag &amp; drop files here, or click to browse (Photos, Videos, Documents)</text>
+    <text x="1175" y="773" text-anchor="middle" fill="#aaa" font-size="11">Max file size: 10MB — JPG, PNG, PDF, MP4, DOCX</text>
+
+    <!-- Buttons (disabled style) -->
+    <rect x="1500" y="800" width="130" height="38" rx="8" fill="#6c757d"/>
+    <text x="1565" y="824" text-anchor="middle" fill="white" font-size="13" font-weight="600">Cancel</text>
+    <rect x="1650" y="800" width="300" height="38" rx="8" fill="#667eea" opacity="0.5"/>
+    <text x="1800" y="824" text-anchor="middle" fill="white" font-size="13" font-weight="600">📤 Submit Report</text>
+    <text x="400" y="870" fill="#888" font-size="11">All fields marked * are required. Submit button activates when required fields are filled.</text>
+  </g>
+
+  <!-- Arrow S4 → S5 -->
+  <g transform="translate(2580, 2230)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#28a745" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="75,-7 90,0 75,7" fill="#28a745"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#28a745" font-size="11" font-weight="600">Fill &amp; Submit</text>
+  </g>
+
+  <!-- S5: Report Modal — Filled + Success Toast -->
+  <g transform="translate(2700, 1520)">
+    <rect x="0" y="0" width="2500" height="40" rx="20" fill="#28a745" opacity="0.9"/>
+    <text x="1250" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S5 — Report Crime Modal (Filled + Submit Success)</text>
+
+    <rect x="0" y="50" width="2500" height="1350" rx="14" fill="#f5f7fa"/>
+    <rect x="0" y="50" width="2500" height="55" rx="0" fill="url(#primaryGrad)"/>
+    <text x="20" y="83" fill="white" font-size="18" font-weight="700">🚔 CMAS</text>
+    <text x="130" y="83" fill="white" font-size="11" opacity="0.9">Crime Management Analysis System</text>
+
+    <!-- Dimmed overlay -->
+    <rect x="0" y="150" width="2500" height="1250" fill="rgba(0,0,0,0.45)"/>
+
+    <!-- Modal with filled fields -->
+    <rect x="350" y="180" width="1800" height="1160" rx="12" fill="white" filter="url(#heavyShadow)"/>
+    <text x="400" y="220" fill="#333" font-size="20" font-weight="700">Submit Crime Report</text>
+    <circle cx="2100" cy="210" r="15" fill="#f0f0f0"/>
+    <text x="2100" y="216" text-anchor="middle" fill="#999" font-size="16">✕</text>
+
+    <rect x="400" y="240" width="1700" height="45" rx="8" fill="#e3f2fd"/>
+    <rect x="400" y="240" width="5" height="45" rx="2" fill="#2196F3"/>
+    <text x="420" y="260" fill="#1565C0" font-size="12" font-weight="600">ℹ Important Information</text>
+    <text x="420" y="276" fill="#1976D2" font-size="11">Your report will be reviewed by officers. Include as much detail as possible.</text>
+
+    <!-- FILLED form fields (green borders) -->
+    <text x="400" y="315" fill="#333" font-size="13" font-weight="600">Crime Type *</text>
+    <rect x="400" y="325" width="780" height="40" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="420" y="350" fill="#333" font-size="13" font-weight="600">Violent</text>
+
+    <text x="400" y="395" fill="#333" font-size="13" font-weight="600">Date of Incident *</text>
+    <rect x="400" y="405" width="780" height="40" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="420" y="430" fill="#333" font-size="13">2026-02-15</text>
+
+    <text x="1210" y="395" fill="#333" font-size="13" font-weight="600">Time of Incident</text>
+    <rect x="1210" y="405" width="740" height="40" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="1230" y="430" fill="#333" font-size="13">21:30</text>
+
+    <text x="400" y="475" fill="#333" font-size="13" font-weight="600">City *</text>
+    <rect x="400" y="485" width="500" height="40" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="420" y="510" fill="#333" font-size="13">Karachi</text>
+
+    <text x="920" y="475" fill="#333" font-size="13" font-weight="600">Area</text>
+    <rect x="920" y="485" width="500" height="40" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="940" y="510" fill="#333" font-size="13">Gulshan-e-Iqbal</text>
+
+    <text x="1440" y="475" fill="#333" font-size="13" font-weight="600">Street Address</text>
+    <rect x="1440" y="485" width="510" height="40" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="1460" y="510" fill="#333" font-size="13">Block 5, Main Blvd</text>
+
+    <text x="400" y="555" fill="#333" font-size="13" font-weight="600">Report Details *</text>
+    <rect x="400" y="565" width="1550" height="120" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="420" y="588" fill="#333" font-size="12">On the night of Feb 15, I was walking home from work when an individual</text>
+    <text x="420" y="606" fill="#333" font-size="12">approached me near the market and snatched my bag containing wallet and</text>
+    <text x="420" y="624" fill="#333" font-size="12">phone. He was ~5'10", dark hoodie, fled on a black motorcycle towards Johar.</text>
+    <text x="420" y="642" fill="#333" font-size="12">Plate number partially visible starting with "KHI-".</text>
+
+    <text x="400" y="715" fill="#333" font-size="13" font-weight="600">📎 Upload Evidence (Optional)</text>
+    <rect x="400" y="725" width="1550" height="55" rx="8" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="2"/>
+    <text x="420" y="750" fill="#2e7d32" font-size="12">📷 scene_photo.jpg (2.4MB) ✓ | 🎥 cctv_clip.mp4 (8.1MB) ✓</text>
+    <text x="420" y="770" fill="#2e7d32" font-size="11">2 files attached successfully</text>
+
+    <!-- Buttons (active) -->
+    <rect x="1500" y="800" width="130" height="38" rx="8" fill="#6c757d"/>
+    <text x="1565" y="824" text-anchor="middle" fill="white" font-size="13" font-weight="600">Cancel</text>
+    <rect x="1650" y="800" width="300" height="38" rx="8" fill="url(#primaryGrad)"/>
+    <text x="1800" y="824" text-anchor="middle" fill="white" font-size="13" font-weight="600">📤 Submit Report</text>
+
+    <!-- Success Toast -->
+    <rect x="1300" y="860" width="650" height="80" rx="10" fill="#d4edda" stroke="#c3e6cb" stroke-width="2" filter="url(#cardShadow)"/>
+    <text x="1320" y="888" fill="#155724" font-size="14" font-weight="600">✅ Report Submitted Successfully!</text>
+    <text x="1320" y="908" fill="#155724" font-size="12">Report ID: #RPT-2026-0047 — Status: Pending Review</text>
+    <text x="1320" y="925" fill="#155724" font-size="11">Confirmation notification sent to sarah.khan@email.com</text>
+  </g>
+
+  <!-- Arrow S5 → S6 -->
+  <g transform="translate(5230, 2230)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#dc3545" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="75,-7 90,0 75,7" fill="#dc3545"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#dc3545" font-size="11" font-weight="600">Officer Side →</text>
+  </g>
+
+  <!-- S6: Officer Login — Default + Filled -->
+  <g transform="translate(5350, 1520)">
+    <rect x="0" y="0" width="2400" height="40" rx="20" fill="#dc3545" opacity="0.9"/>
+    <text x="1200" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S6 — Officer Login (Default → Filled)</text>
+
+    <rect x="0" y="50" width="2400" height="1350" rx="14" fill="url(#authBg)"/>
+    <rect x="550" y="120" width="1300" height="600" rx="14" fill="white" filter="url(#heavyShadow)"/>
+
+    <circle cx="1200" cy="185" r="34" fill="#f0f0f0"/>
+    <text x="1200" y="195" text-anchor="middle" font-size="28">🔒</text>
+    <text x="1200" y="255" text-anchor="middle" fill="#333" font-size="26" font-weight="700">Officer Login</text>
+    <text x="1200" y="282" text-anchor="middle" fill="#666" font-size="14">Crime Management Analysis System</text>
+
+    <!-- Filled form -->
+    <text x="600" y="320" fill="#333" font-size="14" font-weight="600">Email</text>
+    <rect x="600" y="330" width="1200" height="44" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="620" y="358" fill="#333" font-size="14">officer.ahmed@police.gov.pk</text>
+
+    <text x="600" y="405" fill="#333" font-size="14" font-weight="600">Password</text>
+    <rect x="600" y="415" width="1200" height="44" rx="8" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="620" y="443" fill="#333" font-size="14">••••••••••••</text>
+
+    <rect x="600" y="490" width="1200" height="46" rx="8" fill="url(#primaryGrad)"/>
+    <text x="1200" y="519" text-anchor="middle" fill="white" font-size="15" font-weight="600">Login</text>
+
+    <text x="1200" y="580" text-anchor="middle" fill="#666" font-size="13">Not an officer? <tspan fill="#667eea" font-weight="600">Login as Victim/Witness</tspan></text>
+
+    <!-- JWT info -->
+    <rect x="550" y="760" width="1300" height="80" rx="10" fill="white" filter="url(#cardShadow)"/>
+    <text x="1200" y="790" text-anchor="middle" fill="#333" font-size="14" font-weight="600">🔐 Authentication Details</text>
+    <text x="580" y="815" fill="#555" font-size="12">• JWT token issued → Role: OFFICER | Access to: Crimes, Suspects, Evidence, Reports, Investigations, Analytics, Predictions</text>
+  </g>
+
+  <!-- ======================== ROW 3 ======================== -->
+  <!-- S7: Officer Crime Reports Review — Default State -->
+  <g transform="translate(50, 2970)">
+    <rect x="0" y="0" width="3750" height="40" rx="20" fill="#dc3545" opacity="0.9"/>
+    <text x="1875" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S7 — Officer: Crime Reports Review (Default State — No Popup)</text>
+
+    <rect x="0" y="50" width="3750" height="1200" rx="14" fill="#f5f7fa"/>
+    <rect x="0" y="50" width="3750" height="55" rx="0" fill="url(#primaryGrad)"/>
+    <text x="20" y="83" fill="white" font-size="18" font-weight="700">🚔 CMAS</text>
+    <text x="130" y="83" fill="white" font-size="11" opacity="0.9">Crime Management Analysis System</text>
+    <rect x="350" y="67" width="65" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="382" y="83" text-anchor="middle" fill="white" font-size="10">Crimes</text>
+    <rect x="425" y="67" width="70" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="460" y="83" text-anchor="middle" fill="white" font-size="10">Suspects</text>
+    <rect x="505" y="67" width="70" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="540" y="83" text-anchor="middle" fill="white" font-size="10">Evidence</text>
+    <rect x="585" y="67" width="65" height="24" rx="6" fill="rgba(255,255,255,0.3)"/>
+    <text x="617" y="83" text-anchor="middle" fill="white" font-size="10" font-weight="600">Reports</text>
+    <rect x="660" y="67" width="65" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="692" y="83" text-anchor="middle" fill="white" font-size="10">Officers</text>
+    <rect x="735" y="67" width="95" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="782" y="83" text-anchor="middle" fill="white" font-size="10">Investigations</text>
+    <rect x="840" y="67" width="70" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="875" y="83" text-anchor="middle" fill="white" font-size="10">Analytics</text>
+    <rect x="920" y="67" width="80" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="960" y="83" text-anchor="middle" fill="white" font-size="10">Predictions</text>
+    <text x="3450" y="83" fill="white" font-size="12">Officer Ahmed</text>
+    <rect x="3600" y="67" width="60" height="24" rx="6" fill="rgba(255,255,255,0.2)"/>
+    <text x="3630" y="83" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <!-- Page title -->
+    <text x="25" y="140" fill="#333" font-size="22" font-weight="700">📋 Crime Reports Review</text>
+    <text x="25" y="162" fill="#888" font-size="12">Review and manage crime reports submitted by victims and citizens</text>
+    <rect x="3200" y="125" width="160" height="35" rx="8" fill="url(#primaryGrad)"/>
+    <text x="3280" y="148" text-anchor="middle" fill="white" font-size="12" font-weight="600">➕ Report + Crime</text>
+    <rect x="3380" y="125" width="140" height="35" rx="8" fill="#6c757d"/>
+    <text x="3450" y="148" text-anchor="middle" fill="white" font-size="12" font-weight="600">➕ Basic Report</text>
+
+    <!-- Filter Bar -->
+    <rect x="25" y="180" width="3700" height="55" rx="10" fill="white" filter="url(#cardShadow)"/>
+    <text x="45" y="212" fill="#333" font-size="12" font-weight="600">Status:</text>
+    <rect x="95" y="194" width="170" height="30" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1.5"/>
+    <text x="110" y="214" fill="#aaa" font-size="11">All statuses</text>
+    <text x="290" y="212" fill="#333" font-size="12" font-weight="600">Victim ID:</text>
+    <rect x="360" y="194" width="110" height="30" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1.5"/>
+    <text x="490" y="212" fill="#333" font-size="12" font-weight="600">From:</text>
+    <rect x="530" y="194" width="140" height="30" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1.5"/>
+    <text x="690" y="212" fill="#333" font-size="12" font-weight="600">To:</text>
+    <rect x="715" y="194" width="140" height="30" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1.5"/>
+    <rect x="880" y="196" width="100" height="28" rx="6" fill="url(#primaryGrad)"/>
+    <text x="930" y="215" text-anchor="middle" fill="white" font-size="11" font-weight="600">Apply Filters</text>
+    <rect x="990" y="196" width="90" height="28" rx="6" fill="#6c757d"/>
+    <text x="1035" y="215" text-anchor="middle" fill="white" font-size="11" font-weight="600">Clear</text>
+
+    <!-- Stats cards -->
+    <g transform="translate(25, 250)">
+      <rect x="0" y="0" width="880" height="70" rx="10" fill="url(#primaryGrad)" filter="url(#cardShadow)"/>
+      <text x="20" y="25" fill="white" font-size="12" opacity="0.9">Total Reports</text>
+      <text x="20" y="55" fill="white" font-size="26" font-weight="700">47</text>
+      <rect x="900" y="0" width="880" height="70" rx="10" fill="url(#pinkGrad)" filter="url(#cardShadow)"/>
+      <text x="920" y="25" fill="white" font-size="12" opacity="0.9">Pending Review</text>
+      <text x="920" y="55" fill="white" font-size="26" font-weight="700">8</text>
+      <rect x="1800" y="0" width="880" height="70" rx="10" fill="url(#blueGrad)" filter="url(#cardShadow)"/>
+      <text x="1820" y="25" fill="white" font-size="12" opacity="0.9">Under Investigation</text>
+      <text x="1820" y="55" fill="white" font-size="26" font-weight="700">22</text>
+      <rect x="2700" y="0" width="950" height="70" rx="10" fill="url(#greenGrad)" filter="url(#cardShadow)"/>
+      <text x="2720" y="25" fill="white" font-size="12" opacity="0.9">Resolved</text>
+      <text x="2720" y="55" fill="white" font-size="26" font-weight="700">17</text>
+    </g>
+
+    <!-- Table -->
+    <rect x="25" y="340" width="3700" height="280" rx="10" fill="white" filter="url(#cardShadow)"/>
+    <rect x="25" y="340" width="3700" height="35" fill="#f8f9fa"/>
+    <text x="50" y="363" fill="#495057" font-size="11" font-weight="600">REPORT ID</text>
+    <text x="220" y="363" fill="#495057" font-size="11" font-weight="600">DATE REPORTED</text>
+    <text x="550" y="363" fill="#495057" font-size="11" font-weight="600">VICTIM</text>
+    <text x="900" y="363" fill="#495057" font-size="11" font-weight="600">REPORT TYPE</text>
+    <text x="1150" y="363" fill="#495057" font-size="11" font-weight="600">STATUS</text>
+    <text x="1500" y="363" fill="#495057" font-size="11" font-weight="600">ACTIONS</text>
+
+    <!-- Row 1 — Pending -->
+    <rect x="26" y="375" width="3698" height="50" fill="#fffbf0"/>
+    <text x="50" y="405" fill="#333" font-size="13" font-weight="700">#47</text>
+    <text x="220" y="400" fill="#333" font-size="12">Feb 16, 2026</text>
+    <text x="220" y="415" fill="#999" font-size="10">10:35 AM</text>
+    <text x="550" y="400" fill="#333" font-size="12">Sarah Khan</text>
+    <text x="550" y="415" fill="#999" font-size="10">sarah.khan@email.com</text>
+    <rect x="900" y="392" width="80" height="20" rx="10" fill="#e3f2fd"/>
+    <text x="940" y="407" text-anchor="middle" fill="#1976d2" font-size="10" font-weight="600">Registered</text>
+    <rect x="1150" y="392" width="110" height="20" rx="10" fill="#fff3cd"/>
+    <text x="1205" y="407" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">Pending Review</text>
+    <rect x="1500" y="390" width="55" height="24" rx="5" fill="#17a2b8"/>
+    <text x="1527" y="407" text-anchor="middle" fill="white" font-size="9" font-weight="600">📄 View</text>
+    <rect x="1565" y="390" width="55" height="24" rx="5" fill="#28a745"/>
+    <text x="1592" y="407" text-anchor="middle" fill="white" font-size="9" font-weight="600">🔗 Link</text>
+    <rect x="1630" y="390" width="60" height="24" rx="5" fill="#ffc107"/>
+    <text x="1660" y="407" text-anchor="middle" fill="#333" font-size="9" font-weight="600">✏️ Status</text>
+    <rect x="1700" y="390" width="60" height="24" rx="5" fill="#dc3545"/>
+    <text x="1730" y="407" text-anchor="middle" fill="white" font-size="9" font-weight="600">🗑️ Delete</text>
+
+    <!-- Row 2 -->
+    <line x1="45" y1="425" x2="3700" y2="425" stroke="#e9ecef" stroke-width="1"/>
+    <text x="50" y="450" fill="#333" font-size="13" font-weight="700">#46</text>
+    <text x="220" y="445" fill="#333" font-size="12">Feb 14, 2026</text>
+    <text x="550" y="445" fill="#333" font-size="12">Ali Raza</text>
+    <rect x="900" y="437" width="80" height="20" rx="10" fill="#e3f2fd"/>
+    <text x="940" y="452" text-anchor="middle" fill="#1976d2" font-size="10" font-weight="600">Registered</text>
+    <rect x="1150" y="437" width="120" height="20" rx="10" fill="#cfe2ff"/>
+    <text x="1210" y="452" text-anchor="middle" fill="#084298" font-size="10" font-weight="600">Under Investigation</text>
+    <rect x="1500" y="435" width="55" height="24" rx="5" fill="#17a2b8"/>
+    <text x="1527" y="452" text-anchor="middle" fill="white" font-size="9" font-weight="600">📄 View</text>
+    <rect x="1565" y="435" width="55" height="24" rx="5" fill="#28a745"/>
+    <text x="1592" y="452" text-anchor="middle" fill="white" font-size="9" font-weight="600">🔗 Link</text>
+    <rect x="1630" y="435" width="60" height="24" rx="5" fill="#ffc107"/>
+    <text x="1660" y="452" text-anchor="middle" fill="#333" font-size="9" font-weight="600">✏️ Status</text>
+    <rect x="1700" y="435" width="60" height="24" rx="5" fill="#dc3545"/>
+    <text x="1730" y="452" text-anchor="middle" fill="white" font-size="9" font-weight="600">🗑️ Delete</text>
+
+    <!-- Row 3 -->
+    <line x1="45" y1="470" x2="3700" y2="470" stroke="#e9ecef" stroke-width="1"/>
+    <text x="50" y="495" fill="#333" font-size="13" font-weight="700">#45</text>
+    <text x="220" y="490" fill="#333" font-size="12">Feb 12, 2026</text>
+    <text x="550" y="490" fill="#333" font-size="12">Anonymous</text>
+    <rect x="900" y="482" width="80" height="20" rx="10" fill="#fff3e0"/>
+    <text x="940" y="497" text-anchor="middle" fill="#f57c00" font-size="10" font-weight="600">Anonymous</text>
+    <rect x="1150" y="482" width="110" height="20" rx="10" fill="#fff3cd"/>
+    <text x="1205" y="497" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">Pending Review</text>
+    <rect x="1500" y="480" width="55" height="24" rx="5" fill="#17a2b8"/>
+    <text x="1527" y="497" text-anchor="middle" fill="white" font-size="9" font-weight="600">📄 View</text>
+    <rect x="1565" y="480" width="55" height="24" rx="5" fill="#28a745"/>
+    <text x="1592" y="497" text-anchor="middle" fill="white" font-size="9" font-weight="600">🔗 Link</text>
+    <rect x="1630" y="480" width="60" height="24" rx="5" fill="#ffc107"/>
+    <text x="1660" y="497" text-anchor="middle" fill="#333" font-size="9" font-weight="600">✏️ Status</text>
+    <rect x="1700" y="480" width="60" height="24" rx="5" fill="#dc3545"/>
+    <text x="1730" y="497" text-anchor="middle" fill="white" font-size="9" font-weight="600">🗑️ Delete</text>
+
+    <!-- Hint -->
+    <rect x="25" y="640" width="3700" height="45" rx="8" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+    <text x="1875" y="668" text-anchor="middle" fill="#1565C0" font-size="12" font-weight="600">👆 Click "📄 View" on Report #47 to open the detailed review popup (shown in next screen →)</text>
+  </g>
+
+  <!-- Arrow S7 → S8 -->
+  <g transform="translate(3830, 3640)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#dc3545" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="75,-7 90,0 75,7" fill="#dc3545"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#dc3545" font-size="11" font-weight="600">View Clicked</text>
+  </g>
+
+  <!-- S8: Report Detail Popup + Accept/Reject Decision -->
+  <g transform="translate(3950, 2970)">
+    <rect x="0" y="0" width="3800" height="40" rx="20" fill="#dc3545" opacity="0.9"/>
+    <text x="1900" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S8 — Report Detail Modal + Accept / Reject Decision</text>
+
+    <rect x="0" y="50" width="3800" height="1200" rx="14" fill="#f5f7fa"/>
+    <rect x="0" y="50" width="3800" height="55" rx="0" fill="url(#primaryGrad)"/>
+    <text x="20" y="83" fill="white" font-size="18" font-weight="700">🚔 CMAS</text>
+    <text x="3600" y="83" fill="white" font-size="12">Officer Ahmed</text>
+
+    <!-- Dimmed overlay -->
+    <rect x="0" y="150" width="3800" height="1100" fill="rgba(0,0,0,0.45)"/>
+
+    <!-- Detail Modal -->
+    <rect x="200" y="170" width="3400" height="1040" rx="12" fill="white" filter="url(#heavyShadow)"/>
+    <text x="1900" y="210" text-anchor="middle" fill="#333" font-size="20" font-weight="700">📄 Crime Report #47 — Detailed Review</text>
+    <line x1="250" y1="225" x2="3550" y2="225" stroke="#e9ecef" stroke-width="2"/>
+
+    <!-- Report Info -->
+    <rect x="250" y="240" width="3300" height="120" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="280" y="265" fill="#333" font-size="14" font-weight="700">📋 Report Information</text>
+    <text x="280" y="290" fill="#888" font-size="11">REPORT ID</text>
+    <text x="280" y="308" fill="#333" font-size="14" font-weight="700">#47</text>
+    <text x="500" y="290" fill="#888" font-size="11">DATE REPORTED</text>
+    <text x="500" y="308" fill="#333" font-size="13">Feb 16, 2026 10:35 AM</text>
+    <text x="850" y="290" fill="#888" font-size="11">STATUS</text>
+    <rect x="850" y="295" width="110" height="20" rx="10" fill="#fff3cd"/>
+    <text x="905" y="309" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">Pending Review</text>
+    <text x="280" y="340" fill="#888" font-size="11">VICTIM</text>
+    <text x="280" y="350" fill="#333" font-size="12">Sarah Khan | sarah.khan@email.com | Age: 28 | Female | +92-321-1234567</text>
+
+    <!-- Incident Details -->
+    <rect x="250" y="370" width="3300" height="155" rx="10" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="280" y="395" fill="#333" font-size="14" font-weight="700">📝 Incident Details</text>
+    <text x="280" y="420" fill="#888" font-size="11">CRIME TYPE</text>
+    <rect x="280" y="425" width="70" height="18" rx="5" fill="#f8d7da"/>
+    <text x="315" y="438" text-anchor="middle" fill="#721c24" font-size="10" font-weight="600">Violent</text>
+    <text x="480" y="420" fill="#888" font-size="11">DATE/TIME</text>
+    <text x="480" y="440" fill="#333" font-size="13">Feb 15, 2026 at 21:30</text>
+    <text x="850" y="420" fill="#888" font-size="11">LOCATION</text>
+    <text x="850" y="440" fill="#333" font-size="13">Block 5, Main Blvd, Gulshan-e-Iqbal, Karachi</text>
+    <text x="280" y="470" fill="#888" font-size="11">DESCRIPTION</text>
+    <rect x="280" y="477" width="3230" height="35" rx="6" fill="#f8f9fa"/>
+    <text x="295" y="495" fill="#333" font-size="11">Walking home, individual snatched bag with wallet &amp; phone. Suspect ~5'10", dark hoodie, fled on black motorcycle towards Johar. Plate: "KHI-"</text>
+
+    <!-- Evidence + Cross-Reference -->
+    <rect x="250" y="535" width="1600" height="60" rx="10" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="280" y="555" fill="#333" font-size="13" font-weight="700">📎 Evidence</text>
+    <rect x="280" y="568" width="130" height="22" rx="6" fill="#e3f2fd"/>
+    <text x="345" y="583" text-anchor="middle" fill="#1976d2" font-size="9">📷 scene_photo.jpg</text>
+    <rect x="420" y="568" width="120" height="22" rx="6" fill="#e3f2fd"/>
+    <text x="480" y="583" text-anchor="middle" fill="#1976d2" font-size="9">🎥 cctv_clip.mp4</text>
+
+    <rect x="1870" y="535" width="1680" height="60" rx="10" fill="#fffbf0" stroke="#ffe0b2" stroke-width="1"/>
+    <text x="1900" y="555" fill="#333" font-size="13" font-weight="700">🔍 Cross-Reference</text>
+    <text x="1900" y="575" fill="#555" font-size="11">Similar nearby: <tspan font-weight="600" fill="#dc3545">3 in 30 days</tspan> | Duplicates: <tspan fill="#28a745" font-weight="600">None</tspan> | Severity: <tspan fill="#dc3545" font-weight="600">Major</tspan></text>
+
+    <!-- Decision Section -->
+    <rect x="250" y="610" width="3300" height="120" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="1900" y="638" text-anchor="middle" fill="#333" font-size="16" font-weight="700">⚖️ Officer Decision</text>
+
+    <rect x="450" y="655" width="600" height="45" rx="10" fill="#dc3545" filter="url(#cardShadow)"/>
+    <text x="750" y="684" text-anchor="middle" fill="white" font-size="14" font-weight="700">✗ Reject Report</text>
+
+    <rect x="2550" y="655" width="700" height="45" rx="10" fill="#28a745" filter="url(#cardShadow)"/>
+    <text x="2900" y="684" text-anchor="middle" fill="white" font-size="14" font-weight="700">✓ Accept &amp; Create Investigation</text>
+
+    <!-- Rejection / Acceptance info -->
+    <rect x="280" y="745" width="1500" height="80" rx="10" fill="white" stroke="#dc3545" stroke-width="2"/>
+    <text x="310" y="770" fill="#dc3545" font-size="12" font-weight="700">Rejection Reason (if Reject clicked):</text>
+    <rect x="310" y="780" width="1440" height="30" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1.5"/>
+    <text x="330" y="800" fill="#aaa" font-size="11">Enter reason... → Status: "Rejected" → Victim notified</text>
+
+    <rect x="1830" y="745" width="1720" height="80" rx="10" fill="white" stroke="#28a745" stroke-width="2"/>
+    <text x="1860" y="770" fill="#28a745" font-size="12" font-weight="700">✓ Acceptance creates:</text>
+    <text x="1860" y="790" fill="#495057" font-size="11">Crime record (Open) + Investigation (Active) + Bridges + Email to victim</text>
+    <text x="1860" y="808" fill="#495057" font-size="11">Report status → "Under Investigation" | Case: CASE-2026-0015</text>
+
+    <rect x="1300" y="840" width="1200" height="30" rx="6" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+    <text x="1900" y="860" text-anchor="middle" fill="#1b5e20" font-size="11" font-weight="600">✅ Click "Accept" → opens Investigation Creation form (shown in next row ↓)</text>
+  </g>
+
+  <!-- ======================== ROW 4 ======================== -->
+  <!-- S9: Investigation Creation Form -->
+  <g transform="translate(50, 4280)">
+    <rect x="0" y="0" width="3750" height="40" rx="20" fill="#28a745" opacity="0.9"/>
+    <text x="1875" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S9 — Create Investigation (After Accepting Report)</text>
+
+    <rect x="0" y="50" width="3750" height="1800" rx="14" fill="#f5f7fa"/>
+    <rect x="0" y="50" width="3750" height="55" rx="0" fill="url(#primaryGrad)"/>
+    <text x="20" y="83" fill="white" font-size="18" font-weight="700">🚔 CMAS</text>
+    <text x="130" y="83" fill="white" font-size="11" opacity="0.9">Crime Management Analysis System</text>
+    <text x="3550" y="83" fill="white" font-size="12">Officer Ahmed</text>
+
+    <!-- Success banner -->
+    <rect x="30" y="120" width="3690" height="50" rx="10" fill="#d4edda" stroke="#c3e6cb" stroke-width="1"/>
+    <text x="55" y="142" fill="#155724" font-size="14" font-weight="600">✅ Crime Report #47 Accepted — Crime Record Created (Crime ID: #102)</text>
+    <text x="55" y="160" fill="#155724" font-size="12">An official investigation is being created. Complete details below.</text>
+
+    <!-- Form card -->
+    <rect x="30" y="185" width="3690" height="1640" rx="12" fill="white" filter="url(#heavyShadow)"/>
+    <text x="1875" y="220" text-anchor="middle" fill="#333" font-size="20" font-weight="700">🔍 Create New Investigation</text>
+    <line x1="80" y1="235" x2="3670" y2="235" stroke="#e9ecef" stroke-width="2"/>
+
+    <!-- Auto-generated fields -->
+    <rect x="80" y="250" width="3590" height="70" rx="10" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+    <text x="110" y="275" fill="#1565C0" font-size="13" font-weight="700">🔢 Auto-Generated Fields</text>
+    <text x="110" y="300" fill="#333" font-size="12">Case: <tspan font-weight="700" fill="#1565C0">CASE-2026-0015</tspan></text>
+    <text x="500" y="300" fill="#333" font-size="12">ID: <tspan font-weight="700" fill="#1565C0">#INV-089</tspan></text>
+    <text x="800" y="300" fill="#333" font-size="12">Crime: <tspan font-weight="700" fill="#1565C0">#102</tspan></text>
+    <text x="1100" y="300" fill="#333" font-size="12">Start: <tspan font-weight="700" fill="#1565C0">Feb 21, 2026</tspan></text>
+    <text x="1500" y="300" fill="#333" font-size="12">Lead: <tspan font-weight="700" fill="#1565C0">Officer Ahmed</tspan></text>
+    <text x="1900" y="300" fill="#333" font-size="12">Status: <tspan font-weight="700" fill="#28a745">Active</tspan></text>
+
+    <!-- Severity + Priority -->
+    <text x="110" y="355" fill="#333" font-size="13" font-weight="600">Severity Level *</text>
+    <rect x="110" y="365" width="800" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="130" y="390" fill="#495057" font-size="13">Major</text>
+
+    <text x="950" y="355" fill="#333" font-size="13" font-weight="600">Priority Level *</text>
+    <rect x="950" y="365" width="800" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="970" y="390" fill="#495057" font-size="13">High</text>
+
+    <text x="1790" y="355" fill="#333" font-size="13" font-weight="600">Expected Completion</text>
+    <rect x="1790" y="365" width="800" height="40" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="1810" y="390" fill="#495057" font-size="13">2026-04-21</text>
+
+    <!-- Notes -->
+    <text x="110" y="435" fill="#333" font-size="13" font-weight="600">Initial Investigation Notes *</text>
+    <rect x="110" y="445" width="3560" height="100" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="130" y="468" fill="#495057" font-size="12">Report accepted based on cross-reference with 3 similar incidents in Gulshan area.</text>
+    <text x="130" y="486" fill="#495057" font-size="12">Priority actions: 1. Obtain CCTV   2. Canvas witnesses   3. Check "KHI-" plates   4. Cross-ref suspects</text>
+
+    <!-- Assign Officers -->
+    <rect x="80" y="560" width="3590" height="190" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="110" y="588" fill="#333" font-size="14" font-weight="700">👮 Assign Investigation Team</text>
+    <text x="110" y="615" fill="#333" font-size="13" font-weight="600">Additional Officer</text>
+    <rect x="110" y="623" width="700" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="130" y="646" fill="#495057" font-size="12">Officer Fatima Noor (ID: #8)</text>
+    <text x="840" y="615" fill="#333" font-size="13" font-weight="600">Role</text>
+    <rect x="840" y="623" width="600" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="860" y="646" fill="#495057" font-size="12">Supporting Investigator</text>
+    <rect x="1470" y="623" width="150" height="36" rx="8" fill="url(#primaryGrad)"/>
+    <text x="1545" y="646" text-anchor="middle" fill="white" font-size="12" font-weight="600">+ Add Officer</text>
+
+    <rect x="110" y="672" width="1560" height="25" fill="#e9ecef"/>
+    <text x="130" y="690" fill="#495057" font-size="10" font-weight="600">OFFICER</text>
+    <text x="500" y="690" fill="#495057" font-size="10" font-weight="600">ROLE</text>
+    <text x="900" y="690" fill="#495057" font-size="10" font-weight="600">DATE</text>
+    <text x="1200" y="690" fill="#495057" font-size="10" font-weight="600">ACTION</text>
+    <text x="130" y="715" fill="#333" font-size="12" font-weight="600">Officer Ahmed (Lead)</text>
+    <text x="500" y="715" fill="#333" font-size="12">Lead Investigator</text>
+    <text x="900" y="715" fill="#333" font-size="12">Feb 21, 2026</text>
+    <text x="1200" y="715" fill="#888" font-size="11">Primary</text>
+    <line x1="130" y1="725" x2="1650" y2="725" stroke="#e9ecef" stroke-width="1"/>
+    <text x="130" y="745" fill="#333" font-size="12">Officer Fatima Noor</text>
+    <text x="500" y="745" fill="#333" font-size="12">Supporting Investigator</text>
+    <text x="900" y="745" fill="#333" font-size="12">Feb 21, 2026</text>
+    <rect x="1200" y="733" width="60" height="20" rx="4" fill="#dc3545"/>
+    <text x="1230" y="748" text-anchor="middle" fill="white" font-size="10" font-weight="600">Remove</text>
+
+    <!-- Automated Actions -->
+    <rect x="80" y="770" width="3590" height="190" rx="10" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+    <text x="110" y="798" fill="#1b5e20" font-size="14" font-weight="700">⚙️ Automated Actions Upon Investigation Creation</text>
+    <text x="130" y="820" fill="#2e7d32" font-size="12">✅ Report #47 status: "Pending Review" → "Under Investigation"</text>
+    <text x="130" y="840" fill="#2e7d32" font-size="12">✅ Crime #102 created — status "Open", severity "Major"</text>
+    <text x="130" y="860" fill="#2e7d32" font-size="12">✅ Investigation CASE-2026-0015 created — status "Active"</text>
+    <text x="130" y="880" fill="#2e7d32" font-size="12">✅ Report_Crime bridge: #47 ↔ Crime #102 | Investigation_Crime: Inv ↔ Crime #102 | Crime_Victim: Crime ↔ Sarah</text>
+    <text x="130" y="900" fill="#2e7d32" font-size="12">✅ Email notification sent to sarah.khan@email.com | Audit trail logged | Dashboard stats updated</text>
+
+    <!-- Create Button -->
+    <rect x="2900" y="980" width="750" height="50" rx="10" fill="#28a745" filter="url(#cardShadow)"/>
+    <text x="3275" y="1012" text-anchor="middle" fill="white" font-size="16" font-weight="700">✓ Create Investigation</text>
+
+    <!-- Email preview -->
+    <rect x="80" y="1050" width="3590" height="200" rx="10" fill="white" stroke="#667eea" stroke-width="2" filter="url(#cardShadow)"/>
+    <text x="110" y="1078" fill="#333" font-size="14" font-weight="700">📧 Email Notification Preview (to Victim)</text>
+    <rect x="110" y="1090" width="3530" height="145" rx="8" fill="#f8f9fa"/>
+    <text x="130" y="1110" fill="#333" font-size="12" font-weight="600">To: sarah.khan@email.com</text>
+    <text x="130" y="1128" fill="#333" font-size="12" font-weight="600">Subject: Your Crime Report Has Been Accepted — Case CASE-2026-0015</text>
+    <line x1="130" y1="1138" x2="3610" y2="1138" stroke="#dee2e6" stroke-width="1"/>
+    <text x="130" y="1158" fill="#495057" font-size="12">Dear Sarah Khan,</text>
+    <text x="130" y="1176" fill="#495057" font-size="12">Your crime report (#47) has been reviewed and accepted. Case: CASE-2026-0015 | Officer: Ahmed | Status: Active</text>
+    <text x="130" y="1194" fill="#495057" font-size="12">Track your case in real-time by logging into your account.</text>
+    <text x="130" y="1218" fill="#495057" font-size="12" font-weight="600">— Crime Management Analysis System (CMAS)</text>
+
+    <!-- Callout -->
+    <rect x="80" y="1270" width="3590" height="30" rx="6" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+    <text x="1875" y="1290" text-anchor="middle" fill="#1565C0" font-size="12" font-weight="600">After creation → Victim receives email and can track case in real-time (see next screen →)</text>
+  </g>
+
+  <!-- Arrow S9 → S10 -->
+  <g transform="translate(3830, 5300)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+    <polygon points="75,-7 90,0 75,7" fill="#667eea"/>
+    <text x="45" y="-10" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Victim View</text>
+  </g>
+
+  <!-- S10: Victim Case Tracking Detail Popup -->
+  <g transform="translate(3950, 4280)">
+    <rect x="0" y="0" width="3800" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1900" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S10 — Victim Portal: Case Tracking (Detail Popup Open)</text>
+
+    <rect x="0" y="50" width="3800" height="1800" rx="14" fill="#f5f7fa"/>
+    <rect x="0" y="50" width="3800" height="55" rx="0" fill="url(#primaryGrad)"/>
+    <text x="20" y="83" fill="white" font-size="18" font-weight="700">🚔 CMAS</text>
+    <text x="130" y="83" fill="white" font-size="11" opacity="0.9">Crime Management Analysis System</text>
+    <rect x="2100" y="67" width="90" height="24" rx="6" fill="rgba(255,255,255,0.3)"/>
+    <text x="2145" y="83" text-anchor="middle" fill="white" font-size="11" font-weight="600">My Reports</text>
+    <rect x="2200" y="67" width="80" height="24" rx="6" fill="rgba(255,255,255,0.15)"/>
+    <text x="2240" y="83" text-anchor="middle" fill="white" font-size="11">My Profile</text>
+    <text x="3400" y="83" fill="white" font-size="12">Sarah Khan</text>
+    <rect x="3620" y="67" width="60" height="24" rx="6" fill="rgba(255,255,255,0.2)"/>
+    <text x="3650" y="83" text-anchor="middle" fill="white" font-size="11">Logout</text>
+
+    <text x="25" y="140" fill="#333" font-size="22" font-weight="700">📋 My Crime Reports</text>
+
+    <!-- Stats cards -->
+    <g transform="translate(25, 160)">
+      <rect x="0" y="0" width="900" height="60" rx="10" fill="url(#primaryGrad)" filter="url(#cardShadow)"/>
+      <text x="20" y="22" fill="white" font-size="11" opacity="0.9">Total Reports</text>
+      <text x="20" y="48" fill="white" font-size="24" font-weight="700">13</text>
+      <rect x="920" y="0" width="900" height="60" rx="10" fill="url(#pinkGrad)" filter="url(#cardShadow)"/>
+      <text x="940" y="22" fill="white" font-size="11" opacity="0.9">Pending Review</text>
+      <text x="940" y="48" fill="white" font-size="24" font-weight="700">2</text>
+      <rect x="1840" y="0" width="900" height="60" rx="10" fill="url(#blueGrad)" filter="url(#cardShadow)"/>
+      <text x="1860" y="22" fill="white" font-size="11" opacity="0.9">Under Investigation</text>
+      <text x="1860" y="48" fill="white" font-size="24" font-weight="700">6</text>
+      <rect x="2760" y="0" width="960" height="60" rx="10" fill="url(#greenGrad)" filter="url(#cardShadow)"/>
+      <text x="2780" y="22" fill="white" font-size="11" opacity="0.9">Resolved</text>
+      <text x="2780" y="48" fill="white" font-size="24" font-weight="700">5</text>
+    </g>
+
+    <!-- Dimmed overlay -->
+    <rect x="0" y="240" width="3800" height="1610" fill="rgba(0,0,0,0.45)"/>
+
+    <!-- Detail popup -->
+    <rect x="150" y="260" width="3500" height="1540" rx="12" fill="white" filter="url(#heavyShadow)"/>
+    <text x="1900" y="298" text-anchor="middle" fill="#333" font-size="20" font-weight="700">📄 Report #47 — Case Tracking</text>
+    <line x1="200" y1="315" x2="3600" y2="315" stroke="#e9ecef" stroke-width="2"/>
+
+    <!-- Status banner -->
+    <rect x="200" y="330" width="3400" height="55" rx="10" fill="#cfe2ff" stroke="#9ec5fe" stroke-width="1"/>
+    <text x="230" y="355" fill="#084298" font-size="14" font-weight="700">🔵 Status: Under Investigation</text>
+    <text x="230" y="375" fill="#084298" font-size="12">Case: CASE-2026-0015 | Officer: Ahmed | Started: Feb 21, 2026 | Priority: High | Severity: Major</text>
+
+    <!-- Timeline -->
+    <rect x="200" y="398" width="3400" height="290" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="230" y="423" fill="#333" font-size="14" font-weight="700">📅 Investigation Timeline</text>
+
+    <circle cx="260" cy="455" r="9" fill="#28a745"/>
+    <line x1="260" y1="464" x2="260" y2="490" stroke="#28a745" stroke-width="2"/>
+    <text x="285" y="455" fill="#333" font-size="12" font-weight="600">Report Submitted</text>
+    <text x="285" y="470" fill="#888" font-size="10">Feb 16, 2026 10:35 AM — Status: "Pending Review"</text>
+
+    <circle cx="260" cy="500" r="9" fill="#28a745"/>
+    <line x1="260" y1="509" x2="260" y2="535" stroke="#28a745" stroke-width="2"/>
+    <text x="285" y="500" fill="#333" font-size="12" font-weight="600">Report Accepted — Investigation Initiated</text>
+    <text x="285" y="515" fill="#888" font-size="10">Feb 21, 2026 2:15 PM — Officer Ahmed reviewed. Case: CASE-2026-0015</text>
+
+    <circle cx="260" cy="545" r="9" fill="#28a745"/>
+    <line x1="260" y1="554" x2="260" y2="580" stroke="#667eea" stroke-width="2"/>
+    <text x="285" y="545" fill="#333" font-size="12" font-weight="600">Evidence Collection Started</text>
+    <text x="285" y="560" fill="#888" font-size="10">Feb 21, 2026 4:00 PM — CCTV footage collected from Block 5 market area</text>
+
+    <circle cx="260" cy="590" r="9" fill="#667eea"/>
+    <line x1="260" y1="599" x2="260" y2="625" stroke="#ccc" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="285" y="590" fill="#333" font-size="12" font-weight="600">Suspect Identified (In Progress)</text>
+    <text x="285" y="605" fill="#888" font-size="10">Feb 22, 2026 — Potential suspect from CCTV. Verification ongoing.</text>
+
+    <circle cx="260" cy="635" r="9" fill="#ddd" stroke="#ccc" stroke-width="2"/>
+    <text x="285" y="635" fill="#aaa" font-size="12">Case Resolution (Pending)</text>
+    <text x="285" y="650" fill="#ccc" font-size="10">Awaiting further investigation results</text>
+
+    <!-- Linked Crime -->
+    <rect x="200" y="700" width="1650" height="160" rx="10" fill="white" stroke="#2196F3" stroke-width="2"/>
+    <text x="230" y="725" fill="#1565C0" font-size="13" font-weight="700">🔗 Linked Crime Record</text>
+    <text x="230" y="748" fill="#333" font-size="12">Crime ID: <tspan font-weight="600">#102</tspan> | Type: <tspan font-weight="600">Violent — Snatch Theft</tspan></text>
+    <text x="230" y="768" fill="#333" font-size="12">Date: <tspan font-weight="600">Feb 15, 2026 at 21:30</tspan></text>
+    <text x="230" y="788" fill="#333" font-size="12">Location: <tspan font-weight="600">Block 5, Main Blvd, Gulshan-e-Iqbal, Karachi</tspan></text>
+    <text x="230" y="808" fill="#333" font-size="12">Status: <tspan font-weight="600" fill="#084298">Open</tspan> | Severity: <tspan font-weight="600" fill="#dc3545">Major</tspan></text>
+
+    <!-- Evidence Status -->
+    <rect x="1870" y="700" width="1730" height="160" rx="10" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="1900" y="725" fill="#333" font-size="13" font-weight="700">📦 Evidence Collection Status</text>
+    <rect x="1900" y="738" width="1670" height="25" fill="#e9ecef"/>
+    <text x="1920" y="755" fill="#495057" font-size="10" font-weight="600">EVIDENCE</text>
+    <text x="2250" y="755" fill="#495057" font-size="10" font-weight="600">TYPE</text>
+    <text x="2550" y="755" fill="#495057" font-size="10" font-weight="600">STATUS</text>
+    <text x="2900" y="755" fill="#495057" font-size="10" font-weight="600">DATE</text>
+    <text x="1920" y="782" fill="#333" font-size="11">Scene photo</text>
+    <text x="2250" y="782" fill="#333" font-size="11">Document</text>
+    <rect x="2550" y="770" width="70" height="18" rx="9" fill="#d4edda"/>
+    <text x="2585" y="782" text-anchor="middle" fill="#155724" font-size="9" font-weight="600">Collected</text>
+    <text x="2900" y="782" fill="#333" font-size="11">Feb 21</text>
+    <text x="1920" y="805" fill="#333" font-size="11">CCTV footage</text>
+    <text x="2250" y="805" fill="#333" font-size="11">CCTV</text>
+    <rect x="2550" y="793" width="70" height="18" rx="9" fill="#cfe2ff"/>
+    <text x="2585" y="805" text-anchor="middle" fill="#084298" font-size="9" font-weight="600">Analyzing</text>
+    <text x="2900" y="805" fill="#333" font-size="11">Feb 21</text>
+    <text x="1920" y="828" fill="#333" font-size="11">Motorcycle plate trace</text>
+    <text x="2250" y="828" fill="#333" font-size="11">Digital</text>
+    <rect x="2550" y="816" width="70" height="18" rx="9" fill="#fff3cd"/>
+    <text x="2585" y="828" text-anchor="middle" fill="#856404" font-size="9" font-weight="600">Pending</text>
+    <text x="2900" y="828" fill="#333" font-size="11">—</text>
+
+    <!-- Notifications -->
+    <rect x="200" y="875" width="3400" height="180" rx="10" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="230" y="900" fill="#333" font-size="13" font-weight="700">🔔 Notifications &amp; Updates</text>
+
+    <rect x="230" y="915" width="3340" height="35" rx="6" fill="#d4edda"/>
+    <text x="250" y="935" fill="#155724" font-size="12">📧 <tspan font-weight="600">Feb 21, 2:15 PM</tspan> — Report accepted. Investigation initiated: CASE-2026-0015 | Officer: Ahmed</text>
+
+    <rect x="230" y="960" width="3340" height="35" rx="6" fill="#cfe2ff"/>
+    <text x="250" y="980" fill="#084298" font-size="12">📧 <tspan font-weight="600">Feb 21, 4:30 PM</tspan> — Evidence collected: CCTV footage from Block 5 market. Review in progress.</text>
+
+    <rect x="230" y="1005" width="3340" height="35" rx="6" fill="#fff3cd"/>
+    <text x="250" y="1025" fill="#856404" font-size="12">📧 <tspan font-weight="600">Feb 22, 11:00 AM</tspan> — Officer Ahmed requests additional info about motorcycle. Reply through portal.</text>
+
+    <!-- Close button -->
+    <rect x="3050" y="1060" width="500" height="40" rx="8" fill="url(#primaryGrad)"/>
+    <text x="3300" y="1086" text-anchor="middle" fill="white" font-size="14" font-weight="600">Close</text>
+  </g>
+
+  <!-- ======================== FLOW SUMMARY ======================== -->
+  <rect x="50" y="6180" width="7700" height="170" rx="16" fill="white" filter="url(#cardShadow)"/>
+  <text x="3900" y="6220" text-anchor="middle" fill="#333" font-size="20" font-weight="700">Workflow 1 — Complete Flow Summary (Default → Action → Popup for Every Page)</text>
+  <text x="200" y="6255" fill="#495057" font-size="13">S1: Victim Login (Empty) → S2: Login (Filled + Success) → S3: My Reports Dashboard (Default) → S4: "+ Report Crime" Modal (Empty Form) → S5: Modal (Filled + Success Toast)</text>
+  <text x="200" y="6280" fill="#495057" font-size="13">S6: Officer Login (Filled) → S7: Crime Reports Review Table (Default) → S8: View Report Detail Popup + Accept/Reject Decision → S9: Investigation Creation Form → S10: Victim Case Tracking Popup</text>
+  <text x="200" y="6310" fill="#888" font-size="12">Project: Crime Management Analysis System (CMAS) | Entities: Crime, Investigation, Report_Crime, Investigation_Crime, Crime_Victim | Auth: JWT + bcrypt | Notifications: Email</text>
+  <text x="200" y="6335" fill="#888" font-size="12">Each screen shown in: Default/Empty State → Filled/Action Applied → Popup/Dialog (where applicable)</text>
+</svg>

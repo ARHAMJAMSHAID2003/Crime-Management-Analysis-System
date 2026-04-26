@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { crimeReportsAPI } from '../../services/api';
@@ -11,6 +11,7 @@ const CrimeReports = () => {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedReport, setSelectedReport] = useState(null);
+  const arrestNotificationShown = useRef(false);
   const [formData, setFormData] = useState({
     crimeType: '',
     dateOccurred: '',
@@ -33,7 +34,32 @@ const CrimeReports = () => {
       setLoading(true);
       const response = await crimeReportsAPI.getMyReports();
       console.log('📋 Reports loaded:', response.data);
-      setReports(response.data || []);
+      const loadedReports = response.data || [];
+      setReports(loadedReports);
+
+      // Show arrest notification only for reports that NEWLY became Resolved (not yet seen)
+      if (!arrestNotificationShown.current) {
+        arrestNotificationShown.current = true;
+        const seenKey = 'cpas_notified_resolved_ids';
+        const alreadySeen = JSON.parse(localStorage.getItem(seenKey) || '[]');
+        const resolvedReports = loadedReports.filter(r => (r.STATUS || r.status) === 'Resolved');
+        const newlyResolved = resolvedReports.filter(r => {
+          const id = r.REPORT_ID || r.report_id || r.id;
+          return id && !alreadySeen.includes(id);
+        });
+        if (newlyResolved.length > 0) {
+          const newIds = newlyResolved.map(r => r.REPORT_ID || r.report_id || r.id);
+          localStorage.setItem(seenKey, JSON.stringify([...alreadySeen, ...newIds]));
+          Swal.fire({
+            icon: 'success',
+            title: '🚔 Case Update',
+            html: `<p>A suspect linked to your case has been <strong style="color:#28a745;">ARRESTED</strong>.</p>
+                   <p style="color:#555; margin-top:8px;">Click <strong>View Details</strong> on your Resolved report to see arrest information.</p>`,
+            confirmButtonText: 'View My Reports',
+            confirmButtonColor: '#28a745'
+          });
+        }
+      }
     } catch (error) {
       console.error('Failed to load reports:', error);
       Swal.fire('Error!', error.message || 'Failed to load reports', 'error');
@@ -96,6 +122,15 @@ const CrimeReports = () => {
       console.log('📦 Response received:', response);
       const reportData = response.data;
       console.log('📋 Report data:', reportData);
+
+      // Fetch suspect data for each linked crime to show arrest notifications
+      if (reportData.linked_crimes && reportData.linked_crimes.length > 0) {
+        // Suspects are now embedded directly from the backend (crime.SUSPECTS)
+        // No extra API calls needed
+        reportData.linked_crimes.forEach(crime => {
+          if (!crime.SUSPECTS) crime.SUSPECTS = [];
+        });
+      }
       
       let detailsHtml = `
         <div style="text-align: left; max-height: 500px; overflow-y: auto;">
@@ -123,20 +158,90 @@ const CrimeReports = () => {
           ${reportData.linked_crimes && reportData.linked_crimes.length > 0 ? `
             <div style="margin-bottom: 20px;">
               <h4 style="color: #333; margin-bottom: 10px;">🔗 Linked Crimes (${reportData.total_linked_crimes})</h4>
-              ${reportData.linked_crimes.map(crime => `
+              ${reportData.linked_crimes.map(crime => {
+                const crimeId = crime.CRIME_ID || crime.crime_id;
+                const crimeStatus = crime.CRIME_STATUS || crime.crime_status;
+                const allSuspects = crime.SUSPECTS || [];
+                const arrestedSuspects = allSuspects.filter(s => (s.Status || s.STATUS || s.status) === 'Arrested');
+                const evidence = crime.EVIDENCE || [];
+
+                const arrestedBanner = arrestedSuspects.length > 0
+                  ? `<div style="background:#d4edda; padding:10px 12px; border-radius:6px; margin-bottom:8px; border-left:4px solid #28a745;">
+                      <strong>🚨 Arrest Update:</strong> ${arrestedSuspects.map(s => `<strong>${s.Name || s.NAME}</strong> (${s.Role || s.ROLE || 'Suspect'}) has been <span style="color:#155724; font-weight:700;">ARRESTED</span>`).join(' &amp; ')}
+                    </div>`
+                  : '';
+
+                const suspectsSection = allSuspects.length > 0
+                  ? `<div style="background:#fff8e1; padding:10px 12px; border-radius:6px; margin-top:10px; border-left:4px solid #ffa000;">
+                      <p style="margin:0 0 6px 0; font-weight:700; color:#e65100;">🕵️ Linked Suspects</p>
+                      ${allSuspects.map(s => {
+                        const st = s.Status || s.STATUS || s.status || 'Unknown';
+                        const stColor = st === 'Arrested' ? '#155724' : st === 'At Large' ? '#721c24' : '#555';
+                        return `<p style="margin:3px 0; font-size:0.9em;">• <strong>${s.Name || s.NAME}</strong> — Role: ${s.Role || s.ROLE} &nbsp;|&nbsp; Status: <span style="color:${stColor}; font-weight:600;">${st}</span></p>`;
+                      }).join('')}
+                    </div>`
+                  : '';
+
+                const evStatusColor = (st) => {
+                  if (!st) return '#888';
+                  if (['Released', 'Stored'].includes(st)) return '#2e7d32';
+                  if (st === 'Analyzed') return '#1565c0';
+                  if (st === 'Transferred') return '#e65100';
+                  return '#555';
+                };
+                const evidenceSection = evidence.length > 0
+                  ? `<div style="background:#f3e5f5; padding:10px 12px; border-radius:6px; margin-top:10px; border-left:4px solid #8e24aa;">
+                      <p style="margin:0 0 8px 0; font-weight:700; color:#6a1b9a;">🔬 Evidence Collected (${evidence.length})</p>
+                      <table style="width:100%; border-collapse:collapse; font-size:0.85em;">
+                        <thead>
+                          <tr style="background:#e1bee7;">
+                            <th style="padding:4px 8px; text-align:left;">Type</th>
+                            <th style="padding:4px 8px; text-align:left;">Collected By</th>
+                            <th style="padding:4px 8px; text-align:left;">Date</th>
+                            <th style="padding:4px 8px; text-align:left;">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          ${evidence.map(ev => `
+                            <tr style="border-top:1px solid #ce93d8;">
+                              <td style="padding:4px 8px;">${ev.type || 'Unknown'}</td>
+                              <td style="padding:4px 8px;">${ev.collectedBy}</td>
+                              <td style="padding:4px 8px;">${ev.dateCollected || '—'}</td>
+                              <td style="padding:4px 8px; color:${evStatusColor(ev.currentStatus)}; font-weight:600;">${ev.currentStatus}</td>
+                            </tr>`).join('')}
+                        </tbody>
+                      </table>
+                    </div>`
+                  : '';
+
+                const inv = crime.INVESTIGATION;
+                const invSection = inv ? `
+                  <div style="background:#f0f4ff; padding:10px 12px; border-radius:6px; margin-top:10px; border-left:4px solid #5c6bc0;">
+                    <p style="margin:0 0 6px 0; font-weight:700; color:#3949ab;">🔍 Investigation Details</p>
+                    <p style="margin:2px 0;"><strong>Case Number:</strong> ${inv.caseNumber}</p>
+                    <p style="margin:2px 0;"><strong>Lead Officer:</strong> ${inv.leadOfficer || 'Not assigned'}</p>
+                    <p style="margin:2px 0;"><strong>Status:</strong> <span style="color:${inv.status === 'Closed' ? '#2e7d32' : inv.status === 'Suspended' ? '#e65100' : '#1565c0'}; font-weight:600;">${inv.status}</span></p>
+                    <p style="margin:2px 0;"><strong>Outcome:</strong> <span style="color:${inv.outcome === 'Solved' ? '#2e7d32' : inv.outcome === 'Pending' ? '#f57c00' : '#666'}; font-weight:600;">${inv.outcome}</span></p>
+                    <p style="margin:2px 0;"><strong>Started:</strong> ${inv.startDate}</p>
+                    ${inv.closeDate ? `<p style="margin:2px 0;"><strong>Closed:</strong> ${inv.closeDate}</p>` : ''}
+                    ${inv.notes ? `<p style="margin:6px 0 0 0; font-size:0.85em; color:#555;"><strong>Notes:</strong> ${inv.notes}</p>` : ''}
+                  </div>` : '';
+                return `
                 <div style="background: #e3f2fd; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #2196F3;">
-                  <p><strong>Crime ID:</strong> ${crime.CRIME_ID || crime.crime_id}</p>
+                  ${arrestedBanner}
+                  <p><strong>Crime ID:</strong> ${crimeId}</p>
                   <p><strong>Type:</strong> ${crime.CRIME_TYPE || crime.crime_type}</p>
                   <p><strong>Date Occurred:</strong> ${crime.DATE_OCCURRED || crime.date_occurred}</p>
                   <p><strong>Status:</strong> <span style="color: ${
-                    (crime.CRIME_STATUS || crime.crime_status) === 'Solved' ? 'green' : 
-                    (crime.CRIME_STATUS || crime.crime_status) === 'Under Investigation' ? 'orange' : '#666'
-                  };">${crime.CRIME_STATUS || crime.crime_status}</span></p>
+                    crimeStatus === 'Closed' ? 'green' : 
+                    crimeStatus === 'Under Investigation' ? 'orange' : '#666'
+                  };">${crimeStatus}</span></p>
                   <p><strong>Description:</strong> ${crime.CRIME_DESCRIPTION || crime.crime_description || 'N/A'}</p>
-                  <p style="font-size: 0.85em; color: #666;"><em>Linked on: ${crime.LINKED_ON || crime.linked_on}</em></p>
-                  ${(crime.LINK_NOTES || crime.link_notes) ? `<p style="font-size: 0.85em;"><strong>Notes:</strong> ${crime.LINK_NOTES || crime.link_notes}</p>` : ''}
-                </div>
-              `).join('')}
+                  ${suspectsSection}
+                  ${evidenceSection}
+                  ${invSection}
+                </div>`;
+              }).join('')}
             </div>
           ` : `
             <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">

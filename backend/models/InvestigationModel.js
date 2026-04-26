@@ -318,6 +318,57 @@ async function assignInvestigationToOfficer(investigationId, officerId) {
   }
 }
 
+/**
+ * Gets all officers assigned to an investigation team
+ */
+async function getInvestigationTeam(investigationId) {
+  let conn;
+  try {
+    conn = await oracledb.getConnection();
+    const result = await conn.execute(
+      `SELECT io.Officer_ID, o.Name, o.Email, io.Role, TO_CHAR(io.Assigned_Date, 'YYYY-MM-DD') AS Assigned_Date
+       FROM Investigation_Officer io
+       JOIN Officer o ON io.Officer_ID = o.Officer_ID
+       WHERE io.Investigation_ID = :investigationId
+       ORDER BY io.Assigned_Date`,
+      { investigationId },
+      { outFormat: oracledb.OUT_FORMAT_OBJECT }
+    );
+    return result.rows;
+  } catch (err) { throw err; } finally { if (conn) await conn.close(); }
+}
+
+/**
+ * Adds an officer to an investigation team
+ */
+async function addTeamMember(investigationId, officerId, role) {
+  let conn;
+  try {
+    conn = await oracledb.getConnection();
+    await conn.execute(
+      `INSERT INTO Investigation_Officer (Investigation_ID, Officer_ID, Role, Assigned_Date)
+       VALUES (:investigationId, :officerId, :role, SYSDATE)`,
+      { investigationId, officerId, role: role || 'Field Officer' },
+      { autoCommit: true }
+    );
+  } catch (err) { throw err; } finally { if (conn) await conn.close(); }
+}
+
+/**
+ * Removes an officer from an investigation team
+ */
+async function removeTeamMember(investigationId, officerId) {
+  let conn;
+  try {
+    conn = await oracledb.getConnection();
+    await conn.execute(
+      `DELETE FROM Investigation_Officer WHERE Investigation_ID = :investigationId AND Officer_ID = :officerId`,
+      { investigationId, officerId },
+      { autoCommit: true }
+    );
+  } catch (err) { throw err; } finally { if (conn) await conn.close(); }
+}
+
 module.exports = {
   listAllInvestigations,
   getInvestigationById,
@@ -326,5 +377,8 @@ module.exports = {
   linkCrimeToInvestigation,
   deleteInvestigation,
   assignInvestigationToOfficer,
+  getInvestigationTeam,
+  addTeamMember,
+  removeTeamMember,
 };
 

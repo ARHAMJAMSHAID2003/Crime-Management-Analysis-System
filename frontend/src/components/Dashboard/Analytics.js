@@ -29,12 +29,7 @@ const Analytics = () => {
         analyticsAPI.getTrends(filters).catch(() => ({ data: [] })),
         analyticsAPI.getHotspots().catch(() => ({ data: [] })),
         analyticsAPI.getStatistics().catch(() => ({ data: { categoryDistribution: [], officerPerformance: [] } })),
-        fetch('http://localhost:3001/api/analytics/patterns', {
-          headers: { 
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}` 
-          }
-        }).then(r => r.json()).catch(() => ({ data: [] })),
+        analyticsAPI.getPatterns().catch(() => ({ data: [] })),
       ]);
 
       setTrends(trendsRes.data || []);
@@ -192,7 +187,11 @@ const Analytics = () => {
               fontSize: '0.95rem',
             }}
           >
-            {view.charAt(0).toUpperCase() + view.slice(1)}
+            {view === 'overview' ? '📊 Overview' :
+             view === 'trends' ? '📈 Trends' :
+             view === 'hotspots' ? '🗺️ Hotspots' :
+             view === 'patterns' ? '📅 Patterns' :
+             '👮 Performance'}
           </button>
         ))}
       </div>
@@ -317,7 +316,8 @@ const Analytics = () => {
       )}
 
       {/* Trends View */}
-      {activeView === 'trends' && trends.length > 0 && (
+      {activeView === 'trends' && (
+        trends.length > 0 ? (
         <div className="table-container">
           <h3 style={{ padding: '15px', margin: 0, borderBottom: '1px solid #e9ecef', background: '#f8f9fa' }}>
             📈 Crime Trends (Month-over-Month)
@@ -367,10 +367,18 @@ const Analytics = () => {
             </table>
           </div>
         </div>
+        ) : (
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#999' }}>
+            <div style={{ fontSize: '48px', marginBottom: '15px' }}>📈</div>
+            <p style={{ fontWeight: '500' }}>No trend data available yet.</p>
+            <p style={{ fontSize: '14px' }}>Add crimes with dates to see month-over-month trend analysis.</p>
+          </div>
+        )
       )}
 
       {/* Hotspots View */}
-      {activeView === 'hotspots' && hotspots.length > 0 && (
+      {activeView === 'hotspots' && (
+        hotspots.length > 0 ? (
         <div className="table-container">
           <h3 style={{ padding: '15px', margin: 0, borderBottom: '1px solid #e9ecef', background: '#f8f9fa' }}>
             🗺️ Crime Hotspots (Detailed)
@@ -443,10 +451,18 @@ const Analytics = () => {
             </table>
           </div>
         </div>
+        ) : (
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#999' }}>
+            <div style={{ fontSize: '48px', marginBottom: '15px' }}>🗺️</div>
+            <p style={{ fontWeight: '500' }}>No hotspot data available yet.</p>
+            <p style={{ fontSize: '14px' }}>Add crimes with location data to see crime hotspots.</p>
+          </div>
+        )
       )}
 
       {/* Patterns View */}
-      {activeView === 'patterns' && crimePatterns.length > 0 && (
+      {activeView === 'patterns' && (
+        crimePatterns.length > 0 ? (
         <div className="table-container">
           <h3 style={{ padding: '15px', margin: 0, borderBottom: '1px solid #e9ecef', background: '#f8f9fa' }}>
             📅 Crime Patterns by Day of Week
@@ -494,10 +510,19 @@ const Analytics = () => {
             </table>
           </div>
         </div>
+
+        ) : (
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#999' }}>
+            <div style={{ fontSize: '48px', marginBottom: '15px' }}>📅</div>
+            <p style={{ fontWeight: '500' }}>No pattern data available yet.</p>
+            <p style={{ fontSize: '14px' }}>Add crimes with time information to see day-of-week patterns.</p>
+          </div>
+        )
       )}
 
       {/* Performance View */}
-      {activeView === 'performance' && officerPerformance.length > 0 && (
+      {activeView === 'performance' && (
+        officerPerformance.length > 0 ? (
         <div className="table-container">
           <h3 style={{ padding: '15px', margin: 0, borderBottom: '1px solid #e9ecef', background: '#f8f9fa' }}>
             👮 Officer Performance Rankings
@@ -567,15 +592,24 @@ const Analytics = () => {
             </table>
           </div>
         </div>
+        ) : (
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#999' }}>
+            <div style={{ fontSize: '48px', marginBottom: '15px' }}>👮</div>
+            <p style={{ fontWeight: '500' }}>No officer performance data available yet.</p>
+            <p style={{ fontSize: '14px' }}>Assign officers to investigations and crimes to see performance rankings.</p>
+          </div>
+        )
       )}
 
-      {/* Empty State */}
+      {/* Empty State - Overview */}
       {activeView === 'overview' && 
        categoryDistribution.length === 0 && 
        hotspots.length === 0 && (
-        <p style={{ color: '#999', marginTop: '20px', textAlign: 'center' }}>
-          No analytics data available. Add some crimes to see analytics.
-        </p>
+        <div style={{ textAlign: 'center', padding: '60px 20px', color: '#999' }}>
+          <div style={{ fontSize: '48px', marginBottom: '15px' }}>📊</div>
+          <p style={{ fontWeight: '500' }}>No analytics data available yet.</p>
+          <p style={{ fontSize: '14px' }}>Add crimes and investigations to start seeing analytics.</p>
+        </div>
       )}
     </div>
   );

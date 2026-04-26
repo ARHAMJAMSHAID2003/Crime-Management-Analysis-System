@@ -6,6 +6,9 @@ const {
   linkCrimeToInvestigation,
   deleteInvestigation,
   assignInvestigationToOfficer,
+  getInvestigationTeam,
+  addTeamMember,
+  removeTeamMember,
 } = require("../models/InvestigationModel");
 
 /**
@@ -151,6 +154,42 @@ async function assignInvestigation(req, res) {
   }
 }
 
+async function getTeamHandler(req, res) {
+  try {
+    const investigationId = parseInt(req.params.id);
+    const team = await getInvestigationTeam(investigationId);
+    res.json({ data: team });
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching team', error: err.message });
+  }
+}
+
+async function addTeamMemberHandler(req, res) {
+  try {
+    const investigationId = parseInt(req.params.id);
+    const { officerId, role } = req.body;
+    if (!officerId) return res.status(400).json({ message: 'officerId is required' });
+    await addTeamMember(investigationId, parseInt(officerId), role);
+    res.status(201).json({ message: 'Team member added successfully' });
+  } catch (err) {
+    if (err.message && err.message.includes('ORA-00001')) {
+      return res.status(409).json({ message: 'Officer is already on this investigation team' });
+    }
+    res.status(500).json({ message: 'Error adding team member', error: err.message });
+  }
+}
+
+async function removeTeamMemberHandler(req, res) {
+  try {
+    const investigationId = parseInt(req.params.id);
+    const officerId = parseInt(req.params.officerId);
+    await removeTeamMember(investigationId, officerId);
+    res.json({ message: 'Team member removed successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error removing team member', error: err.message });
+  }
+}
+
 module.exports = {
   getAllInvestigations,
   getInvestigation,
@@ -159,5 +198,8 @@ module.exports = {
   linkCrime,
   deleteInvestigationHandler,
   assignInvestigation,
+  getTeamHandler,
+  addTeamMemberHandler,
+  removeTeamMemberHandler,
 };
 

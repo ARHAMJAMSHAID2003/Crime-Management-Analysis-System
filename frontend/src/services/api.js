@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 // Helper function to get auth token
 const getAuthToken = () => {
@@ -143,6 +143,11 @@ export const suspectsAPI = {
     apiCall(`/suspects/${id}`, {
       method: 'DELETE',
     }),
+  arrest: (id, data) =>
+    apiCall(`/suspects/${id}/arrest`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
 };
 
 // Victims API
@@ -268,6 +273,7 @@ export const analyticsAPI = {
       return { data: null };
     }
   },
+  getPatterns: () => apiCall('/analytics/patterns'),
   getTimeAnalysis: (params = {}) => {
     const queryParams = new URLSearchParams(params).toString();
     return apiCall(`/analytics/time-series${queryParams ? `?${queryParams}` : ''}`);
@@ -366,6 +372,16 @@ export const investigationsAPI = {
     apiCall(`/investigations/${id}/crimes`, {
       method: 'POST',
       body: JSON.stringify({ crimeId }),
+    }),
+  getTeam: (id) => apiCall(`/investigations/${id}/team`),
+  addTeamMember: (id, officerId, role) =>
+    apiCall(`/investigations/${id}/team`, {
+      method: 'POST',
+      body: JSON.stringify({ officerId, role }),
+    }),
+  removeTeamMember: (id, officerId) =>
+    apiCall(`/investigations/${id}/team/${officerId}`, {
+      method: 'DELETE',
     }),
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { evidenceAPI, enhancedEvidenceAPI } from '../../services/api';
+import { evidenceAPI, enhancedEvidenceAPI, officersAPI } from '../../services/api';
 import './Crimes.css';
 
 const Evidence = () => {
@@ -110,6 +110,125 @@ const Evidence = () => {
       } catch (error) {
         Swal.fire('Error!', error.message || 'Failed to delete evidence', 'error');
       }
+    }
+  };
+
+  const handleViewEvidence = async (item) => {
+    const evidenceId = item.EVIDENCE_ID || item.Evidence_ID || item.evidence_id;
+    const evidenceType = item.TYPE || item.Type || item.type;
+    const rawDescription = item.DESCRIPTION || item.Description || item.description || '';
+    const crimeId = item.CRIME_ID || item.Crime_ID || item.crime_id;
+    const officerName = item.COLLECTED_BY_NAME || item.Collected_By_Name || item.collected_by_name || 'N/A';
+    const collectedDate = formatDate(item.DATE_COLLECTED || item.Date_Collected || item.date_collected);
+    const crimeStatus = item.CRIME_STATUS || item.Crime_Status || item.crime_status || 'N/A';
+
+    // Build officer ID → name map for chain resolution
+    let officerMap = {};
+    try {
+      const officerResp = await officersAPI.getAll();
+      const allOfficers = officerResp.data || officerResp || [];
+      allOfficers.forEach(o => {
+        const id = o.OFFICER_ID || o.Officer_ID || o.officer_id;
+        const name = o.NAME || o.Name || o.name || o.FULL_NAME || o.Full_Name;
+        if (id && name) officerMap[String(id)] = name;
+      });
+    } catch (e) { /* fallback to ID if fetch fails */ }
+
+    // Parse description: original text is before first ' | ', chain entries follow
+    const parts = rawDescription.split(' | ');
+    const originalDescription = parts[0].trim();
+
+    // Build chain entries array
+    const chainEntries = [
+      { action: 'COLLECTED', officer: officerName, timestamp: collectedDate, notes: 'Initial collection — evidence logged into system' }
+    ];
+    const chainRegex = /^(\w+) by Officer (\d+) on (.+?): (.+)$/;
+    for (let i = 1; i < parts.length; i++) {
+      const part = parts[i].trim();
+      if (!part) continue;
+      const match = part.match(chainRegex);
+      if (match) {
+        const resolvedName = officerMap[match[2]] || `Officer #${match[2]}`;
+        chainEntries.push({ action: match[1], officer: resolvedName, timestamp: match[3], notes: match[4] });
+      } else {
+        chainEntries.push({ action: 'NOTE', officer: officerName, timestamp: collectedDate, notes: part });
+      }
+    }
+
+    const actionColor = (action) => {
+      if (action === 'COLLECTED') return '#d4edda';
+      if (action === 'TRANSFERRED') return '#cce5ff';
+      if (action === 'ANALYZED') return '#fff3cd';
+      if (action === 'STORED') return '#e2e3e5';
+      if (action === 'RELEASED') return '#f8d7da';
+      return '#e9ecef';
+    };
+
+    const chainRowsHtml = chainEntries.map((entry, idx) => `
+      <tr style="border-bottom:1px solid #e9ecef; background:${idx % 2 === 0 ? '#fafafa' : 'white'};">
+        <td style="padding:8px 10px;">
+          <span style="background:${actionColor(entry.action)}; padding:3px 8px; border-radius:4px; font-weight:500; font-size:12px;">${entry.action}</span>
+        </td>
+        <td style="padding:8px 10px;">${entry.officer}</td>
+        <td style="padding:8px 10px; white-space:nowrap;">${entry.timestamp}</td>
+        <td style="padding:8px 10px; color:#555;">${entry.notes}</td>
+      </tr>
+    `).join('');
+
+    const detailsHtml = `
+      <div style="text-align:left; max-height:520px; overflow-y:auto;">
+        <!-- Evidence Summary -->
+        <div style="background:#f8f9fa; padding:14px; border-radius:10px; margin-bottom:16px; border-left:4px solid #667eea;">
+          <h4 style="color:#333; margin:0 0 10px 0; font-size:15px;">📦 Evidence #${evidenceId} — Summary</h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
+            <div><span style="color:#888;">ID:</span> <strong>#${evidenceId}</strong></div>
+            <div><span style="color:#888;">Type:</span> <strong>${evidenceType || 'N/A'}</strong></div>
+            <div><span style="color:#888;">Crime ID:</span> <strong>#${crimeId || 'N/A'}</strong></div>
+            <div><span style="color:#888;">Crime Status:</span> <strong>${crimeStatus}</strong></div>
+            <div><span style="color:#888;">Collected By:</span> <strong>${officerName}</strong></div>
+            <div><span style="color:#888;">Date Collected:</span> <strong>${collectedDate}</strong></div>
+          </div>
+          ${originalDescription ? `<div style="margin-top:10px; font-size:13px;"><span style="color:#888;">Description:</span><div style="background:white; padding:8px; border-radius:5px; margin-top:4px; white-space:pre-wrap;">${originalDescription}</div></div>` : ''}
+        </div>
+
+        <!-- Chain of Custody Log -->
+        <div style="margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h4 style="color:#333; margin:0; font-size:15px;">🔗 Chain of Custody Log (${chainEntries.length} entries)</h4>
+          </div>
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="background:#325a77; color:white;">
+                <th style="padding:8px 10px; text-align:left;">Action</th>
+                <th style="padding:8px 10px; text-align:left;">Officer</th>
+                <th style="padding:8px 10px; text-align:left;">Timestamp</th>
+                <th style="padding:8px 10px; text-align:left;">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${chainRowsHtml}
+            </tbody>
+          </table>
+          <div style="background:#e3f2fd; padding:10px; border-radius:6px; font-size:12px; color:#1565c0; margin-top:8px; border-left:3px solid #2196F3;">
+            ℹ️ Click "🔗 Update Chain" to log a new custody action (Transfer, Analyzed, Stored, Released).
+          </div>
+        </div>
+      </div>
+    `;
+
+    const result = await Swal.fire({
+      title: `📦 Evidence #${evidenceId} — Chain of Custody`,
+      html: detailsHtml,
+      width: '720px',
+      showDenyButton: true,
+      confirmButtonText: 'Close',
+      denyButtonText: '🔗 Update Chain of Custody',
+      confirmButtonColor: '#667eea',
+      denyButtonColor: '#325a77',
+    });
+
+    if (result.isDenied) {
+      handleUpdateChain(item);
     }
   };
 
@@ -380,6 +499,13 @@ const Evidence = () => {
                       <td>{formatDate(collectedDate)}</td>
                       <td>
                         <div className="action-buttons">
+                          <button 
+                            className="btn btn-primary btn-sm" 
+                            onClick={() => handleViewEvidence(item)}
+                            title="View evidence details and chain of custody"
+                          >
+                            👁️ View
+                          </button>
                           <button 
                             className="btn btn-info btn-sm" 
                             onClick={() => handleUpdateChain(item)}

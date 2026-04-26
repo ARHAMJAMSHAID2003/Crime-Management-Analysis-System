@@ -119,6 +119,82 @@ async function getCrimeReportById(reportId) {
       { outFormat: oracledb.OUT_FORMAT_OBJECT }
     );
 
+    // For each linked crime, attach suspects and investigation details
+    for (const crime of crimesResult.rows) {
+      const suspectsRes = await conn.execute(
+        `SELECT s.Name, s.Status, cs.Role
+         FROM Crime_Suspect cs
+         JOIN Suspect s ON cs.Suspect_ID = s.Suspect_ID
+         WHERE cs.Crime_ID = :crimeId`,
+        { crimeId: crime.CRIME_ID },
+        { outFormat: oracledb.OUT_FORMAT_OBJECT }
+      );
+      crime.SUSPECTS = suspectsRes.rows.map(s => ({
+        Name: s.NAME,
+        Status: s.STATUS,
+        Role: s.ROLE
+      }));
+
+      // Fetch linked investigation for this crime
+      const invRes = await conn.execute(
+        `SELECT i.Investigation_ID, i.Case_Number, i.Status AS inv_status,
+                i.Outcome, TO_CHAR(i.Start_Date, 'YYYY-MM-DD') AS start_date,
+                TO_CHAR(i.Close_Date, 'YYYY-MM-DD') AS close_date,
+                i.Notes, o.Name AS lead_officer
+         FROM Investigation_Crime ic
+         JOIN Investigation i ON ic.Investigation_ID = i.Investigation_ID
+         LEFT JOIN Officer o ON i.Lead_Officer_ID = o.Officer_ID
+         WHERE ic.Crime_ID = :crimeId
+         ORDER BY i.Start_Date DESC
+         FETCH FIRST 1 ROWS ONLY`,
+        { crimeId: crime.CRIME_ID },
+        { outFormat: oracledb.OUT_FORMAT_OBJECT }
+      );
+      crime.INVESTIGATION = invRes.rows.length > 0 ? {
+        investigationId: invRes.rows[0].INVESTIGATION_ID,
+        caseNumber: invRes.rows[0].CASE_NUMBER,
+        status: invRes.rows[0].INV_STATUS,
+        outcome: invRes.rows[0].OUTCOME,
+        startDate: invRes.rows[0].START_DATE,
+        closeDate: invRes.rows[0].CLOSE_DATE,
+        notes: invRes.rows[0].NOTES,
+        leadOfficer: invRes.rows[0].LEAD_OFFICER
+      } : null;
+
+      // Fetch evidence for this crime
+      const evidenceRes = await conn.execute(
+        `SELECT e.Evidence_ID, e.Type, e.Date_Collected, e.Description,
+                o.Name AS collected_by_name
+         FROM Evidence e
+         LEFT JOIN Officer o ON e.Collected_By = o.Officer_ID
+         WHERE e.Crime_ID = :crimeId
+         ORDER BY e.Date_Collected ASC`,
+        { crimeId: crime.CRIME_ID },
+        { outFormat: oracledb.OUT_FORMAT_OBJECT }
+      );
+      crime.EVIDENCE = await Promise.all(evidenceRes.rows.map(async (ev) => {
+        let descText = '';
+        if (ev.DESCRIPTION && typeof ev.DESCRIPTION.getData === 'function') {
+          try { descText = await ev.DESCRIPTION.getData(); } catch (_) { descText = ''; }
+        } else if (typeof ev.DESCRIPTION === 'string') {
+          descText = ev.DESCRIPTION;
+        }
+        // Extract last chain-of-custody action keyword from description
+        const actions = ['RELEASED', 'STORED', 'ANALYZED', 'TRANSFERRED', 'COLLECTED'];
+        let currentStatus = 'Collected';
+        for (const action of actions) {
+          if (descText.toUpperCase().includes(action)) { currentStatus = action.charAt(0) + action.slice(1).toLowerCase(); break; }
+        }
+        return {
+          evidenceId: ev.EVIDENCE_ID,
+          type: ev.TYPE,
+          dateCollected: ev.DATE_COLLECTED ? new Date(ev.DATE_COLLECTED).toISOString().split('T')[0] : null,
+          collectedBy: ev.COLLECTED_BY_NAME || 'Unknown',
+          currentStatus
+        };
+      }));
+    }
+
     return {
       report: reportResult.rows[0],
       linked_crimes: crimesResult.rows,

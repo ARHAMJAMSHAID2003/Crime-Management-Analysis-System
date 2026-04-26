@@ -21,6 +21,7 @@
     "express": "^4.21.0",
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^8.0.6",
     "oracledb": "^6.6.0"
   },
   "devDependencies": {

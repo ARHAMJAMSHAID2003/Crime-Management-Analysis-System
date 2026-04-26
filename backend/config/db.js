@@ -16,7 +16,7 @@ async function initialize() {
 
     // Reuse existing pool if already initialized.
     try {
-      const existingPool = oracledb.getPool("cpas_pool");
+      const existingPool = oracledb.getPool("default");
       if (existingPool) {
         console.log("Using existing OracleDB pool");
         return existingPool;
@@ -26,7 +26,7 @@ async function initialize() {
     }
 
     await oracledb.createPool({
-      poolAlias: "cpas_pool",
+      poolAlias: "default",
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       connectString: process.env.DB_CONNECTION_STRING,
@@ -43,7 +43,7 @@ async function initialize() {
 
 async function closePool() {
   try {
-    const pool = oracledb.getPool("cpas_pool");
+    const pool = oracledb.getPool("default");
     await pool.close(10);
     console.log("OracleDB pool closed");
   } catch (_err) {

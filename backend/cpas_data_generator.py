@@ -934,7 +934,7 @@ def generate_all_data():
 
 if __name__ == "__main__":
     print("="*70)
-    print("   CPAS - Crime Pattern Analysis System")
+    print("   CMAS - Crime Management Analysis System")
     print("   Enhanced Realistic Oracle Database Data Generator")
     print("="*70)
     print("\n📝 This script generates realistic crime data with:")

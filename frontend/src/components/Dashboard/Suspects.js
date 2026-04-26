@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { suspectsAPI } from '../../services/api';
+import { suspectsAPI, crimesAPI } from '../../services/api';
 import './Crimes.css';
 
 const Suspects = () => {
@@ -95,6 +95,140 @@ const Suspects = () => {
     setShowForm(true);
   };
 
+  const handleArrest = async (suspect) => {
+    const suspectId = suspect.SUSPECT_ID || suspect.Suspect_ID || suspect.suspect_id;
+    const suspectName = suspect.NAME || suspect.Name || suspect.name;
+    const currentStatus = suspect.STATUS || suspect.Status || suspect.status;
+
+    if (currentStatus === 'Arrested') {
+      Swal.fire({ icon: 'info', title: 'Already Arrested', text: `${suspectName} is already marked as Arrested.`, confirmButtonColor: '#667eea' });
+      return;
+    }
+
+    const { value: formValues } = await Swal.fire({
+      title: `🚨 Arrest Suspect — ${suspectName}`,
+      html: `
+        <div style="text-align:left;">
+          <div style="background:#fff3cd; padding:10px; border-radius:8px; margin-bottom:14px; font-size:13px; border-left:4px solid #ffc107;">
+            ⚠️ This will mark <strong>${suspectName}</strong> as <strong>Arrested</strong> and automatically notify all linked victims via email.
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Arrest Date *</label>
+            <input id="arrestDate" type="date" class="swal2-input" style="margin:0; width:92%;" value="${new Date().toISOString().split('T')[0]}" />
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Arrest Location *</label>
+            <input id="arrestLocation" type="text" class="swal2-input" style="margin:0; width:92%;" placeholder="e.g. University Road checkpoint" />
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Case Number <span style="font-weight:400; color:#888;">(optional — for email subject)</span></label>
+            <input id="arrestCaseNumber" type="text" class="swal2-input" style="margin:0; width:92%;" placeholder="e.g. CASE-2026-0015 (leave blank if unknown)" />
+          </div>
+          <div style="margin-bottom:6px;">
+            <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Additional Notes</label>
+            <textarea id="arrestNotes" class="swal2-textarea" style="margin:0; width:92%; height:70px;" placeholder="Evidence secured, vehicle seized, etc."></textarea>
+          </div>
+        </div>
+      `,
+      width: '560px',
+      showCancelButton: true,
+      confirmButtonText: '🚨 Confirm Arrest & Notify Victims',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6c757d',
+      preConfirm: () => {
+        const date = document.getElementById('arrestDate').value;
+        const location = document.getElementById('arrestLocation').value.trim();
+        if (!date) { Swal.showValidationMessage('Arrest date is required'); return false; }
+        if (!location) { Swal.showValidationMessage('Arrest location is required'); return false; }
+        return {
+          arrestDate: date,
+          arrestLocation: location,
+          caseNumber: document.getElementById('arrestCaseNumber').value.trim(),
+          notes: document.getElementById('arrestNotes').value.trim(),
+        };
+      },
+    });
+
+    if (!formValues) return;
+
+    try {
+      Swal.fire({ title: 'Processing...', text: 'Updating status and sending notifications...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
+      const response = await suspectsAPI.arrest(suspectId, formValues);
+      const data = response.data || response;
+      const notified = data.notifiedVictims || [];
+
+      const victimRows = notified.length > 0
+        ? notified.map(v => `
+            <tr style="border-bottom:1px solid #e9ecef;">
+              <td style="padding:8px 10px;">${v.name || 'N/A'}</td>
+              <td style="padding:8px 10px;">${v.email || 'No email'}</td>
+              <td style="padding:8px 10px;">
+                ${v.status === 'sent'
+                  ? '<span style="color:#28a745; font-weight:600;">✅ Sent</span>'
+                  : v.status === 'failed'
+                  ? '<span style="color:#dc3545;">❌ Failed</span>'
+                  : '<span style="color:#856404;">⚠️ No config</span>'}
+              </td>
+            </tr>`).join('')
+        : `<tr><td colspan="3" style="padding:12px; text-align:center; color:#888;">No victims with email addresses linked to this suspect's crimes.</td></tr>`;
+
+      await Swal.fire({
+        title: '🚨 Suspect Arrested — Notifications Sent',
+        html: `
+          <div style="text-align:left; max-height:480px; overflow-y:auto;">
+            <div style="background:#d4edda; padding:12px 14px; border-radius:8px; margin-bottom:14px; border-left:4px solid #28a745;">
+              ✅ <strong>${suspectName}</strong> has been marked as <strong>Arrested</strong>.
+              ${formValues.arrestDate ? `<br>📅 ${formValues.arrestDate}` : ''}
+              ${formValues.arrestLocation ? ` &nbsp;|&nbsp; 📍 ${formValues.arrestLocation}` : ''}
+            </div>
+
+            <h4 style="font-size:14px; margin:0 0 8px 0; color:#333;">🕵️ Suspect Status Update</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:13px; margin-bottom:16px;">
+              <thead>
+                <tr style="background:#325a77; color:white;">
+                  <th style="padding:8px 10px; text-align:left;">Suspect</th>
+                  <th style="padding:8px 10px; text-align:left;">Previous</th>
+                  <th style="padding:8px 10px; text-align:left;">Updated To</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:#e8f5e9;">
+                  <td style="padding:8px 10px;"><strong>${suspectName}</strong> (#${suspectId})</td>
+                  <td style="padding:8px 10px;"><span style="background:#fff3cd; padding:2px 8px; border-radius:4px;">${currentStatus || 'At Large'}</span></td>
+                  <td style="padding:8px 10px;"><span style="background:#d4edda; padding:2px 8px; border-radius:4px; color:#155724; font-weight:600;">Arrested</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4 style="font-size:14px; margin:0 0 8px 0; color:#333;">🔔 Victim Notifications</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+              <thead>
+                <tr style="background:#325a77; color:white;">
+                  <th style="padding:8px 10px; text-align:left;">Victim</th>
+                  <th style="padding:8px 10px; text-align:left;">Email</th>
+                  <th style="padding:8px 10px; text-align:left;">Status</th>
+                </tr>
+              </thead>
+              <tbody>${victimRows}</tbody>
+            </table>
+            ${notified.some(v => v.status === 'no_email_config')
+              ? '<div style="background:#fff3cd; padding:8px 12px; border-radius:6px; font-size:12px; color:#856404; margin-top:8px;">ℹ️ Email not configured (EMAIL_USER/EMAIL_PASS missing in backend .env). Add credentials to enable real emails.</div>'
+              : ''}
+          </div>
+        `,
+        width: '620px',
+        confirmButtonText: 'Done',
+        confirmButtonColor: '#28a745',
+      });
+
+      loadSuspects();
+    } catch (error) {
+      Swal.fire('Error!', error.message || 'Failed to process arrest', 'error');
+    }
+  };
+
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: 'Are you sure?',
@@ -132,13 +266,114 @@ const Suspects = () => {
         const suspectId = editingSuspect.SUSPECT_ID || editingSuspect.Suspect_ID || editingSuspect.suspect_id;
         await suspectsAPI.update(suspectId, payload);
         Swal.fire('Success!', 'Suspect updated.', 'success');
+        setShowForm(false);
+        setEditingSuspect(null);
+        loadSuspects();
       } else {
+        // Create suspect
         await suspectsAPI.create(payload);
-        Swal.fire('Success!', 'Suspect created.', 'success');
+        setShowForm(false);
+
+        // Get the newly created suspect's ID by searching by name
+        const freshResponse = await suspectsAPI.getAll('');
+        const allSuspects = freshResponse.data || freshResponse || [];
+        const sorted = [...allSuspects].sort((a, b) => (b.SUSPECT_ID || 0) - (a.SUSPECT_ID || 0));
+        const newSuspect = sorted[0];
+        const newSuspectId = newSuspect?.SUSPECT_ID || newSuspect?.Suspect_ID || newSuspect?.suspect_id;
+
+        // WF2 S6 — Link Suspect to Crime (wireframe step)
+        // Fetch crimes for dropdown
+        let crimeOptions = '<option value="">— Select a Crime —</option>';
+        try {
+          const crimesResp = await crimesAPI.getAll('');
+          const allCrimes = crimesResp.data || crimesResp || [];
+          if (allCrimes.length === 0) {
+            crimeOptions += '<option value="" disabled>No crimes found in database</option>';
+          } else {
+            allCrimes.forEach(c => {
+              const id = c.CRIME_ID || c.Crime_ID || c.crime_id;
+              const typeName = c.TYPE_NAME || c.Crime_Type || 'Unknown Type';
+              const city = c.CITY || c.City || '';
+              const area = c.AREA || c.Area || '';
+              const status = c.STATUS || c.Status || '';
+              const label = `#${id} — ${typeName}${city ? ' · ' + city : ''}${area ? ' (' + area + ')' : ''} [${status}]`;
+              crimeOptions += `<option value="${id}">${label}</option>`;
+            });
+          }
+        } catch (e) {
+          crimeOptions += '<option value="" disabled>Failed to load crimes</option>';
+        }
+
+        const { value: linkValues, isConfirmed: doLink } = await Swal.fire({
+          title: '🔗 Link Suspect to Crime?',
+          html: `
+            <div style="text-align:left;">
+              <div style="background:#d4edda; padding:12px; border-radius:8px; margin-bottom:15px; border-left:4px solid #28a745; font-size:13px;">
+                ✅ Suspect <strong>${payload.name}</strong>${newSuspectId ? ` (ID: #${newSuspectId})` : ''} saved successfully.
+              </div>
+              <p style="color:#555; font-size:13px; margin-bottom:15px;">Would you like to link this suspect to a crime? You can skip and do it later.</p>
+              <div style="margin-bottom:12px;">
+                <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Select Crime *</label>
+                <select id="linkCrimeId" class="swal2-input" style="margin:0; width:92%; font-size:13px;">
+                  ${crimeOptions}
+                </select>
+              </div>
+              <div style="margin-bottom:12px;">
+                <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Suspect Role *</label>
+                <select id="linkRole" class="swal2-input" style="margin:0; width:92%; font-size:13px;">
+                  <option value="Primary Suspect">Primary Suspect</option>
+                  <option value="Accomplice">Accomplice</option>
+                  <option value="Person of Interest">Person of Interest</option>
+                </select>
+              </div>
+              <div style="margin-bottom:12px;">
+                <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Arrest Status</label>
+                <select id="linkArrestStatus" class="swal2-input" style="margin:0; width:92%; font-size:13px;">
+                  <option value="Pending">Pending</option>
+                  <option value="Arrested">Arrested</option>
+                  <option value="Released">Released</option>
+                  <option value="Cleared">Cleared</option>
+                </select>
+              </div>
+            </div>
+          `,
+          width: '560px',
+          showDenyButton: true,
+          showCancelButton: false,
+          confirmButtonText: '🔗 Link to Crime',
+          denyButtonText: 'Skip for Now',
+          confirmButtonColor: '#667eea',
+          denyButtonColor: '#6c757d',
+          focusConfirm: false,
+          preConfirm: () => {
+            const crimeId = document.getElementById('linkCrimeId').value;
+            if (!crimeId) { Swal.showValidationMessage('Please select a crime'); return false; }
+            return {
+              crimeId: parseInt(crimeId),
+              role: document.getElementById('linkRole').value,
+              arrestStatus: document.getElementById('linkArrestStatus').value,
+            };
+          }
+        });
+
+        if (doLink && linkValues && newSuspectId) {
+          try {
+            await crimesAPI.linkSuspect(linkValues.crimeId, newSuspectId, linkValues.role, linkValues.arrestStatus);
+            Swal.fire({
+              icon: 'success',
+              title: '✅ Suspect Linked!',
+              html: `<strong>${payload.name}</strong> linked to Crime <strong>#${linkValues.crimeId}</strong> as <strong>${linkValues.role}</strong>.`,
+              confirmButtonColor: '#667eea'
+            });
+          } catch (linkErr) {
+            Swal.fire('Warning', `Suspect saved but could not link to crime: ${linkErr.message}`, 'warning');
+          }
+        } else if (!doLink) {
+          Swal.fire({ icon: 'success', title: 'Suspect Created!', text: `${payload.name} added. Link to a crime from the table when ready.`, confirmButtonColor: '#667eea' });
+        }
+
+        loadSuspects();
       }
-      setShowForm(false);
-      setEditingSuspect(null);
-      loadSuspects();
     } catch (error) {
       Swal.fire('Error!', error.message || 'Failed to save suspect', 'error');
     }
@@ -314,6 +549,15 @@ const Suspects = () => {
                         </td>
                         <td>
                           <div className="action-buttons">
+                            <button
+                              onClick={() => handleArrest(suspect)}
+                              className="btn btn-danger btn-sm"
+                              title="Mark suspect as arrested and notify victims"
+                              disabled={status === 'Arrested'}
+                              style={{ opacity: status === 'Arrested' ? 0.5 : 1, cursor: status === 'Arrested' ? 'not-allowed' : 'pointer' }}
+                            >
+                              🚨 Arrest
+                            </button>
                             <button
                               onClick={() => handleEdit(suspect)}
                               className="btn btn-secondary btn-sm"

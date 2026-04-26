@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { crimeReportsAPI, crimesAPI, crimeTypesAPI, locationsAPI } from '../../services/api';
+import { crimeReportsAPI, crimesAPI, crimeTypesAPI, locationsAPI, investigationsAPI, officersAPI } from '../../services/api';
 import './Crimes.css';
 
 const Reports = () => {
@@ -56,66 +56,101 @@ const Reports = () => {
     try {
       const response = await crimeReportsAPI.getById(reportId);
       const reportData = response.data;
+      const currentStatus = reportData.report.STATUS || reportData.report.status;
+      const isPending = currentStatus === 'Pending Review';
       
       let detailsHtml = `
-        <div style="text-align: left; max-height: 500px; overflow-y: auto;">
-          <div style="margin-bottom: 20px;">
-            <h4 style="color: #333; margin-bottom: 10px;">📋 Report Information</h4>
-            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px;">
-              <p><strong>Report ID:</strong> ${reportData.report.REPORT_ID || reportData.report.report_id}</p>
-              <p><strong>Date Reported:</strong> ${new Date(reportData.report.DATE_REPORTED || reportData.report.date_reported).toLocaleString()}</p>
-              <p><strong>Status:</strong> <span style="color: ${
-                (reportData.report.STATUS || reportData.report.status) === 'Resolved' ? 'green' : 
-                (reportData.report.STATUS || reportData.report.status) === 'Under Investigation' ? 'orange' : '#666'
-              };">${reportData.report.STATUS || reportData.report.status}</span></p>
-              <p><strong>Reported By:</strong> ${reportData.report.REPORTED_BY || reportData.report.reported_by || reportData.report.VICTIM_NAME || reportData.report.victim_name || 'N/A'}</p>
-              <p><strong>Report Type:</strong> ${reportData.report.REPORT_TYPE || reportData.report.report_type}</p>
-              ${(reportData.report.VICTIM_EMAIL || reportData.report.victim_email) ? `<p><strong>Contact:</strong> ${reportData.report.VICTIM_EMAIL || reportData.report.victim_email}</p>` : ''}
+        <div style="text-align: left; max-height: 520px; overflow-y: auto;">
+          <!-- Report Info -->
+          <div style="margin-bottom: 18px; background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+            <h4 style="color: #333; margin: 0 0 10px 0; font-size: 15px;">📋 Report Information</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+              <div><span style="color:#888;">Report ID:</span> <strong>#${reportData.report.REPORT_ID || reportData.report.report_id}</strong></div>
+              <div><span style="color:#888;">Date Reported:</span> <strong>${new Date(reportData.report.DATE_REPORTED || reportData.report.date_reported).toLocaleString()}</strong></div>
+              <div><span style="color:#888;">Status:</span> <strong style="color:${
+                currentStatus === 'Resolved' ? '#2e7d32' : 
+                currentStatus === 'Under Investigation' ? '#1976d2' : 
+                currentStatus === 'Rejected' ? '#d32f2f' :
+                currentStatus === 'Pending Review' ? '#f57c00' : '#666'
+              };">${currentStatus}</strong></div>
+              <div><span style="color:#888;">Report Type:</span> <strong>${reportData.report.REPORT_TYPE || reportData.report.report_type || 'N/A'}</strong></div>
+              <div><span style="color:#888;">Reported By:</span> <strong>${reportData.report.REPORTED_BY || reportData.report.reported_by || reportData.report.VICTIM_NAME || reportData.report.victim_name || 'N/A'}</strong></div>
+              ${(reportData.report.VICTIM_EMAIL || reportData.report.victim_email) ? `<div><span style="color:#888;">Contact:</span> <strong>${reportData.report.VICTIM_EMAIL || reportData.report.victim_email}</strong></div>` : ''}
             </div>
           </div>
           
-          <div style="margin-bottom: 20px;">
-            <h4 style="color: #333; margin-bottom: 10px;">📝 Report Details</h4>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; white-space: pre-wrap; max-height: 200px; overflow-y: auto;">
+          <!-- Report Details -->
+          <div style="margin-bottom: 18px;">
+            <h4 style="color: #333; margin: 0 0 8px 0; font-size: 15px;">📝 Report Details</h4>
+            <div style="background: #f9f9f9; padding: 13px; border-radius: 8px; white-space: pre-wrap; max-height: 180px; overflow-y: auto; font-size: 13px; line-height: 1.5;">
               ${reportData.report.DETAILS || reportData.report.details || 'No details provided'}
             </div>
           </div>
           
+          <!-- Linked Crimes -->
           ${reportData.linked_crimes && reportData.linked_crimes.length > 0 ? `
-            <div style="margin-bottom: 20px;">
-              <h4 style="color: #333; margin-bottom: 10px;">🔗 Linked Crimes (${reportData.total_linked_crimes})</h4>
+            <div style="margin-bottom: 18px;">
+              <h4 style="color: #333; margin: 0 0 8px 0; font-size: 15px;">🔗 Linked Crimes (${reportData.total_linked_crimes})</h4>
               ${reportData.linked_crimes.map(crime => `
-                <div style="background: #e8f5e9; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #4caf50;">
-                  <p><strong>Crime ID:</strong> #${crime.CRIME_ID || crime.crime_id}</p>
-                  <p><strong>Type:</strong> ${crime.CRIME_TYPE || crime.crime_type}</p>
-                  <p><strong>Date:</strong> ${crime.DATE_OCCURRED || crime.date_occurred}</p>
-                  <p><strong>Status:</strong> ${crime.CRIME_STATUS || crime.crime_status}</p>
-                  ${(crime.LINK_NOTES || crime.link_notes) ? `<p style="font-size: 0.9em;"><strong>Notes:</strong> ${crime.LINK_NOTES || crime.link_notes}</p>` : ''}
-                  <p style="font-size: 0.85em; color: #666;"><em>Linked: ${crime.LINKED_ON || crime.linked_on}</em></p>
+                <div style="background: #e8f5e9; padding: 10px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #4caf50; font-size: 13px;">
+                  <strong>Crime #${crime.CRIME_ID || crime.crime_id}</strong> — ${crime.CRIME_TYPE || crime.crime_type} 
+                  <span style="color:#666;"> | ${crime.DATE_OCCURRED || crime.date_occurred} | ${crime.CRIME_STATUS || crime.crime_status}</span>
+                  ${(crime.LINK_NOTES || crime.link_notes) ? `<div style="margin-top:4px; color:#555;"><em>Notes: ${crime.LINK_NOTES || crime.link_notes}</em></div>` : ''}
                 </div>
               `).join('')}
             </div>
           ` : `
-            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
-              <p style="margin: 0; color: #856404;">⚠️ No crimes linked yet. You can create a crime and link it to this report.</p>
+            <div style="background: #fff3cd; padding: 12px; border-radius: 8px; border-left: 4px solid #ffc107; font-size: 13px; color: #856404; margin-bottom: 18px;">
+              ⚠️ No crimes linked yet. Accept this report to automatically create and link a crime record.
             </div>
           `}
+          
+          ${isPending ? `
+          <!-- Officer Decision Banner -->
+          <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 10px; padding: 15px; text-align: center;">
+            <h4 style="color: #333; margin: 0 0 8px 0; font-size: 15px;">⚖️ Officer Decision Required</h4>
+            <p style="color: #666; font-size: 12px; margin: 0 0 12px 0;">Review the report above and choose to accept or reject it.</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+              <div style="background: #dc3545; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 13px;">✗ Reject</div>
+              <div style="background: #28a745; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 13px;">✓ Accept &amp; Create Investigation</div>
+            </div>
+            <p style="color: #888; font-size: 11px; margin: 10px 0 0 0;">Use the Accept / Reject buttons in the table row, or click "Accept Report" / "Reject Report" below.</p>
+          </div>
+          ` : ''}
         </div>
       `;
       
-      Swal.fire({
-        title: `Crime Report #${reportId}`,
+      const swalConfig = {
+        title: `📋 Crime Report #${reportId}`,
         html: detailsHtml,
-        width: '750px',
-        showCancelButton: true,
-        confirmButtonText: 'Update Status',
-        cancelButtonText: 'Close',
-        confirmButtonColor: '#667eea'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          handleUpdateStatus(reportId, reportData.report.STATUS || reportData.report.status);
+        width: '780px',
+        confirmButtonColor: '#667eea',
+      };
+
+      if (isPending) {
+        swalConfig.showDenyButton = true;
+        swalConfig.showCancelButton = true;
+        swalConfig.confirmButtonText = '✅ Accept Report';
+        swalConfig.denyButtonText = '❌ Reject Report';
+        swalConfig.cancelButtonText = 'Close';
+        swalConfig.denyButtonColor = '#dc3545';
+      } else {
+        swalConfig.showCancelButton = true;
+        swalConfig.confirmButtonText = 'Update Status';
+        swalConfig.cancelButtonText = 'Close';
+      }
+
+      const result = await Swal.fire(swalConfig);
+
+      if (result.isConfirmed) {
+        if (isPending) {
+          handleAcceptReport(reportId);
+        } else {
+          handleUpdateStatus(reportId, currentStatus);
         }
-      });
+      } else if (result.isDenied) {
+        handleRejectReport(reportId);
+      }
     } catch (error) {
       console.error('Error loading report details:', error);
       Swal.fire('Error!', 'Failed to load report details', 'error');
@@ -189,152 +224,193 @@ const Reports = () => {
 
   const handleAcceptReport = async (reportId) => {
     try {
-      const result = await Swal.fire({
-        title: 'Accept Report?',
-        text: 'This will automatically create a crime and mark the report as resolved.',
-        icon: 'question',
+      // Step 1: Get officers list and report data
+      const [reportResponse, officersResponse] = await Promise.all([
+        crimeReportsAPI.getById(reportId),
+        officersAPI.getAll()
+      ]);
+      const reportData = reportResponse.data;
+      const officers = officersResponse.data || [];
+
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const officerId = user.id || user.userId;
+
+      if (!officerId) {
+        Swal.fire('Error!', 'User session invalid. Please login again.', 'error');
+        return;
+      }
+
+      const reportDetails = reportData.report.DETAILS || reportData.report.details || '';
+
+      // Parse report details
+      const parseReportDetails = (details) => {
+        const lines = details.split('\n');
+        const parsed = { crimeType: '', date: '', time: '', city: '', area: '', street: '', severity: 'Moderate', description: '' };
+        let inDescription = false, descriptionText = '';
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (trimmed.startsWith('Crime Type:')) parsed.crimeType = trimmed.replace('Crime Type:', '').trim();
+          else if (trimmed.startsWith('Date:')) { const parts = trimmed.replace('Date:', '').trim().split(' '); parsed.date = parts[0]; if (parts[1]) parsed.time = parts[1]; }
+          else if (trimmed.startsWith('Location:')) { const loc = trimmed.replace('Location:', '').trim().split(',').map(p => p.trim()); parsed.city = loc[0] || ''; parsed.area = loc[1] || ''; parsed.street = loc[2] || ''; }
+          else if (trimmed.startsWith('Severity:')) parsed.severity = trimmed.replace('Severity:', '').trim();
+          else if (trimmed === 'Description:') inDescription = true;
+          else if (inDescription && trimmed) descriptionText += (descriptionText ? '\n' : '') + trimmed;
+        }
+        parsed.description = descriptionText || details;
+        return parsed;
+      };
+
+      const parsedData = parseReportDetails(reportDetails);
+
+      if (!parsedData.crimeType || !parsedData.city) {
+        Swal.fire('Error!', 'Report is missing Crime Type or City. Cannot create crime.', 'error');
+        return;
+      }
+
+      // Step 2: Show "Create Investigation" form (S9 wireframe)
+      const year = new Date().getFullYear();
+      const autoCaseNumber = `CASE-${year}-${String(Math.floor(Math.random() * 9000) + 1000).padStart(4, '0')}`;
+      const today = new Date().toISOString().split('T')[0];
+
+      const { value: formValues, isConfirmed } = await Swal.fire({
+        title: '📋 Create Investigation — Report #' + reportId,
+        html: `
+          <div style="text-align:left; max-height:520px; overflow-y:auto; padding:5px 0;">
+            <div style="background:#e3f2fd; padding:12px; border-radius:8px; margin-bottom:16px; font-size:13px; border-left:4px solid #1976d2;">
+              <strong>✅ Crime record will be auto-created from this report.</strong><br>
+              <span style="color:#555;">Crime Type: <strong>${parsedData.crimeType}</strong> | Location: <strong>${parsedData.city}${parsedData.area ? ', ' + parsedData.area : ''}</strong> | Severity: <strong>${parsedData.severity}</strong></span>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Auto Case Number</label>
+              <input id="caseNumber" class="swal2-input" value="${autoCaseNumber}" style="margin:0; width:90%; font-size:13px; background:#f8f9fa;">
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Lead Officer *</label>
+              <select id="leadOfficerId" class="swal2-input" style="margin:0; width:92%; font-size:13px;">
+                <option value="${officerId}">Current Officer (You)</option>
+                ${officers.map(o => `<option value="${o.OFFICER_ID}" ${o.OFFICER_ID == officerId ? 'selected' : ''}>${o.NAME} (#${o.OFFICER_ID})</option>`).join('')}
+              </select>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+              <div>
+                <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Priority Level *</label>
+                <select id="priority" class="swal2-input" style="margin:0; width:90%; font-size:13px;">
+                  <option value="High" ${parsedData.severity === 'Severe' || parsedData.severity === 'Major' ? 'selected' : ''}>High</option>
+                  <option value="Medium" ${parsedData.severity === 'Moderate' ? 'selected' : ''}>Medium</option>
+                  <option value="Low" ${parsedData.severity === 'Minor' ? 'selected' : ''}>Low</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Expected Completion</label>
+                <input id="expectedCompletion" type="date" class="swal2-input" style="margin:0; width:90%; font-size:13px;" min="${today}">
+              </div>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <label style="display:block; font-weight:600; margin-bottom:5px; font-size:13px;">Initial Investigation Notes *</label>
+              <textarea id="invNotes" class="swal2-textarea" style="width:90%; margin:0; min-height:100px; font-size:13px;" 
+                placeholder="e.g. Report accepted. Priority actions: 1. Collect evidence 2. Canvas witnesses 3. Cross-reference similar incidents"></textarea>
+            </div>
+
+            <div style="background:#fff3cd; padding:10px; border-radius:6px; font-size:12px; color:#856404; border-left:3px solid #ffc107;">
+              ℹ️ Upon creation: Report → "Under Investigation" | Crime record created | Investigation opened | Crime linked to investigation
+            </div>
+          </div>
+        `,
+        width: '680px',
+        focusConfirm: false,
         showCancelButton: true,
-        confirmButtonText: '✅ Accept',
+        confirmButtonText: '🔍 Create Investigation',
         cancelButtonText: 'Cancel',
-        confirmButtonColor: '#43e97b'
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#6c757d',
+        preConfirm: () => {
+          const caseNumber = document.getElementById('caseNumber').value.trim();
+          const leadOfficerId = document.getElementById('leadOfficerId').value;
+          const priority = document.getElementById('priority').value;
+          const expectedCompletion = document.getElementById('expectedCompletion').value;
+          const invNotes = document.getElementById('invNotes').value.trim();
+          if (!caseNumber) { Swal.showValidationMessage('Case number is required'); return false; }
+          if (!invNotes) { Swal.showValidationMessage('Initial investigation notes are required'); return false; }
+          return { caseNumber, leadOfficerId: leadOfficerId || officerId, priority, expectedCompletion, invNotes };
+        }
       });
 
-      if (result.isConfirmed) {
-        console.log('🔍 Starting accept report process for report ID:', reportId);
-        
-        // Get report details
-        const response = await crimeReportsAPI.getById(reportId);
-        const reportData = response.data;
-        console.log('📋 Report data:', reportData);
-        
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        const officerId = user.id || user.userId;
-        
-        console.log('👮 Officer ID:', officerId);
-        
-        if (!officerId) {
-          Swal.fire('Error!', 'User session invalid. Please login again.', 'error');
-          return;
-        }
-        
-        // Parse the report details to extract structured data
-        const reportDetails = reportData.report.DETAILS || reportData.report.details || reportData.report.REPORT_DETAILS || reportData.report.report_details || '';
-        console.log('📄 Raw report details:', reportDetails);
-        
-        // Parse the structured report details
-        const parseReportDetails = (details) => {
-          const lines = details.split('\n');
-          const parsed = {
-            crimeType: '',
-            date: '',
-            time: '',
-            city: '',
-            area: '',
-            street: '',
-            severity: 'Moderate',
-            status: 'Open',
-            description: ''
-          };
-          
-          let inDescription = false;
-          let descriptionText = '';
-          
-          for (const line of lines) {
-            const trimmed = line.trim();
-            
-            if (trimmed.startsWith('Crime Type:')) {
-              parsed.crimeType = trimmed.replace('Crime Type:', '').trim();
-            } else if (trimmed.startsWith('Date:')) {
-              const dateTime = trimmed.replace('Date:', '').trim();
-              const parts = dateTime.split(' ');
-              parsed.date = parts[0]; // Date part
-              if (parts[1]) parsed.time = parts[1]; // Time part if exists
-            } else if (trimmed.startsWith('Location:')) {
-              const location = trimmed.replace('Location:', '').trim();
-              const locationParts = location.split(',').map(p => p.trim());
-              parsed.city = locationParts[0] || '';
-              parsed.area = locationParts[1] || '';
-              parsed.street = locationParts[2] || '';
-            } else if (trimmed.startsWith('Severity:')) {
-              parsed.severity = trimmed.replace('Severity:', '').trim();
-            } else if (trimmed.startsWith('Status:')) {
-              parsed.status = trimmed.replace('Status:', '').trim();
-            } else if (trimmed === 'Description:') {
-              inDescription = true;
-            } else if (inDescription && trimmed) {
-              descriptionText += (descriptionText ? '\n' : '') + trimmed;
-            }
-          }
-          
-          parsed.description = descriptionText || details;
-          return parsed;
-        };
-        
-        const parsedData = parseReportDetails(reportDetails);
-        console.log('🔍 Parsed report data:', parsedData);
-        
-        // Validate that we have essential data
-        if (!parsedData.crimeType || !parsedData.city) {
-          Swal.fire('Error!', 'Report is missing essential information (Crime Type or City). Cannot create crime.', 'error');
-          return;
-        }
-        
-        // Create crime from parsed report data
-        const crimeData = {
-          crimeTypeName: parsedData.crimeType,
-          city: parsedData.city,
-          area: parsedData.area || '',
-          street: parsedData.street || '',
-          dateOccurred: parsedData.date || new Date().toISOString().split('T')[0],
-          dateReported: new Date().toISOString().split('T')[0],
-          timeOccurred: parsedData.time || '',
-          severityLevel: parsedData.severity || 'Moderate',
-          description: parsedData.description,
-          status: 'Open',
-          officerId
-        };
+      if (!isConfirmed || !formValues) return;
 
-        console.log('📝 Creating crime with data:', crimeData);
-        const crimeResult = await crimesAPI.create(crimeData);
-        console.log('✅ Crime created result:', crimeResult);
-        
-        // Get the crime ID from the response
-        const newCrimeId = crimeResult.crimeId || crimeResult.data?.crimeId;
-        
-        console.log('🆔 New crime ID:', newCrimeId);
-        
-        if (!newCrimeId) {
-          console.error('❌ No crime ID returned from server');
-          throw new Error('Crime was created but no crimeId was returned');
-        }
-        
-        console.log('🔗 Linking report to crime:', reportId, '->', newCrimeId);
-        
-        // Link the report to the newly created crime
-        await crimeReportsAPI.linkToCrime(reportId, newCrimeId, `Auto-linked when accepting report #${reportId}`);
-        console.log(`✅ Successfully linked report ${reportId} to crime ${newCrimeId}`);
-        
-        // Update report status to "Under Investigation"
-        await crimeReportsAPI.updateStatus(reportId, 'Under Investigation');
-        console.log(`✅ Updated report ${reportId} status to Under Investigation`);
-        
-        // Verify the crime was created by fetching it
+      // Step 3: Create crime
+      const crimeData = {
+        crimeTypeName: parsedData.crimeType,
+        city: parsedData.city,
+        area: parsedData.area || '',
+        street: parsedData.street || '',
+        dateOccurred: parsedData.date || today,
+        dateReported: today,
+        timeOccurred: parsedData.time || '',
+        severityLevel: parsedData.severity || 'Moderate',
+        description: parsedData.description,
+        status: 'Open',
+        officerId
+      };
+      const crimeResult = await crimesAPI.create(crimeData);
+      const newCrimeId = crimeResult.crimeId || crimeResult.data?.crimeId;
+      if (!newCrimeId) throw new Error('Crime was created but no crimeId was returned');
+
+      // Step 4: Link report to crime & update report status
+      await crimeReportsAPI.linkToCrime(reportId, newCrimeId, `Auto-linked when accepting report #${reportId}`);
+      await crimeReportsAPI.updateStatus(reportId, 'Under Investigation');
+
+      // Step 4.5: Link the victim to the crime in Crime_Victim table (so arrest notifications work)
+      const victimId = reportData.report.VICTIM_ID || reportData.report.victim_id;
+      if (victimId) {
         try {
-          const verifyResponse = await crimesAPI.getById(newCrimeId);
-          console.log('✅ Crime verified in database:', verifyResponse.data);
-        } catch (verifyError) {
-          console.error('⚠️ Could not verify crime creation:', verifyError.message);
+          await crimesAPI.linkVictim(newCrimeId, victimId, 'Unknown');
+        } catch (linkVictimErr) {
+          console.warn('Could not link victim to crime:', linkVictimErr.message);
         }
-        
-        Swal.fire({
-          icon: 'success',
-          title: 'Report Accepted!',
-          html: `Crime #${newCrimeId} created from Report #${reportId}.<br>Report is now under investigation.<br><br><strong>Please navigate to the Crimes tab to view the new crime.</strong>`,
-          confirmButtonColor: '#667eea'
-        });
-        
-        loadReports();
       }
+
+      // Step 5: Create investigation
+      const invData = {
+        caseNumber: formValues.caseNumber,
+        leadOfficerId: formValues.leadOfficerId || officerId,
+        startDate: today,
+        status: 'Active',
+        notes: `Priority: ${formValues.priority}\n${formValues.expectedCompletion ? 'Expected Completion: ' + formValues.expectedCompletion + '\n' : ''}${formValues.invNotes}`
+      };
+      const invResult = await investigationsAPI.create(invData);
+      const newInvId = invResult.investigationId || invResult.data?.investigationId;
+
+      // Step 6: Link crime to investigation
+      if (newInvId) {
+        try {
+          await investigationsAPI.linkCrime(newInvId, newCrimeId);
+        } catch (linkErr) {
+          console.warn('Could not link crime to investigation:', linkErr.message);
+        }
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: '✅ Investigation Created!',
+        html: `
+          <div style="text-align:left; padding:5px;">
+            <p style="margin-bottom:8px;">Report <strong>#${reportId}</strong> accepted and processed:</p>
+            <ul style="margin:0; padding-left:20px; font-size:14px; line-height:1.8;">
+              <li>Crime <strong>#${newCrimeId}</strong> created (${parsedData.crimeType})</li>
+              <li>Investigation <strong>${formValues.caseNumber}</strong> opened${newInvId ? ` (#${newInvId})` : ''}</li>
+              <li>Crime linked to investigation</li>
+              <li>Report status → <strong>Under Investigation</strong></li>
+            </ul>
+            <p style="margin-top:12px; font-size:13px; color:#666;">Navigate to the <strong>Investigations</strong> tab to manage the case.</p>
+          </div>
+        `,
+        confirmButtonColor: '#28a745'
+      });
+      loadReports();
     } catch (error) {
       console.error('Error accepting report:', error);
       Swal.fire('Error!', error.message || 'Failed to accept report', 'error');
@@ -342,6 +418,48 @@ const Reports = () => {
   };
 
   const handleRejectReport = async (reportId) => {
+    const { value: reason, isConfirmed } = await Swal.fire({
+      title: '❌ Reject Report',
+      html: `
+        <div style="text-align: left; margin-bottom: 10px;">
+          <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+            You are about to reject <strong>Report #${reportId}</strong>. Please provide a reason.
+          </p>
+        </div>
+      `,
+      input: 'textarea',
+      inputLabel: 'Rejection Reason',
+      inputPlaceholder: 'Enter the reason for rejection (e.g. duplicate report, insufficient information, false report)...',
+      inputAttributes: {
+        style: 'min-height: 100px; font-size: 14px;'
+      },
+      showCancelButton: true,
+      confirmButtonText: '❌ Reject Report',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6c757d',
+      width: '550px',
+      inputValidator: (value) => {
+        if (!value || value.trim().length < 10) {
+          return 'Please provide a rejection reason (at least 10 characters)';
+        }
+      }
+    });
+
+    if (isConfirmed && reason) {
+      try {
+        await crimeReportsAPI.updateStatus(reportId, 'Rejected');
+        Swal.fire({
+          icon: 'success',
+          title: 'Report Rejected',
+          html: `Report <strong>#${reportId}</strong> has been marked as <strong>Rejected</strong>.<br><small style="color:#666;">Reason: ${reason.trim()}</small>`,
+          confirmButtonColor: '#667eea'
+        });
+        loadReports();
+      } catch (error) {
+        Swal.fire('Error!', error.message || 'Failed to reject report', 'error');
+      }
+    }
   };
 
   const handleAddReport = async () => {

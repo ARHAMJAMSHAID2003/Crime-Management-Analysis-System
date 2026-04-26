@@ -1,0 +1,1133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7800 7400" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="100%" style="stop-color:#00f2fe"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b"/>
+      <stop offset="100%" style="stop-color:#38f9d7"/>
+    </linearGradient>
+    <linearGradient id="authBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <filter id="cardShadow" x="-3%" y="-3%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+    <filter id="heavyShadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="8" stdDeviation="15" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="7800" height="7400" fill="#f0f2f5"/>
+
+  <!-- Title Banner -->
+  <rect x="0" y="0" width="7800" height="80" fill="url(#primaryGrad)"/>
+  <text x="3900" y="50" text-anchor="middle" fill="white" font-size="28" font-weight="700">WORKFLOW 3: Crime Analytics Dashboard &#x2192; Hotspots / Trends / Patterns &#x2192; Predictions &#x2192; Forecasting</text>
+
+  <!-- ======================== ROW 1 ======================== -->
+  <!-- S1: Officer Login (Default Empty) -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S1 &#x2014; Officer Login (Default State)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="url(#authBg)"/>
+    <rect x="625" y="120" width="1200" height="1050" rx="14" fill="white" filter="url(#heavyShadow)"/>
+
+    <circle cx="1225" cy="190" r="34" fill="#f0f0f0"/>
+    <text x="1225" y="200" text-anchor="middle" font-size="28">&#x1F46E;</text>
+    <text x="1225" y="260" text-anchor="middle" fill="#333" font-size="26" font-weight="700">&#x1F512; Officer Login</text>
+    <text x="1225" y="290" text-anchor="middle" fill="#666" font-size="14">Crime Management Analysis System</text>
+
+    <!-- Email field -->
+    <text x="680" y="340" fill="#333" font-size="14" font-weight="600">Email</text>
+    <rect x="680" y="350" width="1080" height="44" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="700" y="378" fill="#aaa" font-size="14">officer@police.gov.pk</text>
+
+    <!-- Password field -->
+    <text x="680" y="425" fill="#333" font-size="14" font-weight="600">Password</text>
+    <rect x="680" y="435" width="1080" height="44" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="700" y="463" fill="#aaa" font-size="14">Enter your password</text>
+
+    <!-- Login button -->
+    <rect x="680" y="520" width="1080" height="46" rx="8" fill="url(#primaryGrad)"/>
+    <text x="1225" y="549" text-anchor="middle" fill="white" font-size="15" font-weight="600">Login</text>
+
+    <text x="1225" y="610" text-anchor="middle" fill="#666" font-size="13">Not an officer? <tspan fill="#667eea" font-weight="600">Login as Victim/Witness</tspan></text>
+
+    <!-- Access Levels -->
+    <line x1="730" y1="650" x2="1720" y2="650" stroke="#e0e0e0"/>
+    <text x="1225" y="680" text-anchor="middle" fill="#888" font-size="12" font-weight="600">ACCESS LEVELS</text>
+    <rect x="750" y="695" width="200" height="26" rx="13" fill="#e8f5e9"/>
+    <text x="850" y="713" text-anchor="middle" fill="#2e7d32" font-size="11" font-weight="600">&#x1F513; Admin</text>
+    <rect x="980" y="695" width="200" height="26" rx="13" fill="#e3f2fd"/>
+    <text x="1080" y="713" text-anchor="middle" fill="#1565c0" font-size="11" font-weight="600">&#x1F511; Investigator</text>
+    <rect x="750" y="730" width="200" height="26" rx="13" fill="#fff3e0"/>
+    <text x="850" y="748" text-anchor="middle" fill="#e65100" font-size="11" font-weight="600">&#x1F4CB; Analyst</text>
+    <rect x="980" y="730" width="200" height="26" rx="13" fill="#fce4ec"/>
+    <text x="1080" y="748" text-anchor="middle" fill="#c62828" font-size="11" font-weight="600">&#x1F46E; Officer</text>
+  </g>
+
+  <!-- Arrow S1 to S2 -->
+  <line x1="2530" y1="770" x2="2670" y2="770" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="2670,764 2690,770 2670,776" fill="#667eea"/>
+  <text x="2610" y="758" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Login</text>
+
+  <!-- S2: Officer Login (Filled + SweetAlert Success) -->
+  <g transform="translate(2700, 120)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#28a745" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S2 &#x2014; Officer Login (Filled + Success Alert)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="url(#authBg)"/>
+    <rect x="625" y="120" width="1200" height="1050" rx="14" fill="white" filter="url(#heavyShadow)"/>
+
+    <circle cx="1225" cy="190" r="34" fill="#f0f0f0"/>
+    <text x="1225" y="200" text-anchor="middle" font-size="28">&#x1F46E;</text>
+    <text x="1225" y="260" text-anchor="middle" fill="#333" font-size="26" font-weight="700">&#x1F512; Officer Login</text>
+    <text x="1225" y="290" text-anchor="middle" fill="#666" font-size="14">Crime Management Analysis System</text>
+
+    <!-- Email filled -->
+    <text x="680" y="340" fill="#333" font-size="14" font-weight="600">Email</text>
+    <rect x="680" y="350" width="1080" height="44" rx="8" fill="white" stroke="#667eea" stroke-width="2"/>
+    <text x="700" y="378" fill="#333" font-size="14">fatima.noor@police.gov.pk</text>
+
+    <!-- Password filled -->
+    <text x="680" y="425" fill="#333" font-size="14" font-weight="600">Password</text>
+    <rect x="680" y="435" width="1080" height="44" rx="8" fill="white" stroke="#667eea" stroke-width="2"/>
+    <text x="700" y="463" fill="#333" font-size="14">&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</text>
+
+    <!-- Login button -->
+    <rect x="680" y="520" width="1080" height="46" rx="8" fill="url(#primaryGrad)"/>
+    <text x="1225" y="549" text-anchor="middle" fill="white" font-size="15" font-weight="600">Login</text>
+
+    <!-- SweetAlert Success Popup -->
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="black" opacity="0.4"/>
+    <rect x="750" y="350" width="950" height="400" rx="16" fill="white" filter="url(#heavyShadow)"/>
+    <circle cx="1225" cy="430" r="45" fill="none" stroke="#28a745" stroke-width="4"/>
+    <polyline points="1200,430 1218,450 1255,410" fill="none" stroke="#28a745" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1225" y="510" text-anchor="middle" fill="#333" font-size="24" font-weight="700">Success!</text>
+    <text x="1225" y="545" text-anchor="middle" fill="#666" font-size="15">Logged in successfully</text>
+    <rect x="1050" y="580" width="350" height="40" rx="8" fill="#28a745"/>
+    <text x="1225" y="605" text-anchor="middle" fill="white" font-size="14" font-weight="600">OK</text>
+    <rect x="750" y="740" width="700" height="4" rx="2" fill="#28a745" opacity="0.4"/>
+  </g>
+
+  <!-- Arrow S2 to S3 -->
+  <line x1="5180" y1="770" x2="5270" y2="770" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="5270,764 5290,770 5270,776" fill="#667eea"/>
+  <text x="5230" y="758" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Navigate</text>
+
+  <!-- S3: Analytics Dashboard Overview -->
+  <g transform="translate(5300, 120)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S3 &#x2014; Analytics Dashboard (Overview Tab)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+
+    <!-- Header Bar -->
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <text x="350" y="86" fill="white" opacity="0.8" font-size="10">Crimes</text>
+    <text x="420" y="86" fill="white" opacity="0.8" font-size="10">Suspects</text>
+    <text x="500" y="86" fill="white" opacity="0.8" font-size="10">Evidence</text>
+    <text x="580" y="86" fill="white" opacity="0.8" font-size="10">Reports</text>
+    <text x="650" y="86" fill="white" opacity="0.8" font-size="10">Officers</text>
+    <text x="730" y="86" fill="white" opacity="0.8" font-size="10">Investigations</text>
+    <text x="840" y="86" fill="white" opacity="0.8" font-size="10">Locations</text>
+    <text x="930" y="86" fill="white" opacity="0.8" font-size="10">Crime Types</text>
+    <rect x="1030" y="73" width="70" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1065" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Analytics</text>
+    <text x="1130" y="86" fill="white" opacity="0.8" font-size="10">Predictions</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <!-- Page Title -->
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F4CA; Crime Analytics Dashboard</text>
+    <rect x="2200" y="120" width="220" height="32" rx="6" fill="url(#primaryGrad)"/>
+    <text x="2310" y="141" text-anchor="middle" fill="white" font-size="12" font-weight="600">&#x1F504; Refresh Data</text>
+
+    <!-- Filter Section -->
+    <rect x="20" y="160" width="2410" height="60" rx="8" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="40" y="185" fill="#333" font-size="11" font-weight="600">Year</text>
+    <rect x="40" y="192" width="100" height="22" rx="4" fill="white" stroke="#ced4da"/>
+    <text x="50" y="207" fill="#aaa" font-size="10">2024</text>
+    <text x="170" y="185" fill="#333" font-size="11" font-weight="600">Month</text>
+    <rect x="170" y="192" width="120" height="22" rx="4" fill="white" stroke="#ced4da"/>
+    <text x="180" y="207" fill="#aaa" font-size="10">All Months &#x25BE;</text>
+    <text x="320" y="185" fill="#333" font-size="11" font-weight="600">Hotspot Limit</text>
+    <rect x="320" y="192" width="80" height="22" rx="4" fill="white" stroke="#ced4da"/>
+    <text x="330" y="207" fill="#aaa" font-size="10">20</text>
+    <rect x="430" y="190" width="70" height="25" rx="5" fill="url(#primaryGrad)"/>
+    <text x="465" y="207" text-anchor="middle" fill="white" font-size="10" font-weight="600">Apply</text>
+    <rect x="510" y="190" width="70" height="25" rx="5" fill="#6c757d"/>
+    <text x="545" y="207" text-anchor="middle" fill="white" font-size="10" font-weight="600">Clear</text>
+
+    <!-- Tab Bar -->
+    <line x1="20" y1="258" x2="2430" y2="258" stroke="#e9ecef" stroke-width="2"/>
+    <rect x="20" y="232" width="85" height="28" rx="4" fill="#007bff"/>
+    <text x="62" y="250" text-anchor="middle" fill="white" font-size="11" font-weight="600">Overview</text>
+    <text x="140" y="250" fill="#495057" font-size="11">Trends</text>
+    <text x="210" y="250" fill="#495057" font-size="11">Hotspots</text>
+    <text x="290" y="250" fill="#495057" font-size="11">Patterns</text>
+    <text x="385" y="250" fill="#495057" font-size="11">Performance</text>
+
+    <!-- Left: Category Distribution -->
+    <rect x="20" y="270" width="1180" height="1010" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="300" fill="#333" font-size="15" font-weight="700">&#x1F4C8; Category Distribution</text>
+    <rect x="30" y="315" width="1160" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="50" y="335" fill="#495057" font-size="10" font-weight="700">RANK</text>
+    <text x="140" y="335" fill="#495057" font-size="10" font-weight="700">CATEGORY</text>
+    <text x="440" y="335" fill="#495057" font-size="10" font-weight="700">TOTAL CRIMES</text>
+    <text x="650" y="335" fill="#495057" font-size="10" font-weight="700">PERCENTAGE</text>
+    <!-- Row 1 -->
+    <rect x="45" y="355" width="30" height="22" rx="11" fill="#ffd700"/>
+    <text x="60" y="370" text-anchor="middle" fill="white" font-size="10" font-weight="700">1</text>
+    <rect x="120" y="355" width="220" height="22" rx="4" fill="#f8d7da"/>
+    <text x="230" y="370" text-anchor="middle" fill="#721c24" font-size="10" font-weight="600">Violent</text>
+    <text x="480" y="370" fill="#333" font-size="12">156</text>
+    <text x="660" y="370" fill="#333" font-size="12">32.5%</text>
+    <!-- Row 2 -->
+    <rect x="45" y="390" width="30" height="22" rx="11" fill="#c0c0c0"/>
+    <text x="60" y="405" text-anchor="middle" fill="white" font-size="10" font-weight="700">2</text>
+    <rect x="120" y="390" width="220" height="22" rx="4" fill="#fff3cd"/>
+    <text x="230" y="405" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">Property</text>
+    <text x="480" y="405" fill="#333" font-size="12">128</text>
+    <text x="660" y="405" fill="#333" font-size="12">26.7%</text>
+    <!-- Row 3 -->
+    <rect x="45" y="425" width="30" height="22" rx="11" fill="#cd7f32"/>
+    <text x="60" y="440" text-anchor="middle" fill="white" font-size="10" font-weight="700">3</text>
+    <rect x="120" y="425" width="220" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="230" y="440" text-anchor="middle" fill="#0c5460" font-size="10" font-weight="600">Cyber</text>
+    <text x="480" y="440" fill="#333" font-size="12">98</text>
+    <text x="660" y="440" fill="#333" font-size="12">20.4%</text>
+    <!-- Row 4 -->
+    <rect x="45" y="460" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="60" y="475" text-anchor="middle" fill="#666" font-size="10" font-weight="700">4</text>
+    <rect x="120" y="460" width="220" height="22" rx="4" fill="#e2e3e5"/>
+    <text x="230" y="475" text-anchor="middle" fill="#383d41" font-size="10" font-weight="600">White Collar</text>
+    <text x="480" y="475" fill="#333" font-size="12">62</text>
+    <text x="660" y="475" fill="#333" font-size="12">12.9%</text>
+    <!-- Row 5 -->
+    <rect x="45" y="495" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="60" y="510" text-anchor="middle" fill="#666" font-size="10" font-weight="700">5</text>
+    <rect x="120" y="495" width="220" height="22" rx="4" fill="#f5c6cb"/>
+    <text x="230" y="510" text-anchor="middle" fill="#721c24" font-size="10" font-weight="600">Drug Related</text>
+    <text x="480" y="510" fill="#333" font-size="12">36</text>
+    <text x="660" y="510" fill="#333" font-size="12">7.5%</text>
+
+    <!-- Right: Top Crime Hotspots -->
+    <rect x="1220" y="270" width="1210" height="1010" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="1240" y="300" fill="#333" font-size="15" font-weight="700">&#x1F5FA;&#xFE0F; Top Crime Hotspots</text>
+    <rect x="1230" y="315" width="1190" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="1250" y="335" fill="#495057" font-size="10" font-weight="700">RANK</text>
+    <text x="1340" y="335" fill="#495057" font-size="10" font-weight="700">LOCATION</text>
+    <text x="1900" y="335" fill="#495057" font-size="10" font-weight="700">CRIMES</text>
+    <rect x="1245" y="355" width="30" height="22" rx="11" fill="#ffd700"/>
+    <text x="1260" y="370" text-anchor="middle" fill="white" font-size="10" font-weight="700">1</text>
+    <text x="1340" y="370" fill="#333" font-size="12">Karachi, Gulshan-e-Iqbal</text>
+    <text x="1920" y="370" fill="#333" font-size="12" font-weight="600">42</text>
+    <rect x="1245" y="390" width="30" height="22" rx="11" fill="#c0c0c0"/>
+    <text x="1260" y="405" text-anchor="middle" fill="white" font-size="10" font-weight="700">2</text>
+    <text x="1340" y="405" fill="#333" font-size="12">Lahore, Johar Town</text>
+    <text x="1920" y="405" fill="#333" font-size="12" font-weight="600">38</text>
+    <rect x="1245" y="425" width="30" height="22" rx="11" fill="#cd7f32"/>
+    <text x="1260" y="440" text-anchor="middle" fill="white" font-size="10" font-weight="700">3</text>
+    <text x="1340" y="440" fill="#333" font-size="12">Islamabad, F-8 Sector</text>
+    <text x="1920" y="440" fill="#333" font-size="12" font-weight="600">29</text>
+    <rect x="1245" y="460" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1260" y="475" text-anchor="middle" fill="#666" font-size="10" font-weight="700">4</text>
+    <text x="1340" y="475" fill="#333" font-size="12">Rawalpindi, Saddar</text>
+    <text x="1920" y="475" fill="#333" font-size="12" font-weight="600">24</text>
+    <rect x="1245" y="495" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1260" y="510" text-anchor="middle" fill="#666" font-size="10" font-weight="700">5</text>
+    <text x="1340" y="510" fill="#333" font-size="12">Faisalabad, D Ground</text>
+    <text x="1920" y="510" fill="#333" font-size="12" font-weight="600">18</text>
+  </g>
+
+  <!-- ======================== ROW 2 ======================== -->
+  <!-- Arrow S3 down to S4 -->
+  <line x1="6525" y1="1420" x2="6525" y2="1480" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="6525" y1="1480" x2="1275" y2="1480" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="1275" y1="1480" x2="1275" y2="1530" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="1269,1530 1275,1550 1281,1530" fill="#667eea"/>
+  <text x="3900" y="1474" text-anchor="middle" fill="#667eea" font-size="12" font-weight="600">Click &#x201C;Trends&#x201D; Tab</text>
+
+  <!-- S4: Analytics Trends Tab -->
+  <g transform="translate(50, 1560)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S4 &#x2014; Analytics: Trends Tab</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <rect x="1030" y="73" width="70" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1065" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Analytics</text>
+    <text x="1130" y="86" fill="white" opacity="0.8" font-size="10">Predictions</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F4CA; Crime Analytics Dashboard</text>
+
+    <!-- Filter -->
+    <rect x="20" y="155" width="2410" height="50" rx="8" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="40" y="175" fill="#333" font-size="11" font-weight="600">Year</text>
+    <rect x="40" y="182" width="100" height="18" rx="4" fill="white" stroke="#ced4da"/>
+    <text x="50" y="195" fill="#333" font-size="9">2024</text>
+    <text x="170" y="175" fill="#333" font-size="11" font-weight="600">Month</text>
+    <rect x="170" y="182" width="120" height="18" rx="4" fill="white" stroke="#ced4da"/>
+    <text x="180" y="195" fill="#333" font-size="9">All Months &#x25BE;</text>
+
+    <!-- Tab Bar - Trends active -->
+    <line x1="20" y1="238" x2="2430" y2="238" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="230" fill="#495057" font-size="11">Overview</text>
+    <rect x="105" y="212" width="65" height="28" rx="4" fill="#007bff"/>
+    <text x="137" y="230" text-anchor="middle" fill="white" font-size="11" font-weight="600">Trends</text>
+    <text x="210" y="230" fill="#495057" font-size="11">Hotspots</text>
+    <text x="290" y="230" fill="#495057" font-size="11">Patterns</text>
+    <text x="385" y="230" fill="#495057" font-size="11">Performance</text>
+
+    <!-- Trends Table -->
+    <rect x="20" y="250" width="2410" height="1030" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="280" fill="#333" font-size="15" font-weight="700">&#x1F4C8; Crime Trends (Month-over-Month)</text>
+    <rect x="30" y="295" width="2390" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="50" y="315" fill="#495057" font-size="10" font-weight="700">CRIME TYPE</text>
+    <text x="400" y="315" fill="#495057" font-size="10" font-weight="700">YEAR</text>
+    <text x="600" y="315" fill="#495057" font-size="10" font-weight="700">MONTH</text>
+    <text x="850" y="315" fill="#495057" font-size="10" font-weight="700">TOTAL CRIMES</text>
+    <text x="1150" y="315" fill="#495057" font-size="10" font-weight="700">CUMULATIVE</text>
+    <text x="1500" y="315" fill="#495057" font-size="10" font-weight="700">MoM CHANGE</text>
+    <!-- Data rows -->
+    <text x="50" y="350" fill="#333" font-size="12">Robbery</text>
+    <text x="420" y="350" fill="#333" font-size="12">2024</text>
+    <text x="620" y="350" fill="#333" font-size="12">January</text>
+    <text x="890" y="350" fill="#333" font-size="12">24</text>
+    <text x="1180" y="350" fill="#333" font-size="12">24</text>
+    <text x="1500" y="350" fill="#dc3545" font-size="12" font-weight="600">&#x2191; 15.2%</text>
+
+    <text x="50" y="380" fill="#333" font-size="12">Theft</text>
+    <text x="420" y="380" fill="#333" font-size="12">2024</text>
+    <text x="620" y="380" fill="#333" font-size="12">January</text>
+    <text x="890" y="380" fill="#333" font-size="12">31</text>
+    <text x="1180" y="380" fill="#333" font-size="12">55</text>
+    <text x="1500" y="380" fill="#28a745" font-size="12" font-weight="600">&#x2193; -8.3%</text>
+
+    <text x="50" y="410" fill="#333" font-size="12">Assault</text>
+    <text x="420" y="410" fill="#333" font-size="12">2024</text>
+    <text x="620" y="410" fill="#333" font-size="12">February</text>
+    <text x="890" y="410" fill="#333" font-size="12">18</text>
+    <text x="1180" y="410" fill="#333" font-size="12">73</text>
+    <text x="1500" y="410" fill="#dc3545" font-size="12" font-weight="600">&#x2191; 22.1%</text>
+
+    <text x="50" y="440" fill="#333" font-size="12">Cybercrime</text>
+    <text x="420" y="440" fill="#333" font-size="12">2024</text>
+    <text x="620" y="440" fill="#333" font-size="12">February</text>
+    <text x="890" y="440" fill="#333" font-size="12">12</text>
+    <text x="1180" y="440" fill="#333" font-size="12">85</text>
+    <text x="1500" y="440" fill="#28a745" font-size="12" font-weight="600">&#x2193; -3.5%</text>
+
+    <text x="50" y="470" fill="#333" font-size="12">Fraud</text>
+    <text x="420" y="470" fill="#333" font-size="12">2024</text>
+    <text x="620" y="470" fill="#333" font-size="12">March</text>
+    <text x="890" y="470" fill="#333" font-size="12">9</text>
+    <text x="1180" y="470" fill="#333" font-size="12">94</text>
+    <text x="1500" y="470" fill="#dc3545" font-size="12" font-weight="600">&#x2191; 5.8%</text>
+  </g>
+
+  <!-- Arrow S4 to S5 -->
+  <line x1="2530" y1="2210" x2="2670" y2="2210" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="2670,2204 2690,2210 2670,2216" fill="#667eea"/>
+  <text x="2610" y="2198" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Hotspots</text>
+
+  <!-- S5: Analytics Hotspots Tab -->
+  <g transform="translate(2700, 1560)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S5 &#x2014; Analytics: Hotspots Tab (Detailed)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <rect x="1030" y="73" width="70" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1065" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Analytics</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F4CA; Crime Analytics Dashboard</text>
+
+    <!-- Filter -->
+    <rect x="20" y="155" width="2410" height="50" rx="8" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="320" y="175" fill="#333" font-size="11" font-weight="600">Hotspot Limit</text>
+    <rect x="320" y="182" width="80" height="18" rx="4" fill="white" stroke="#667eea" stroke-width="2"/>
+    <text x="330" y="195" fill="#333" font-size="9" font-weight="600">10</text>
+
+    <!-- Tab Bar - Hotspots active -->
+    <line x1="20" y1="238" x2="2430" y2="238" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="230" fill="#495057" font-size="11">Overview</text>
+    <text x="120" y="230" fill="#495057" font-size="11">Trends</text>
+    <rect x="180" y="212" width="75" height="28" rx="4" fill="#007bff"/>
+    <text x="217" y="230" text-anchor="middle" fill="white" font-size="11" font-weight="600">Hotspots</text>
+    <text x="290" y="230" fill="#495057" font-size="11">Patterns</text>
+    <text x="385" y="230" fill="#495057" font-size="11">Performance</text>
+
+    <!-- Hotspots Table -->
+    <rect x="20" y="250" width="2410" height="1030" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="280" fill="#333" font-size="15" font-weight="700">&#x1F5FA;&#xFE0F; Crime Hotspots (Detailed)</text>
+    <rect x="30" y="295" width="2390" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="50" y="315" fill="#495057" font-size="10" font-weight="700">RANK</text>
+    <text x="140" y="315" fill="#495057" font-size="10" font-weight="700">LOCATION ID</text>
+    <text x="340" y="315" fill="#495057" font-size="10" font-weight="700">CITY</text>
+    <text x="600" y="315" fill="#495057" font-size="10" font-weight="700">AREA</text>
+    <text x="950" y="315" fill="#495057" font-size="10" font-weight="700">STREET</text>
+    <text x="1300" y="315" fill="#495057" font-size="10" font-weight="700">TOTAL CRIMES</text>
+    <text x="1600" y="315" fill="#495057" font-size="10" font-weight="700">SOLVED</text>
+    <text x="1850" y="315" fill="#495057" font-size="10" font-weight="700">SOLVE RATE</text>
+    <!-- Row 1 -->
+    <rect x="45" y="340" width="30" height="22" rx="11" fill="#ffd700"/>
+    <text x="60" y="355" text-anchor="middle" fill="white" font-size="10" font-weight="700">1</text>
+    <text x="170" y="355" fill="#333" font-size="12">LOC-015</text>
+    <text x="340" y="355" fill="#333" font-size="12">Karachi</text>
+    <text x="600" y="355" fill="#333" font-size="12">Gulshan-e-Iqbal</text>
+    <text x="950" y="355" fill="#333" font-size="12">Main Boulevard</text>
+    <text x="1350" y="355" fill="#333" font-size="12">42</text>
+    <text x="1630" y="355" fill="#333" font-size="12">31</text>
+    <rect x="1840" y="340" width="80" height="22" rx="4" fill="#d4edda"/>
+    <text x="1880" y="355" text-anchor="middle" fill="#155724" font-size="10" font-weight="600">73.8%</text>
+    <!-- Row 2 -->
+    <rect x="45" y="375" width="30" height="22" rx="11" fill="#c0c0c0"/>
+    <text x="60" y="390" text-anchor="middle" fill="white" font-size="10" font-weight="700">2</text>
+    <text x="170" y="390" fill="#333" font-size="12">LOC-008</text>
+    <text x="340" y="390" fill="#333" font-size="12">Lahore</text>
+    <text x="600" y="390" fill="#333" font-size="12">Johar Town</text>
+    <text x="950" y="390" fill="#333" font-size="12">Canal Road</text>
+    <text x="1350" y="390" fill="#333" font-size="12">38</text>
+    <text x="1630" y="390" fill="#333" font-size="12">25</text>
+    <rect x="1840" y="375" width="80" height="22" rx="4" fill="#fff3cd"/>
+    <text x="1880" y="390" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">65.8%</text>
+    <!-- Row 3 -->
+    <rect x="45" y="410" width="30" height="22" rx="11" fill="#cd7f32"/>
+    <text x="60" y="425" text-anchor="middle" fill="white" font-size="10" font-weight="700">3</text>
+    <text x="170" y="425" fill="#333" font-size="12">LOC-022</text>
+    <text x="340" y="425" fill="#333" font-size="12">Islamabad</text>
+    <text x="600" y="425" fill="#333" font-size="12">F-8 Sector</text>
+    <text x="950" y="425" fill="#333" font-size="12">Jinnah Ave</text>
+    <text x="1350" y="425" fill="#333" font-size="12">29</text>
+    <text x="1630" y="425" fill="#333" font-size="12">8</text>
+    <rect x="1840" y="410" width="80" height="22" rx="4" fill="#f8d7da"/>
+    <text x="1880" y="425" text-anchor="middle" fill="#721c24" font-size="10" font-weight="600">27.6%</text>
+    <!-- Row 4 -->
+    <rect x="45" y="445" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="60" y="460" text-anchor="middle" fill="#666" font-size="10" font-weight="700">4</text>
+    <text x="170" y="460" fill="#333" font-size="12">LOC-031</text>
+    <text x="340" y="460" fill="#333" font-size="12">Rawalpindi</text>
+    <text x="600" y="460" fill="#333" font-size="12">Saddar</text>
+    <text x="950" y="460" fill="#333" font-size="12">Mall Road</text>
+    <text x="1350" y="460" fill="#333" font-size="12">24</text>
+    <text x="1630" y="460" fill="#333" font-size="12">15</text>
+    <rect x="1840" y="445" width="80" height="22" rx="4" fill="#fff3cd"/>
+    <text x="1880" y="460" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">62.5%</text>
+  </g>
+
+  <!-- Arrow S5 to S6 -->
+  <line x1="5180" y1="2210" x2="5270" y2="2210" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="5270,2204 5290,2210 5270,2216" fill="#667eea"/>
+  <text x="5230" y="2198" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Patterns</text>
+
+  <!-- S6: Analytics Patterns Tab -->
+  <g transform="translate(5300, 1560)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S6 &#x2014; Analytics: Patterns Tab</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <rect x="1030" y="73" width="70" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1065" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Analytics</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F4CA; Crime Analytics Dashboard</text>
+
+    <!-- Tab Bar - Patterns active -->
+    <line x1="20" y1="238" x2="2430" y2="238" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="230" fill="#495057" font-size="11">Overview</text>
+    <text x="120" y="230" fill="#495057" font-size="11">Trends</text>
+    <text x="200" y="230" fill="#495057" font-size="11">Hotspots</text>
+    <rect x="268" y="212" width="70" height="28" rx="4" fill="#007bff"/>
+    <text x="303" y="230" text-anchor="middle" fill="white" font-size="11" font-weight="600">Patterns</text>
+    <text x="385" y="230" fill="#495057" font-size="11">Performance</text>
+
+    <!-- Patterns Table -->
+    <rect x="20" y="250" width="2410" height="1030" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="280" fill="#333" font-size="15" font-weight="700">&#x1F4C5; Crime Patterns by Day of Week</text>
+    <rect x="30" y="295" width="2390" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="50" y="315" fill="#495057" font-size="10" font-weight="700">CRIME TYPE</text>
+    <text x="400" y="315" fill="#495057" font-size="10" font-weight="700">DAY OF WEEK</text>
+    <text x="750" y="315" fill="#495057" font-size="10" font-weight="700">TOTAL INCIDENTS</text>
+    <text x="1100" y="315" fill="#495057" font-size="10" font-weight="700">AVG HOUR</text>
+    <text x="1450" y="315" fill="#495057" font-size="10" font-weight="700">DAY RANK</text>
+    <!-- Data -->
+    <text x="50" y="350" fill="#333" font-size="12">Robbery</text>
+    <text x="400" y="350" fill="#333" font-size="12">Friday</text>
+    <text x="800" y="350" fill="#333" font-size="12">28</text>
+    <text x="1120" y="350" fill="#333" font-size="12">22:30</text>
+    <rect x="1440" y="335" width="30" height="22" rx="11" fill="#ffd700"/>
+    <text x="1455" y="350" text-anchor="middle" fill="white" font-size="10" font-weight="700">1</text>
+
+    <text x="50" y="380" fill="#333" font-size="12">Theft</text>
+    <text x="400" y="380" fill="#333" font-size="12">Saturday</text>
+    <text x="800" y="380" fill="#333" font-size="12">24</text>
+    <text x="1120" y="380" fill="#333" font-size="12">14:15</text>
+    <rect x="1440" y="365" width="30" height="22" rx="11" fill="#c0c0c0"/>
+    <text x="1455" y="380" text-anchor="middle" fill="white" font-size="10" font-weight="700">2</text>
+
+    <text x="50" y="410" fill="#333" font-size="12">Assault</text>
+    <text x="400" y="410" fill="#333" font-size="12">Sunday</text>
+    <text x="800" y="410" fill="#333" font-size="12">19</text>
+    <text x="1120" y="410" fill="#333" font-size="12">01:45</text>
+    <rect x="1440" y="395" width="30" height="22" rx="11" fill="#cd7f32"/>
+    <text x="1455" y="410" text-anchor="middle" fill="white" font-size="10" font-weight="700">3</text>
+
+    <text x="50" y="440" fill="#333" font-size="12">Cybercrime</text>
+    <text x="400" y="440" fill="#333" font-size="12">Monday</text>
+    <text x="800" y="440" fill="#333" font-size="12">15</text>
+    <text x="1120" y="440" fill="#333" font-size="12">11:00</text>
+    <rect x="1440" y="425" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1455" y="440" text-anchor="middle" fill="#666" font-size="10" font-weight="700">4</text>
+
+    <text x="50" y="470" fill="#333" font-size="12">Drug Trafficking</text>
+    <text x="400" y="470" fill="#333" font-size="12">Wednesday</text>
+    <text x="800" y="470" fill="#333" font-size="12">11</text>
+    <text x="1120" y="470" fill="#333" font-size="12">19:50</text>
+    <rect x="1440" y="455" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1455" y="470" text-anchor="middle" fill="#666" font-size="10" font-weight="700">5</text>
+  </g>
+
+  <!-- ======================== ROW 3 ======================== -->
+  <!-- Arrow S6 down to S7 -->
+  <line x1="6525" y1="2860" x2="6525" y2="2920" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="6525" y1="2920" x2="1275" y2="2920" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="1275" y1="2920" x2="1275" y2="2970" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="1269,2970 1275,2990 1281,2970" fill="#667eea"/>
+  <text x="3900" y="2914" text-anchor="middle" fill="#667eea" font-size="12" font-weight="600">Click &#x201C;Performance&#x201D; Tab</text>
+
+  <!-- S7: Analytics Performance Tab -->
+  <g transform="translate(50, 3000)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S7 &#x2014; Analytics: Performance Tab</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <rect x="1030" y="73" width="70" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1065" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Analytics</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F4CA; Crime Analytics Dashboard</text>
+
+    <!-- Tab Bar - Performance active -->
+    <line x1="20" y1="238" x2="2430" y2="238" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="230" fill="#495057" font-size="11">Overview</text>
+    <text x="120" y="230" fill="#495057" font-size="11">Trends</text>
+    <text x="200" y="230" fill="#495057" font-size="11">Hotspots</text>
+    <text x="285" y="230" fill="#495057" font-size="11">Patterns</text>
+    <rect x="355" y="212" width="90" height="28" rx="4" fill="#007bff"/>
+    <text x="400" y="230" text-anchor="middle" fill="white" font-size="11" font-weight="600">Performance</text>
+
+    <!-- Performance Table -->
+    <rect x="20" y="250" width="2410" height="1030" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="280" fill="#333" font-size="15" font-weight="700">&#x1F46E; Officer Performance Rankings</text>
+    <rect x="30" y="295" width="2390" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="50" y="315" fill="#495057" font-size="10" font-weight="700">RANK</text>
+    <text x="150" y="315" fill="#495057" font-size="10" font-weight="700">OFFICER ID</text>
+    <text x="350" y="315" fill="#495057" font-size="10" font-weight="700">OFFICER NAME</text>
+    <text x="700" y="315" fill="#495057" font-size="10" font-weight="700">TOTAL CRIMES</text>
+    <text x="1000" y="315" fill="#495057" font-size="10" font-weight="700">SOLVED</text>
+    <text x="1250" y="315" fill="#495057" font-size="10" font-weight="700">SOLVE RATE</text>
+    <text x="1550" y="315" fill="#495057" font-size="10" font-weight="700">INVESTIGATIONS</text>
+    <!-- Row 1 -->
+    <rect x="45" y="340" width="30" height="22" rx="11" fill="#ffd700"/>
+    <text x="60" y="355" text-anchor="middle" fill="white" font-size="10" font-weight="700">1</text>
+    <text x="170" y="355" fill="#333" font-size="12">OFC-001</text>
+    <text x="350" y="355" fill="#333" font-size="12">SSP Ahmed Khan</text>
+    <text x="740" y="355" fill="#333" font-size="12">45</text>
+    <text x="1020" y="355" fill="#333" font-size="12">38</text>
+    <rect x="1230" y="340" width="80" height="22" rx="4" fill="#d4edda"/>
+    <text x="1270" y="355" text-anchor="middle" fill="#155724" font-size="10" font-weight="600">84.4%</text>
+    <text x="1590" y="355" fill="#333" font-size="12">12</text>
+    <!-- Row 2 -->
+    <rect x="45" y="375" width="30" height="22" rx="11" fill="#c0c0c0"/>
+    <text x="60" y="390" text-anchor="middle" fill="white" font-size="10" font-weight="700">2</text>
+    <text x="170" y="390" fill="#333" font-size="12">OFC-003</text>
+    <text x="350" y="390" fill="#333" font-size="12">DSP Fatima Noor</text>
+    <text x="740" y="390" fill="#333" font-size="12">38</text>
+    <text x="1020" y="390" fill="#333" font-size="12">29</text>
+    <rect x="1230" y="375" width="80" height="22" rx="4" fill="#d4edda"/>
+    <text x="1270" y="390" text-anchor="middle" fill="#155724" font-size="10" font-weight="600">76.3%</text>
+    <text x="1590" y="390" fill="#333" font-size="12">9</text>
+    <!-- Row 3 -->
+    <rect x="45" y="410" width="30" height="22" rx="11" fill="#cd7f32"/>
+    <text x="60" y="425" text-anchor="middle" fill="white" font-size="10" font-weight="700">3</text>
+    <text x="170" y="425" fill="#333" font-size="12">OFC-007</text>
+    <text x="350" y="425" fill="#333" font-size="12">ASI Bilal Hussain</text>
+    <text x="740" y="425" fill="#333" font-size="12">32</text>
+    <text x="1020" y="425" fill="#333" font-size="12">18</text>
+    <rect x="1230" y="410" width="80" height="22" rx="4" fill="#fff3cd"/>
+    <text x="1270" y="425" text-anchor="middle" fill="#856404" font-size="10" font-weight="600">56.3%</text>
+    <text x="1590" y="425" fill="#333" font-size="12">7</text>
+    <!-- Row 4 -->
+    <rect x="45" y="445" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="60" y="460" text-anchor="middle" fill="#666" font-size="10" font-weight="700">4</text>
+    <text x="170" y="460" fill="#333" font-size="12">OFC-012</text>
+    <text x="350" y="460" fill="#333" font-size="12">SI Usman Ali</text>
+    <text x="740" y="460" fill="#333" font-size="12">27</text>
+    <text x="1020" y="460" fill="#333" font-size="12">9</text>
+    <rect x="1230" y="445" width="80" height="22" rx="4" fill="#f8d7da"/>
+    <text x="1270" y="460" text-anchor="middle" fill="#721c24" font-size="10" font-weight="600">33.3%</text>
+    <text x="1590" y="460" fill="#333" font-size="12">5</text>
+  </g>
+
+  <!-- Arrow S7 to S8 -->
+  <line x1="2530" y1="3650" x2="2670" y2="3650" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="2670,3644 2690,3650 2670,3656" fill="#667eea"/>
+  <text x="2610" y="3636" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Predictions</text>
+
+  <!-- S8: Predictions Risk Assessment (Empty) -->
+  <g transform="translate(2700, 3000)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S8 &#x2014; Predictions: Risk Assessment (Empty Form)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <text x="1030" y="86" fill="white" opacity="0.8" font-size="10">Analytics</text>
+    <rect x="1100" y="73" width="80" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1140" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Predictions</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F52E; Crime Predictions &amp; Forecasting</text>
+
+    <!-- Tab Bar - Risk active -->
+    <line x1="20" y1="185" x2="2430" y2="185" stroke="#e9ecef" stroke-width="2"/>
+    <rect x="20" y="158" width="130" height="28" rx="4" fill="#007bff"/>
+    <text x="85" y="176" text-anchor="middle" fill="white" font-size="11" font-weight="600">&#x26A0;&#xFE0F; Risk Assessment</text>
+    <text x="185" y="176" fill="#495057" font-size="11">&#x1F50D; Pattern Matching</text>
+    <text x="355" y="176" fill="#495057" font-size="11">&#x1F4C8; Forecast Trends</text>
+
+    <!-- Risk Form -->
+    <rect x="20" y="200" width="2410" height="300" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="230" fill="#333" font-size="15" font-weight="700">&#x26A0;&#xFE0F; Location Risk Assessment</text>
+    <text x="40" y="250" fill="#666" font-size="12">Enter a location to assess its crime risk level</text>
+
+    <text x="40" y="285" fill="#333" font-size="13" font-weight="600">City *</text>
+    <rect x="40" y="292" width="1100" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="55" y="316" fill="#aaa" font-size="12">Enter city name (e.g., Karachi)</text>
+
+    <text x="40" y="355" fill="#333" font-size="13" font-weight="600">Area <tspan fill="#888" font-weight="400">(Optional)</tspan></text>
+    <rect x="40" y="362" width="1100" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="55" y="386" fill="#aaa" font-size="12">Enter area name (e.g., Gulshan-e-Iqbal)</text>
+
+    <rect x="40" y="420" width="160" height="40" rx="8" fill="url(#primaryGrad)"/>
+    <text x="120" y="445" text-anchor="middle" fill="white" font-size="13" font-weight="600">Assess Risk</text>
+
+    <!-- Empty Results -->
+    <rect x="20" y="520" width="2410" height="200" rx="12" fill="white" filter="url(#cardShadow)" stroke="#e9ecef" stroke-dasharray="6,3"/>
+    <text x="1225" y="620" text-anchor="middle" fill="#aaa" font-size="16">Enter a location above to see risk assessment results</text>
+    <text x="1225" y="650" text-anchor="middle" fill="#ccc" font-size="30">&#x1F4CA;</text>
+  </g>
+
+  <!-- Arrow S8 to S9 -->
+  <line x1="5180" y1="3650" x2="5270" y2="3650" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="5270,3644 5290,3650 5270,3656" fill="#667eea"/>
+  <text x="5230" y="3636" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Submit</text>
+
+  <!-- S9: Risk Assessment Results + SweetAlert -->
+  <g transform="translate(5300, 3000)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#28a745" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S9 &#x2014; Risk Assessment (Results + SweetAlert)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F52E; Crime Predictions &amp; Forecasting</text>
+
+    <!-- Tab Bar -->
+    <line x1="20" y1="185" x2="2430" y2="185" stroke="#e9ecef" stroke-width="2"/>
+    <rect x="20" y="158" width="130" height="28" rx="4" fill="#007bff"/>
+    <text x="85" y="176" text-anchor="middle" fill="white" font-size="11" font-weight="600">&#x26A0;&#xFE0F; Risk Assessment</text>
+    <text x="185" y="176" fill="#495057" font-size="11">&#x1F50D; Pattern Matching</text>
+    <text x="355" y="176" fill="#495057" font-size="11">&#x1F4C8; Forecast Trends</text>
+
+    <!-- Filled Form compact -->
+    <rect x="20" y="200" width="2410" height="180" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="225" fill="#333" font-size="14" font-weight="700">&#x26A0;&#xFE0F; Location Risk Assessment</text>
+    <text x="40" y="255" fill="#333" font-size="12" font-weight="600">City *</text>
+    <rect x="40" y="262" width="700" height="32" rx="6" fill="white" stroke="#667eea" stroke-width="2"/>
+    <text x="55" y="283" fill="#333" font-size="12">Karachi</text>
+    <text x="780" y="255" fill="#333" font-size="12" font-weight="600">Area</text>
+    <rect x="780" y="262" width="700" height="32" rx="6" fill="white" stroke="#667eea" stroke-width="2"/>
+    <text x="795" y="283" fill="#333" font-size="12">Gulshan-e-Iqbal</text>
+    <rect x="40" y="310" width="140" height="35" rx="8" fill="url(#primaryGrad)"/>
+    <text x="110" y="332" text-anchor="middle" fill="white" font-size="12" font-weight="600">Assess Risk</text>
+
+    <!-- Results -->
+    <text x="30" y="410" fill="#333" font-size="16" font-weight="700">&#x1F4CA; Risk Assessment Results</text>
+
+    <!-- Location Card -->
+    <rect x="20" y="425" width="750" height="120" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="450" fill="#333" font-size="13" font-weight="700">&#x1F4CD; Location Details</text>
+    <text x="40" y="475" fill="#666" font-size="12">City: <tspan fill="#333" font-weight="600">Karachi</tspan></text>
+    <text x="40" y="497" fill="#666" font-size="12">Area: <tspan fill="#333" font-weight="600">Gulshan-e-Iqbal</tspan></text>
+    <text x="40" y="519" fill="#666" font-size="12">Location ID: <tspan fill="#333" font-weight="600">#15</tspan></text>
+
+    <!-- Risk Card -->
+    <rect x="790" y="425" width="850" height="120" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="810" y="450" fill="#333" font-size="13" font-weight="700">&#x26A0;&#xFE0F; Risk Analysis</text>
+    <rect x="810" y="460" width="70" height="24" rx="4" fill="#f8d7da"/>
+    <text x="845" y="477" text-anchor="middle" fill="#721c24" font-size="11" font-weight="700">HIGH</text>
+    <text x="900" y="477" fill="#666" font-size="12">Risk Score: <tspan fill="#dc3545" font-weight="700" font-size="16">8.2</tspan><tspan fill="#999">/10</tspan></text>
+    <text x="810" y="505" fill="#666" font-size="12">Severity: <tspan fill="#dc3545" font-weight="600">Critical</tspan></text>
+    <rect x="810" y="515" width="400" height="10" rx="5" fill="#e9ecef"/>
+    <rect x="810" y="515" width="328" height="10" rx="5" fill="#dc3545"/>
+    <text x="1230" y="525" fill="#666" font-size="10">82%</text>
+
+    <!-- Recommendation Card -->
+    <rect x="1660" y="425" width="770" height="120" rx="12" fill="#fffbf0" filter="url(#cardShadow)" stroke="#ffc107" stroke-width="1"/>
+    <text x="1680" y="450" fill="#333" font-size="13" font-weight="700">&#x1F4A1; Recommendation</text>
+    <text x="1680" y="475" fill="#666" font-size="11">Increase patrol frequency</text>
+    <text x="1680" y="495" fill="#666" font-size="11">in Gulshan-e-Iqbal area.</text>
+    <text x="1680" y="515" fill="#666" font-size="11">Deploy surveillance resources</text>
+    <text x="1680" y="535" fill="#666" font-size="11">during peak crime hours.</text>
+
+    <!-- SweetAlert -->
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="black" opacity="0.4"/>
+    <rect x="750" y="400" width="950" height="320" rx="16" fill="white" filter="url(#heavyShadow)"/>
+    <circle cx="1225" cy="470" r="40" fill="none" stroke="#28a745" stroke-width="4"/>
+    <polyline points="1202,470 1218,488 1252,448" fill="none" stroke="#28a745" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1225" y="535" text-anchor="middle" fill="#333" font-size="22" font-weight="700">Success!</text>
+    <text x="1225" y="565" text-anchor="middle" fill="#666" font-size="14">Risk assessment completed</text>
+    <rect x="1050" y="590" width="350" height="38" rx="8" fill="#28a745"/>
+    <text x="1225" y="614" text-anchor="middle" fill="white" font-size="13" font-weight="600">OK</text>
+    <rect x="750" y="710" width="680" height="4" rx="2" fill="#28a745" opacity="0.4"/>
+  </g>
+
+  <!-- ======================== ROW 4 ======================== -->
+  <!-- Arrow S9 down to S10 -->
+  <line x1="6525" y1="4300" x2="6525" y2="4360" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="6525" y1="4360" x2="1275" y2="4360" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="1275" y1="4360" x2="1275" y2="4410" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="1269,4410 1275,4430 1281,4410" fill="#667eea"/>
+  <text x="3900" y="4354" text-anchor="middle" fill="#667eea" font-size="12" font-weight="600">Click &#x201C;Pattern Matching&#x201D; Tab</text>
+
+  <!-- S10: Predictions Pattern Matching (Empty) -->
+  <g transform="translate(50, 4440)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S10 &#x2014; Predictions: Pattern Matching (Empty Form)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <rect x="1100" y="73" width="80" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1140" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Predictions</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F52E; Crime Predictions &amp; Forecasting</text>
+
+    <!-- Tab Bar - Pattern active -->
+    <line x1="20" y1="185" x2="2430" y2="185" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="176" fill="#495057" font-size="11">&#x26A0;&#xFE0F; Risk Assessment</text>
+    <rect x="175" y="158" width="140" height="28" rx="4" fill="#007bff"/>
+    <text x="245" y="176" text-anchor="middle" fill="white" font-size="11" font-weight="600">&#x1F50D; Pattern Matching</text>
+    <text x="355" y="176" fill="#495057" font-size="11">&#x1F4C8; Forecast Trends</text>
+
+    <!-- Pattern Form -->
+    <rect x="20" y="200" width="2410" height="420" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="230" fill="#333" font-size="15" font-weight="700">&#x1F50D; Find Similar Crime Patterns</text>
+    <text x="40" y="250" fill="#666" font-size="12">Search for crimes matching specific patterns</text>
+
+    <text x="40" y="285" fill="#333" font-size="13" font-weight="600">Crime Type</text>
+    <rect x="40" y="292" width="1100" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="55" y="316" fill="#aaa" font-size="12">e.g., Robbery, Theft, Assault</text>
+
+    <text x="40" y="350" fill="#333" font-size="13" font-weight="600">City</text>
+    <rect x="40" y="357" width="530" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="55" y="381" fill="#aaa" font-size="12">e.g., Karachi</text>
+
+    <text x="610" y="350" fill="#333" font-size="13" font-weight="600">Area</text>
+    <rect x="610" y="357" width="530" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="625" y="381" fill="#aaa" font-size="12">e.g., Gulshan</text>
+
+    <text x="40" y="420" fill="#333" font-size="13" font-weight="600">Day of Week</text>
+    <rect x="40" y="427" width="530" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="55" y="451" fill="#aaa" font-size="12">Select day of week &#x25BE;</text>
+
+    <rect x="40" y="490" width="160" height="40" rx="8" fill="url(#primaryGrad)"/>
+    <text x="120" y="515" text-anchor="middle" fill="white" font-size="13" font-weight="600">Find Patterns</text>
+
+    <!-- Empty Results -->
+    <rect x="20" y="640" width="2410" height="200" rx="12" fill="white" filter="url(#cardShadow)" stroke="#e9ecef" stroke-dasharray="6,3"/>
+    <text x="1225" y="740" text-anchor="middle" fill="#aaa" font-size="16">Enter search criteria above to find matching crime patterns</text>
+    <text x="1225" y="770" text-anchor="middle" fill="#ccc" font-size="30">&#x1F50D;</text>
+  </g>
+
+  <!-- Arrow S10 to S11 -->
+  <line x1="2530" y1="5090" x2="2670" y2="5090" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="2670,5084 2690,5090 2670,5096" fill="#667eea"/>
+  <text x="2610" y="5078" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Submit</text>
+
+  <!-- S11: Pattern Matching Results + SweetAlert -->
+  <g transform="translate(2700, 4440)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#28a745" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S11 &#x2014; Pattern Matching (Results + SweetAlert)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F52E; Crime Predictions &amp; Forecasting</text>
+
+    <!-- Tab Bar -->
+    <line x1="20" y1="185" x2="2430" y2="185" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="176" fill="#495057" font-size="11">&#x26A0;&#xFE0F; Risk Assessment</text>
+    <rect x="175" y="158" width="140" height="28" rx="4" fill="#007bff"/>
+    <text x="245" y="176" text-anchor="middle" fill="white" font-size="11" font-weight="600">&#x1F50D; Pattern Matching</text>
+    <text x="355" y="176" fill="#495057" font-size="11">&#x1F4C8; Forecast Trends</text>
+
+    <!-- Filled Form compact -->
+    <rect x="20" y="200" width="2410" height="120" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="225" fill="#333" font-size="14" font-weight="700">&#x1F50D; Search Criteria</text>
+    <text x="40" y="250" fill="#666" font-size="11">Crime Type: <tspan fill="#333" font-weight="600">Robbery</tspan></text>
+    <text x="350" y="250" fill="#666" font-size="11">City: <tspan fill="#333" font-weight="600">Karachi</tspan></text>
+    <text x="600" y="250" fill="#666" font-size="11">Area: <tspan fill="#333" font-weight="600">All</tspan></text>
+    <text x="800" y="250" fill="#666" font-size="11">Day: <tspan fill="#333" font-weight="600">Friday</tspan></text>
+    <rect x="40" y="270" width="140" height="30" rx="6" fill="url(#primaryGrad)"/>
+    <text x="110" y="290" text-anchor="middle" fill="white" font-size="11" font-weight="600">Find Patterns</text>
+
+    <!-- Results Table -->
+    <rect x="20" y="340" width="2410" height="530" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="370" fill="#333" font-size="15" font-weight="700">&#x1F4CB; Pattern Matches (4)</text>
+    <rect x="30" y="385" width="2390" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="50" y="405" fill="#495057" font-size="9" font-weight="700">CRIME ID</text>
+    <text x="170" y="405" fill="#495057" font-size="9" font-weight="700">CRIME TYPE</text>
+    <text x="370" y="405" fill="#495057" font-size="9" font-weight="700">LOCATION</text>
+    <text x="650" y="405" fill="#495057" font-size="9" font-weight="700">DAY</text>
+    <text x="780" y="405" fill="#495057" font-size="9" font-weight="700">HOUR</text>
+    <text x="900" y="405" fill="#495057" font-size="9" font-weight="700">DATE</text>
+    <text x="1100" y="405" fill="#495057" font-size="9" font-weight="700">STATUS</text>
+    <text x="1300" y="405" fill="#495057" font-size="9" font-weight="700">FREQUENCY</text>
+    <text x="1500" y="405" fill="#495057" font-size="9" font-weight="700">RECENCY RANK</text>
+    <!-- Row 1 -->
+    <text x="50" y="440" fill="#333" font-size="11">CRM-042</text>
+    <text x="170" y="440" fill="#333" font-size="11">Robbery</text>
+    <text x="370" y="440" fill="#333" font-size="11">Karachi, Gulshan</text>
+    <text x="650" y="440" fill="#333" font-size="11">Friday</text>
+    <text x="780" y="440" fill="#333" font-size="11">22:00</text>
+    <text x="900" y="440" fill="#333" font-size="11">2024-03-15</text>
+    <rect x="1090" y="425" width="60" height="22" rx="4" fill="#f8d7da"/>
+    <text x="1120" y="440" text-anchor="middle" fill="#721c24" font-size="9" font-weight="600">Open</text>
+    <text x="1320" y="440" fill="#333" font-size="11">5</text>
+    <rect x="1500" y="425" width="30" height="22" rx="11" fill="#ffd700"/>
+    <text x="1515" y="440" text-anchor="middle" fill="white" font-size="9" font-weight="700">1</text>
+    <!-- Row 2 -->
+    <text x="50" y="470" fill="#333" font-size="11">CRM-038</text>
+    <text x="170" y="470" fill="#333" font-size="11">Robbery</text>
+    <text x="370" y="470" fill="#333" font-size="11">Karachi, DHA</text>
+    <text x="650" y="470" fill="#333" font-size="11">Friday</text>
+    <text x="780" y="470" fill="#333" font-size="11">23:30</text>
+    <text x="900" y="470" fill="#333" font-size="11">2024-03-08</text>
+    <rect x="1090" y="455" width="60" height="22" rx="4" fill="#d4edda"/>
+    <text x="1120" y="470" text-anchor="middle" fill="#155724" font-size="9" font-weight="600">Closed</text>
+    <text x="1320" y="470" fill="#333" font-size="11">3</text>
+    <rect x="1500" y="455" width="30" height="22" rx="11" fill="#c0c0c0"/>
+    <text x="1515" y="470" text-anchor="middle" fill="white" font-size="9" font-weight="700">2</text>
+    <!-- Row 3 -->
+    <text x="50" y="500" fill="#333" font-size="11">CRM-029</text>
+    <text x="170" y="500" fill="#333" font-size="11">Robbery</text>
+    <text x="370" y="500" fill="#333" font-size="11">Karachi, Clifton</text>
+    <text x="650" y="500" fill="#333" font-size="11">Friday</text>
+    <text x="780" y="500" fill="#333" font-size="11">21:15</text>
+    <text x="900" y="500" fill="#333" font-size="11">2024-02-23</text>
+    <rect x="1090" y="485" width="60" height="22" rx="4" fill="#d4edda"/>
+    <text x="1120" y="500" text-anchor="middle" fill="#155724" font-size="9" font-weight="600">Closed</text>
+    <text x="1320" y="500" fill="#333" font-size="11">4</text>
+    <rect x="1500" y="485" width="30" height="22" rx="11" fill="#cd7f32"/>
+    <text x="1515" y="500" text-anchor="middle" fill="white" font-size="9" font-weight="700">3</text>
+    <!-- Row 4 -->
+    <text x="50" y="530" fill="#333" font-size="11">CRM-021</text>
+    <text x="170" y="530" fill="#333" font-size="11">Robbery</text>
+    <text x="370" y="530" fill="#333" font-size="11">Karachi, North Nazimabad</text>
+    <text x="650" y="530" fill="#333" font-size="11">Friday</text>
+    <text x="780" y="530" fill="#333" font-size="11">20:45</text>
+    <text x="900" y="530" fill="#333" font-size="11">2024-02-09</text>
+    <rect x="1090" y="515" width="80" height="22" rx="4" fill="#fff3cd"/>
+    <text x="1130" y="530" text-anchor="middle" fill="#856404" font-size="9" font-weight="600">Investigating</text>
+    <text x="1320" y="530" fill="#333" font-size="11">2</text>
+    <rect x="1500" y="515" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1515" y="530" text-anchor="middle" fill="#666" font-size="9" font-weight="700">4</text>
+
+    <!-- SweetAlert -->
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="black" opacity="0.4"/>
+    <rect x="750" y="400" width="950" height="320" rx="16" fill="white" filter="url(#heavyShadow)"/>
+    <circle cx="1225" cy="470" r="40" fill="none" stroke="#28a745" stroke-width="4"/>
+    <polyline points="1202,470 1218,488 1252,448" fill="none" stroke="#28a745" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1225" y="535" text-anchor="middle" fill="#333" font-size="22" font-weight="700">Success!</text>
+    <text x="1225" y="565" text-anchor="middle" fill="#666" font-size="14">Found 4 pattern matches</text>
+    <rect x="1050" y="590" width="350" height="38" rx="8" fill="#28a745"/>
+    <text x="1225" y="614" text-anchor="middle" fill="white" font-size="13" font-weight="600">OK</text>
+    <rect x="750" y="710" width="680" height="4" rx="2" fill="#28a745" opacity="0.4"/>
+  </g>
+
+  <!-- Arrow S11 to S12 -->
+  <line x1="5180" y1="5090" x2="5270" y2="5090" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="5270,5084 5290,5090 5270,5096" fill="#667eea"/>
+  <text x="5230" y="5078" text-anchor="middle" fill="#667eea" font-size="11" font-weight="600">Forecast</text>
+
+  <!-- S12: Predictions Forecast (Empty) -->
+  <g transform="translate(5300, 4440)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#667eea" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S12 &#x2014; Predictions: Forecast Trends (Empty Form)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <rect x="1100" y="73" width="80" height="22" rx="4" fill="rgba(255,255,255,0.25)"/>
+    <text x="1140" y="88" text-anchor="middle" fill="white" font-size="10" font-weight="700">Predictions</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F52E; Crime Predictions &amp; Forecasting</text>
+
+    <!-- Tab Bar - Forecast active -->
+    <line x1="20" y1="185" x2="2430" y2="185" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="176" fill="#495057" font-size="11">&#x26A0;&#xFE0F; Risk Assessment</text>
+    <text x="185" y="176" fill="#495057" font-size="11">&#x1F50D; Pattern Matching</text>
+    <rect x="330" y="158" width="130" height="28" rx="4" fill="#007bff"/>
+    <text x="395" y="176" text-anchor="middle" fill="white" font-size="11" font-weight="600">&#x1F4C8; Forecast Trends</text>
+
+    <!-- Forecast Form -->
+    <rect x="20" y="200" width="2410" height="420" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="230" fill="#333" font-size="15" font-weight="700">&#x1F4C8; Generate Crime Forecast</text>
+    <text x="40" y="250" fill="#666" font-size="12">Forecast future crime trends based on historical data</text>
+
+    <text x="40" y="285" fill="#333" font-size="13" font-weight="600">Forecast Months *</text>
+    <rect x="40" y="292" width="530" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="55" y="316" fill="#aaa" font-size="12">6</text>
+
+    <text x="610" y="285" fill="#333" font-size="13" font-weight="600">Crime Type</text>
+    <rect x="610" y="292" width="530" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="625" y="316" fill="#aaa" font-size="12">All types</text>
+
+    <text x="40" y="355" fill="#333" font-size="13" font-weight="600">City</text>
+    <rect x="40" y="362" width="530" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="55" y="386" fill="#aaa" font-size="12">All cities</text>
+
+    <text x="610" y="355" fill="#333" font-size="13" font-weight="600">Area</text>
+    <rect x="610" y="362" width="530" height="38" rx="6" fill="white" stroke="#ced4da"/>
+    <text x="625" y="386" fill="#aaa" font-size="12">All areas</text>
+
+    <rect x="40" y="420" width="180" height="40" rx="8" fill="url(#primaryGrad)"/>
+    <text x="130" y="445" text-anchor="middle" fill="white" font-size="13" font-weight="600">Generate Forecast</text>
+
+    <!-- Empty Results -->
+    <rect x="20" y="640" width="2410" height="200" rx="12" fill="white" filter="url(#cardShadow)" stroke="#e9ecef" stroke-dasharray="6,3"/>
+    <text x="1225" y="740" text-anchor="middle" fill="#aaa" font-size="16">Configure parameters above to generate a crime forecast</text>
+    <text x="1225" y="770" text-anchor="middle" fill="#ccc" font-size="30">&#x1F4C8;</text>
+  </g>
+
+  <!-- ======================== ROW 5 ======================== -->
+  <!-- Arrow S12 down to S13 -->
+  <line x1="6525" y1="5740" x2="6525" y2="5800" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="6525" y1="5800" x2="1275" y2="5800" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="1275" y1="5800" x2="1275" y2="5850" stroke="#667eea" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="1269,5850 1275,5870 1281,5850" fill="#667eea"/>
+  <text x="3900" y="5794" text-anchor="middle" fill="#667eea" font-size="12" font-weight="600">Submit Forecast Form</text>
+
+  <!-- S13: Forecast Results + SweetAlert -->
+  <g transform="translate(50, 5880)">
+    <rect x="0" y="0" width="2450" height="40" rx="20" fill="#28a745" opacity="0.9"/>
+    <text x="1225" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="700">S13 &#x2014; Forecast Results (Data + SweetAlert)</text>
+
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="#f5f7fa" filter="url(#shadow)"/>
+    <rect x="0" y="50" width="2450" height="56" rx="14" fill="url(#primaryGrad)"/>
+    <rect x="0" y="80" width="2450" height="26" fill="url(#primaryGrad)"/>
+    <text x="30" y="86" fill="white" font-size="16" font-weight="700">&#x1F694; CMAS</text>
+    <text x="140" y="86" fill="white" opacity="0.85" font-size="10">Crime Management Analysis System</text>
+    <text x="2200" y="86" fill="white" opacity="0.9" font-size="11">Fatima Noor</text>
+    <rect x="2310" y="72" width="80" height="24" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="2350" y="88" text-anchor="middle" fill="white" font-size="10">Logout</text>
+
+    <text x="30" y="140" fill="#333" font-size="20" font-weight="700">&#x1F52E; Crime Predictions &amp; Forecasting</text>
+
+    <!-- Tab Bar -->
+    <line x1="20" y1="185" x2="2430" y2="185" stroke="#e9ecef" stroke-width="2"/>
+    <text x="40" y="176" fill="#495057" font-size="11">&#x26A0;&#xFE0F; Risk Assessment</text>
+    <text x="185" y="176" fill="#495057" font-size="11">&#x1F50D; Pattern Matching</text>
+    <rect x="330" y="158" width="130" height="28" rx="4" fill="#007bff"/>
+    <text x="395" y="176" text-anchor="middle" fill="white" font-size="11" font-weight="600">&#x1F4C8; Forecast Trends</text>
+
+    <!-- Filled Form compact -->
+    <rect x="20" y="200" width="2410" height="100" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="225" fill="#333" font-size="14" font-weight="700">&#x1F4C8; Forecast Parameters</text>
+    <text x="40" y="250" fill="#666" font-size="11">Months: <tspan fill="#333" font-weight="600">6</tspan></text>
+    <text x="200" y="250" fill="#666" font-size="11">Crime Type: <tspan fill="#333" font-weight="600">Robbery</tspan></text>
+    <text x="500" y="250" fill="#666" font-size="11">City: <tspan fill="#333" font-weight="600">Karachi</tspan></text>
+    <text x="720" y="250" fill="#666" font-size="11">Area: <tspan fill="#333" font-weight="600">All</tspan></text>
+    <rect x="40" y="265" width="140" height="28" rx="6" fill="url(#primaryGrad)"/>
+    <text x="110" y="284" text-anchor="middle" fill="white" font-size="11" font-weight="600">Generate Forecast</text>
+
+    <!-- Forecast Table -->
+    <rect x="20" y="320" width="2410" height="550" rx="12" fill="white" filter="url(#cardShadow)"/>
+    <text x="40" y="350" fill="#333" font-size="15" font-weight="700">&#x1F4CA; Forecast Results (6 months)</text>
+    <rect x="30" y="365" width="2390" height="30" rx="4" fill="#f8f9fa"/>
+    <text x="50" y="385" fill="#495057" font-size="9" font-weight="700">YEAR</text>
+    <text x="150" y="385" fill="#495057" font-size="9" font-weight="700">MONTH</text>
+    <text x="320" y="385" fill="#495057" font-size="9" font-weight="700">ACTUAL COUNT</text>
+    <text x="530" y="385" fill="#495057" font-size="9" font-weight="700">3-MONTH AVG</text>
+    <text x="750" y="385" fill="#495057" font-size="9" font-weight="700">FORECASTED</text>
+    <text x="960" y="385" fill="#495057" font-size="9" font-weight="700">YoY CHANGE</text>
+    <text x="1170" y="385" fill="#495057" font-size="9" font-weight="700">TREND</text>
+    <text x="1360" y="385" fill="#495057" font-size="9" font-weight="700">SEVERITY RANK</text>
+    <!-- Row 1 -->
+    <text x="50" y="420" fill="#333" font-size="11">2024</text>
+    <text x="150" y="420" fill="#333" font-size="11">July</text>
+    <text x="350" y="420" fill="#333" font-size="11">18</text>
+    <text x="555" y="420" fill="#333" font-size="11">16.3</text>
+    <rect x="740" y="405" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="770" y="420" text-anchor="middle" fill="#0c5460" font-size="10" font-weight="600">19</text>
+    <text x="960" y="420" fill="#dc3545" font-size="11" font-weight="600">&#x2191; 12.5%</text>
+    <rect x="1160" y="405" width="60" height="22" rx="4" fill="#f8d7da"/>
+    <text x="1190" y="420" text-anchor="middle" fill="#721c24" font-size="9" font-weight="600">High</text>
+    <rect x="1360" y="405" width="30" height="22" rx="11" fill="#ffd700"/>
+    <text x="1375" y="420" text-anchor="middle" fill="white" font-size="9" font-weight="700">1</text>
+    <!-- Row 2 -->
+    <text x="50" y="450" fill="#333" font-size="11">2024</text>
+    <text x="150" y="450" fill="#333" font-size="11">August</text>
+    <text x="350" y="450" fill="#333" font-size="11">15</text>
+    <text x="555" y="450" fill="#333" font-size="11">17.0</text>
+    <rect x="740" y="435" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="770" y="450" text-anchor="middle" fill="#0c5460" font-size="10" font-weight="600">17</text>
+    <text x="960" y="450" fill="#28a745" font-size="11" font-weight="600">&#x2193; -5.2%</text>
+    <rect x="1160" y="435" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="1190" y="450" text-anchor="middle" fill="#0c5460" font-size="9" font-weight="600">Normal</text>
+    <rect x="1360" y="435" width="30" height="22" rx="11" fill="#c0c0c0"/>
+    <text x="1375" y="450" text-anchor="middle" fill="white" font-size="9" font-weight="700">2</text>
+    <!-- Row 3 -->
+    <text x="50" y="480" fill="#333" font-size="11">2024</text>
+    <text x="150" y="480" fill="#333" font-size="11">September</text>
+    <text x="350" y="480" fill="#333" font-size="11">21</text>
+    <text x="555" y="480" fill="#333" font-size="11">18.0</text>
+    <rect x="740" y="465" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="770" y="480" text-anchor="middle" fill="#0c5460" font-size="10" font-weight="600">22</text>
+    <text x="960" y="480" fill="#dc3545" font-size="11" font-weight="600">&#x2191; 18.7%</text>
+    <rect x="1160" y="465" width="60" height="22" rx="4" fill="#f8d7da"/>
+    <text x="1190" y="480" text-anchor="middle" fill="#721c24" font-size="9" font-weight="600">High</text>
+    <rect x="1360" y="465" width="30" height="22" rx="11" fill="#cd7f32"/>
+    <text x="1375" y="480" text-anchor="middle" fill="white" font-size="9" font-weight="700">3</text>
+    <!-- Row 4 -->
+    <text x="50" y="510" fill="#333" font-size="11">2024</text>
+    <text x="150" y="510" fill="#333" font-size="11">October</text>
+    <text x="350" y="510" fill="#333" font-size="11">14</text>
+    <text x="555" y="510" fill="#333" font-size="11">16.7</text>
+    <rect x="740" y="495" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="770" y="510" text-anchor="middle" fill="#0c5460" font-size="10" font-weight="600">15</text>
+    <text x="960" y="510" fill="#28a745" font-size="11" font-weight="600">&#x2193; -8.1%</text>
+    <rect x="1160" y="495" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="1190" y="510" text-anchor="middle" fill="#0c5460" font-size="9" font-weight="600">Normal</text>
+    <rect x="1360" y="495" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1375" y="510" text-anchor="middle" fill="#666" font-size="9" font-weight="700">4</text>
+    <!-- Row 5 -->
+    <text x="50" y="540" fill="#333" font-size="11">2024</text>
+    <text x="150" y="540" fill="#333" font-size="11">November</text>
+    <text x="350" y="540" fill="#333" font-size="11">16</text>
+    <text x="555" y="540" fill="#333" font-size="11">17.0</text>
+    <rect x="740" y="525" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="770" y="540" text-anchor="middle" fill="#0c5460" font-size="10" font-weight="600">17</text>
+    <text x="960" y="540" fill="#dc3545" font-size="11" font-weight="600">&#x2191; 3.4%</text>
+    <rect x="1160" y="525" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="1190" y="540" text-anchor="middle" fill="#0c5460" font-size="9" font-weight="600">Normal</text>
+    <rect x="1360" y="525" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1375" y="540" text-anchor="middle" fill="#666" font-size="9" font-weight="700">5</text>
+    <!-- Row 6 -->
+    <text x="50" y="570" fill="#333" font-size="11">2024</text>
+    <text x="150" y="570" fill="#333" font-size="11">December</text>
+    <text x="350" y="570" fill="#333" font-size="11">20</text>
+    <text x="555" y="570" fill="#333" font-size="11">17.3</text>
+    <rect x="740" y="555" width="60" height="22" rx="4" fill="#d1ecf1"/>
+    <text x="770" y="570" text-anchor="middle" fill="#0c5460" font-size="10" font-weight="600">21</text>
+    <text x="960" y="570" fill="#dc3545" font-size="11" font-weight="600">&#x2191; 15.9%</text>
+    <rect x="1160" y="555" width="60" height="22" rx="4" fill="#f8d7da"/>
+    <text x="1190" y="570" text-anchor="middle" fill="#721c24" font-size="9" font-weight="600">High</text>
+    <rect x="1360" y="555" width="30" height="22" rx="11" fill="#e9ecef"/>
+    <text x="1375" y="570" text-anchor="middle" fill="#666" font-size="9" font-weight="700">6</text>
+
+    <!-- SweetAlert -->
+    <rect x="0" y="50" width="2450" height="1250" rx="14" fill="black" opacity="0.4"/>
+    <rect x="750" y="430" width="950" height="320" rx="16" fill="white" filter="url(#heavyShadow)"/>
+    <circle cx="1225" cy="500" r="40" fill="none" stroke="#28a745" stroke-width="4"/>
+    <polyline points="1202,500 1218,518 1252,478" fill="none" stroke="#28a745" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1225" y="565" text-anchor="middle" fill="#333" font-size="22" font-weight="700">Success!</text>
+    <text x="1225" y="595" text-anchor="middle" fill="#666" font-size="14">Forecast generated successfully</text>
+    <rect x="1050" y="620" width="350" height="38" rx="8" fill="#28a745"/>
+    <text x="1225" y="644" text-anchor="middle" fill="white" font-size="13" font-weight="600">OK</text>
+    <rect x="750" y="740" width="680" height="4" rx="2" fill="#28a745" opacity="0.4"/>
+  </g>
+
+  <!-- ======================== FLOW SUMMARY ======================== -->
+  <rect x="50" y="7180" width="7700" height="190" rx="16" fill="white" filter="url(#cardShadow)"/>
+  <text x="3900" y="7220" text-anchor="middle" fill="#333" font-size="20" font-weight="700">Workflow 3 &#x2014; Complete Flow Summary (Default &#x2192; Action &#x2192; Popup for Every Page)</text>
+  <text x="200" y="7255" fill="#495057" font-size="13">S1: Officer Login (Empty) &#x2192; S2: Login (Filled + Success Alert) &#x2192; S3: Analytics Dashboard (Overview &#x2014; Category Distribution + Top Hotspots)</text>
+  <text x="200" y="7280" fill="#495057" font-size="13">S4: Trends Tab (MoM Change) &#x2192; S5: Hotspots Tab (Detailed with Solve Rate) &#x2192; S6: Patterns Tab (Day of Week Analysis) &#x2192; S7: Performance Tab (Officer Rankings)</text>
+  <text x="200" y="7305" fill="#495057" font-size="13">S8: Predictions &#x2014; Risk Assessment (Empty) &#x2192; S9: Risk Results (HIGH 8.2/10 + Recommendation + SweetAlert) &#x2192; S10: Pattern Matching (Empty) &#x2192; S11: Pattern Results (4 Matches + SweetAlert)</text>
+  <text x="200" y="7330" fill="#495057" font-size="13">S12: Forecast Trends (Empty) &#x2192; S13: Forecast Results (6-Month Projection with YoY Change, Trend Badges, Severity Ranks + SweetAlert)</text>
+  <text x="200" y="7355" fill="#888" font-size="12">Project: Crime Management Analysis System (CMAS) | Entities: Crime, Location, Officer, Crime_Type | Views: Crime_Trends_Monthly, Crime_Hotspots, Crime_Patterns_Weekly | Auth: JWT + bcrypt</text>
+
+</svg>

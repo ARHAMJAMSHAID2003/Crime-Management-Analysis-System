@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "cpas-complete-test-2025",
 		"name": "CPAS - Complete Test Suite",
-		"description": "Comprehensive test collection for Crime Pattern Analysis System. Tests all functionality in logical sequential flow.",
+		"description": "Comprehensive test collection for Crime Management Analysis System. Tests all functionality in logical sequential flow.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "cpas-exporter"
 	},

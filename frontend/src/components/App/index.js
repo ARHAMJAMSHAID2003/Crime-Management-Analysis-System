@@ -63,7 +63,7 @@ const App = () => {
             isAuthenticated && role === 'OFFICER' ? (
               <Navigate to="/dashboard" replace />
             ) : (
-              <OfficerLogin setIsAuthenticated={setIsAuthenticated} />
+              <OfficerLogin setIsAuthenticated={setIsAuthenticated} setRole={setRole} />
             )
           } 
         />
@@ -75,7 +75,7 @@ const App = () => {
             ) : isAuthenticated && role === 'WITNESS' ? (
               <Navigate to="/witness-cases" replace />
             ) : (
-              <VictimWitnessLogin setIsAuthenticated={setIsAuthenticated} />
+              <VictimWitnessLogin setIsAuthenticated={setIsAuthenticated} setRole={setRole} />
             )
           } 
         />

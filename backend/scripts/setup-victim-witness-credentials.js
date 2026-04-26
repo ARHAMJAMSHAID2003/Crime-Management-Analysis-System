@@ -12,7 +12,7 @@ const oracledb = require("oracledb");
 const bcrypt = require("bcryptjs");
 const fs = require("fs");
 const path = require("path");
-require("dotenv").config();
+require("dotenv").config({ path: require("path").resolve(__dirname, "../.env") });
 
 // Default password for all users (they should change it on first login)
 const DEFAULT_PASSWORD = "changeme123";

@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { authAPI } from '../../services/api';
 import './Auth.css';
 
-const VictimWitnessLogin = ({ setIsAuthenticated }) => {
+const VictimWitnessLogin = ({ setIsAuthenticated, setRole }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +25,7 @@ const VictimWitnessLogin = ({ setIsAuthenticated }) => {
       localStorage.setItem('user', JSON.stringify(response.user));
       localStorage.setItem('role', response.user.role);
       setIsAuthenticated(true);
+      setRole(response.user.role);
 
       Swal.fire({
         icon: 'success',

@@ -287,51 +287,216 @@ const Investigations = () => {
     }
   };
 
-  const handleViewDetails = (investigation) => {
-    const detailsHtml = `
-      <div style="text-align: left; max-height: 500px; overflow-y: auto;">
-        <div style="margin-bottom: 20px;">
-          <h4 style="color: #333; margin-bottom: 10px;">🔍 Investigation Details</h4>
-          <div style="background: #f5f5f5; padding: 15px; border-radius: 8px;">
-            <p><strong>Investigation ID:</strong> #${investigation.INVESTIGATION_ID}</p>
-            <p><strong>Case Number:</strong> ${investigation.CASE_NUMBER}</p>
-            <p><strong>Lead Officer:</strong> ${investigation.LEAD_OFFICER_NAME || 'Not assigned'}</p>
-            <p><strong>Start Date:</strong> ${investigation.START_DATE}</p>
-            <p><strong>Close Date:</strong> ${investigation.CLOSE_DATE || 'Not closed'}</p>
-            <p><strong>Status:</strong> <span style="color: ${
-              investigation.STATUS === 'Closed' ? 'green' : 
-              investigation.STATUS === 'Active' ? 'blue' : 'orange'
-            };">${investigation.STATUS}</span></p>
-            <p><strong>Outcome:</strong> <span style="color: ${
-              investigation.OUTCOME === 'Solved' ? 'green' : 
-              investigation.OUTCOME === 'Pending' ? 'orange' : 'red'
-            };">${investigation.OUTCOME}</span></p>
-            <p><strong>Linked Crimes:</strong> ${
-              investigation.LINKED_CRIME_IDS ? 
-                '<span style="color: #667eea; font-weight: 500;">#' + investigation.LINKED_CRIME_IDS.split(', ').join(', #') + '</span>' : 
-                '<span style="color: #999;">No crimes linked</span>'
-            }</p>
+  const handleViewDetails = async (investigation) => {
+    let linkedCrimes = [];
+    let inv = investigation;
+    let teamMembers = [];
+
+    try {
+      const [detailsResp, teamResp] = await Promise.all([
+        investigationsAPI.getById(investigation.INVESTIGATION_ID),
+        investigationsAPI.getTeam(investigation.INVESTIGATION_ID).catch(() => ({ data: [] }))
+      ]);
+      if (detailsResp && detailsResp.data) {
+        inv = detailsResp.data.investigation || investigation;
+        linkedCrimes = detailsResp.data.linkedCrimes || [];
+      }
+      if (teamResp && teamResp.data) {
+        teamMembers = teamResp.data;
+      }
+    } catch (err) {
+      // Fall back to existing data
+    }
+
+    const showDetailsPopup = (team) => {
+      const teamHtml = team.map(member => `
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px; background: white; border-radius: 6px; margin-bottom: 6px;">
+          <span style="background: #7b1fa2; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; white-space: nowrap;">${member.ROLE || 'Field Officer'}</span>
+          <strong style="flex: 1;">${member.NAME}</strong>
+          <span style="color: #888; font-size: 12px;">${member.EMAIL || ''}</span>
+          <button data-officer-id="${member.OFFICER_ID}" class="removeTeamBtn" style="background: #ef5350; color: white; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; flex-shrink: 0;">✕ Remove</button>
+        </div>
+      `).join('');
+
+      const detailsHtml = `
+        <div style="text-align: left; max-height: 600px; overflow-y: auto; padding-right: 5px;">
+
+          <!-- Investigation Details -->
+          <div style="margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #667eea;">
+            <h4 style="color: #333; margin: 0 0 12px 0; font-size: 15px;">🔍 Investigation Details</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+              <div><span style="color:#888;">ID:</span> <strong>#${inv.INVESTIGATION_ID}</strong></div>
+              <div><span style="color:#888;">Case Number:</span> <strong>${inv.CASE_NUMBER}</strong></div>
+              <div><span style="color:#888;">Lead Officer:</span> <strong>${inv.LEAD_OFFICER_NAME || 'Unassigned'}</strong></div>
+              <div><span style="color:#888;">Start Date:</span> <strong>${inv.START_DATE || 'N/A'}</strong></div>
+              <div><span style="color:#888;">Close Date:</span> <strong>${inv.CLOSE_DATE || 'Not closed'}</strong></div>
+              <div><span style="color:#888;">Status:</span> <strong style="color:${inv.STATUS === 'Active' ? '#1976d2' : inv.STATUS === 'Closed' ? '#2e7d32' : '#f57c00'};">${inv.STATUS}</strong></div>
+              <div><span style="color:#888;">Outcome:</span> <strong style="color:${inv.OUTCOME === 'Solved' ? '#2e7d32' : inv.OUTCOME === 'Pending' ? '#f57c00' : '#d32f2f'};">${inv.OUTCOME}</strong></div>
+            </div>
+            ${inv.NOTES ? `<div style="margin-top: 10px; font-size: 13px;"><span style="color:#888;">Notes:</span><div style="background: white; padding: 8px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">${inv.NOTES}</div></div>` : ''}
+          </div>
+
+          <!-- Linked Crimes -->
+          <div style="margin-bottom: 20px;">
+            <h4 style="color: #333; margin: 0 0 10px 0; font-size: 15px;">🚨 Linked Crimes (${linkedCrimes.length})</h4>
+            ${linkedCrimes.length > 0 ? linkedCrimes.map(crime => `
+              <div style="background: #e3f2fd; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #2196F3;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 13px;">
+                  <div><span style="color:#888;">Crime ID:</span> <strong>#${crime.CRIME_ID}</strong></div>
+                  <div><span style="color:#888;">Type:</span> <strong>${crime.CRIME_TYPE || 'N/A'}</strong></div>
+                  <div><span style="color:#888;">Date:</span> <strong>${crime.DATE_OCCURRED || 'N/A'}</strong></div>
+                  <div><span style="color:#888;">Status:</span> <strong>${crime.STATUS || 'N/A'}</strong></div>
+                </div>
+                ${crime.DESCRIPTION ? `<div style="margin-top: 6px; font-size: 12px; color:#555;"><em>${crime.DESCRIPTION.substring(0, 150)}${crime.DESCRIPTION.length > 150 ? '...' : ''}</em></div>` : ''}
+              </div>
+            `).join('') : `
+              <div style="background: #fff3cd; padding: 12px; border-radius: 8px; border-left: 4px solid #ffc107; font-size: 13px; color: #856404;">
+                ⚠️ No crimes linked yet. Use the 🔗 button to link crimes.
+              </div>
+            `}
+          </div>
+
+          <!-- Investigation Team -->
+          <div style="margin-bottom: 20px; background: #f3e5f5; padding: 15px; border-radius: 10px; border-left: 4px solid #9c27b0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h4 style="color: #333; margin: 0; font-size: 15px;">👮 Investigation Team (${(team.length + (inv.LEAD_OFFICER_NAME ? 1 : 0))} members)</h4>
+              <button id="addTeamMemberBtn" style="background: #9c27b0; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">+ Add Member</button>
+            </div>
+            ${inv.LEAD_OFFICER_NAME ? `
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px; background: white; border-radius: 6px; margin-bottom: 6px;">
+                <span style="background: #9c27b0; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; white-space: nowrap;">Lead Officer</span>
+                <strong style="flex: 1;">${inv.LEAD_OFFICER_NAME}</strong>
+                ${inv.LEAD_OFFICER_EMAIL ? `<span style="color: #666; font-size: 12px;">${inv.LEAD_OFFICER_EMAIL}</span>` : ''}
+              </div>
+            ` : ''}
+            ${teamHtml}
+            ${team.length === 0 && !inv.LEAD_OFFICER_NAME ? `
+              <div style="font-size: 13px; color: #856404; background: #fff3cd; padding: 10px; border-radius: 6px;">⚠️ No team members assigned. Click "+ Add Member" to add officers.</div>
+            ` : ''}
+          </div>
+
+          <!-- Action Hint -->
+          <div style="background: #e8f5e9; padding: 12px; border-radius: 8px; font-size: 12px; color: #2e7d32; text-align: center;">
+            💡 Use the table action buttons to update status, assign lead officer, link crimes, or delete.
           </div>
         </div>
-        
-        ${investigation.NOTES ? `
-          <div style="margin-bottom: 20px;">
-            <h4 style="color: #333; margin-bottom: 10px;">📝 Notes</h4>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; white-space: pre-wrap;">
-              ${investigation.NOTES}
-            </div>
+      `;
+
+      Swal.fire({
+        title: `📁 Case File: ${inv.CASE_NUMBER || investigation.CASE_NUMBER}`,
+        html: detailsHtml,
+        width: '750px',
+        confirmButtonText: 'Close',
+        confirmButtonColor: '#667eea',
+        didOpen: (popup) => {
+          const addBtn = popup.querySelector('#addTeamMemberBtn');
+          if (addBtn) {
+            addBtn.addEventListener('click', () => {
+              Swal.close();
+              handleAddTeamMemberModal(inv, team, showDetailsPopup);
+            });
+          }
+          popup.querySelectorAll('.removeTeamBtn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const officerId = btn.getAttribute('data-officer-id');
+              const memberName = btn.closest('div').querySelector('strong') ? btn.closest('div').querySelector('strong').textContent : 'this officer';
+              Swal.fire({
+                title: 'Remove Team Member?',
+                text: `Remove ${memberName} from this investigation team?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef5350',
+                cancelButtonColor: '#9e9e9e',
+                confirmButtonText: 'Remove',
+              }).then(async (result) => {
+                if (result.isConfirmed) {
+                  try {
+                    await investigationsAPI.removeTeamMember(inv.INVESTIGATION_ID, officerId);
+                    const updatedTeamResp = await investigationsAPI.getTeam(inv.INVESTIGATION_ID).catch(() => ({ data: [] }));
+                    const updatedTeam = (updatedTeamResp && updatedTeamResp.data) ? updatedTeamResp.data : [];
+                    showDetailsPopup(updatedTeam);
+                  } catch (err) {
+                    Swal.fire('Error', 'Failed to remove team member', 'error');
+                  }
+                }
+              });
+            });
+          });
+        }
+      });
+    };
+
+    showDetailsPopup(teamMembers);
+  };
+
+  const handleAddTeamMemberModal = async (inv, currentTeam, onBack) => {
+    const assignedIds = [inv.LEAD_OFFICER_ID, ...currentTeam.map(m => m.OFFICER_ID)].filter(Boolean).map(String);
+    const availableOfficers = officers.filter(o => !assignedIds.includes(String(o.OFFICER_ID)));
+
+    if (availableOfficers.length === 0) {
+      Swal.fire({
+        title: 'No Officers Available',
+        text: 'All officers are already assigned to this investigation.',
+        icon: 'info',
+        confirmButtonColor: '#667eea'
+      }).then(() => onBack && onBack(currentTeam));
+      return;
+    }
+
+    const { value: formValues } = await Swal.fire({
+      title: '👮 Add Team Member',
+      html: `
+        <div style="text-align: left;">
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 5px;">Officer *</label>
+            <select id="swal-officer" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+              <option value="">Select Officer</option>
+              ${availableOfficers.map(o => `<option value="${o.OFFICER_ID}">${o.NAME}</option>`).join('')}
+            </select>
           </div>
-        ` : ''}
-      </div>
-    `;
-    
-    Swal.fire({
-      title: `Investigation: ${investigation.CASE_NUMBER}`,
-      html: detailsHtml,
-      width: '700px',
-      confirmButtonText: 'Close',
-      confirmButtonColor: '#667eea'
+          <div>
+            <label style="display: block; font-weight: 600; margin-bottom: 5px;">Role</label>
+            <select id="swal-role" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+              <option value="Field Officer">Field Officer</option>
+              <option value="Detective">Detective</option>
+              <option value="Forensics">Forensics</option>
+              <option value="Analyst">Analyst</option>
+              <option value="Support">Support</option>
+            </select>
+          </div>
+        </div>
+      `,
+      width: '480px',
+      showCancelButton: true,
+      confirmButtonText: 'Add to Team',
+      confirmButtonColor: '#9c27b0',
+      cancelButtonColor: '#9e9e9e',
+      preConfirm: () => {
+        const officerId = document.getElementById('swal-officer').value;
+        const role = document.getElementById('swal-role').value;
+        if (!officerId) {
+          Swal.showValidationMessage('Please select an officer');
+          return false;
+        }
+        return { officerId, role };
+      }
     });
+
+    if (formValues) {
+      try {
+        await investigationsAPI.addTeamMember(inv.INVESTIGATION_ID, parseInt(formValues.officerId), formValues.role);
+        await Swal.fire({ title: 'Added!', text: 'Team member added successfully.', icon: 'success', timer: 1200, showConfirmButton: false });
+        const updatedTeamResp = await investigationsAPI.getTeam(inv.INVESTIGATION_ID).catch(() => ({ data: [] }));
+        const updatedTeam = (updatedTeamResp && updatedTeamResp.data) ? updatedTeamResp.data : [];
+        if (onBack) onBack(updatedTeam);
+      } catch (err) {
+        const msg = err.message && err.message.includes('already') ? 'Officer is already on this team.' : (err.message || 'Failed to add team member');
+        Swal.fire('Error', msg, 'error').then(() => onBack && onBack(currentTeam));
+      }
+    } else {
+      // Cancelled — return to details popup
+      if (onBack) onBack(currentTeam);
+    }
   };
 
   const getStatusBadgeClass = (status) => {
